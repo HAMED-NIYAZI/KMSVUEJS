@@ -128,3 +128,9 @@ async function destroy(id) {
 }
 index()
 </script>
+
+<style scoped>
+.page{
+ background: red;
+}
+</style>

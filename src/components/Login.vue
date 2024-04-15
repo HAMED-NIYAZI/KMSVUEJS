@@ -1,17 +1,12 @@
 <template>
-    <div class="card">
-        <div class="card-header">
-            <div class="card-title">ورود</div>
-        </div>
-        <div class="card-body">
-            <div class="text-center mt-5" v-if="loading"><span class=" spinner-border spinner-border-sm"></span></div>
+ 
+             <div class="text-center mt-5" v-if="loading"><span class=" spinner-border spinner-border-sm"></span></div>
             <div class="row no-gutter" v-else>
                 <!-- The image half -->
                 <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
                     <div class="row wd-100p mr-center text-center">
                         <div class="col-md-12 col-lg-12 col-xl-12 my-auto mr-center wd-100p">
-                            <img :src="'https://freelancework.ir/' + loginPageInfo.imagePath"
-                                class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mr-center" alt="logo">
+                            <img src="assets/img/media/login.png" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mr-center" alt="logo">
                         </div>
                     </div>
                 </div>
@@ -34,7 +29,7 @@
                                             </div>
                                             <div class="card-sigin">
                                                 <div class="main-signup-header">
-                                                    <h5 class="fw-semibold mb-4">{{ loginPageInfo.description }}</h5>
+                                                    <!-- <h5 class="fw-semibold mb-4">{{ loginPageInfo.description }}</h5> -->
                                                     <form action="#">
                                                         <div class="form-group">
                                                             <label>نام کاربری</label>
@@ -74,9 +69,7 @@
                     </div><!-- End -->
                 </div>
             </div>
-        </div>
-    </div>
-</template>
+  </template>
 <script setup>
 import { reactive, ref, computed } from 'vue'
 import Auth from '../services/Auth'
