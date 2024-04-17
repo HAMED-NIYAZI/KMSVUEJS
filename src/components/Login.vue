@@ -22,9 +22,9 @@
                                             <div class="card-sigin d-flex mb-5">
                                                 <a href="#"><img
                                                         :src="'https://freelancework.ir/' + loginPageInfo.imagePath"
-                                                        class="sign-favicon-a ht-40" alt="logo">
+                                                        class="sign-favicon-a ht-90" alt="logo">
                                                 </a>
-                                                <h1 class="main-logo1 ms-1 me-0 my-auto tx-28 ps-1">{{ loginPageInfo.title }}
+                                                <h1 class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44">{{ loginPageInfo.title }}
                                                 </h1>
                                             </div>
                                             <div class="card-sigin">
@@ -98,6 +98,7 @@ async function doLogin(e) {
     errors = {}
     try {
         const response = await Auth.login(formData);
+        console.log(response);
         if (response.data.result == 0 ) {
             userStore.setUser(response.data.data);
             router.push({ name: 'dashboard' })
@@ -111,7 +112,7 @@ async function doLogin(e) {
             });
         }
     } catch (err) {
-        
+
         // if (err.response.status == 400) {
         //     errors = err.response.errors
         // } else {
@@ -147,3 +148,10 @@ async function getLoginPageInfo() {
 }
 getLoginPageInfo()
 </script>
+
+
+<style scoped>
+.mt-44{
+    margin-top: 44px !important;
+}
+</style>
