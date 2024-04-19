@@ -268,4 +268,4 @@ async function doRegister(e) {
     loading.value = false;
   }
 }
-</script>
+</script> 
