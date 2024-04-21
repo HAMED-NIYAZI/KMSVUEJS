@@ -160,8 +160,20 @@ async function doLogin(e) {
       });
     }
   } catch (err) {
+    console.log(err);
 
+ if(err.code=='ERR_BAD_REQUEST'){
 
+  if (
+      err.response.status == 404 &&
+      err.message == "Request failed with status code 404"
+    ) {
+      toast.error(err.response.data.message, {
+              timeout: 4000,
+            });
+    }
+
+ }
 //server is down
     if(err.code=='ERR_NETWORK'){
         toast.error('سرور در دسترس نیست', {
@@ -188,6 +200,7 @@ async function doLogin(e) {
     }
 
 
+
   } finally {
     signInLoading.value = false;
   }
@@ -199,7 +212,6 @@ async function getLoginPageInfo() {
     const response = await Auth.getInfoForLoginPage();
     if (response.data.result == 0) {
       loginPageInfo = response.data.data;
-      console.log(loginPageInfo);
     } else if (response.data.result == 5) {
       toast.warning(response.data.message, {
         timeout: 2000,
