@@ -220,10 +220,7 @@ import { reactive, ref, computed } from "vue";
 import Auth from "../services/Auth";
 import { useToast } from "vue-toastification";
 import { useHead } from "@vueuse/head";
-useHead({
-  // Can be static or computed
-  title: computed(() => "صفحه درخواست عضویت"),
-});
+
 const toast = useToast();
 let loading = ref(false);
 let getLoginPageInfoLoading = ref(false);

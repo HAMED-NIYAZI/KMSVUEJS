@@ -37,9 +37,6 @@ import { useToast } from "vue-toastification";
 import { useHead } from '@vueuse/head'
 import Swal from 'sweetalert2'
 import TreeItem from "@/components/pages/tree/TreeItem.vue";
-useHead({
-    title: computed(() => 'لیست پایه تحصیلی'),
-})
 const toast = useToast();
 let loading = ref(false)
 let trees = ref();

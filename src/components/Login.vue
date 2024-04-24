@@ -118,10 +118,7 @@ import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../store/user";
 import { useHead } from "@vueuse/head";
-useHead({
-  // Can be static or computed
-  title: computed(() => "صفحه ورود"),
-});
+
 const userStore = useUserStore();
 const router = useRouter();
 const toast = useToast();

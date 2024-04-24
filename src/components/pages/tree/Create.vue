@@ -81,9 +81,6 @@ import { useHead } from '@vueuse/head'
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, maxLength } from '@vuelidate/validators'
 const route = useRoute()
-useHead({
-    title: computed(() => 'ثبت پایه تحصیلی'),
-})
 const toast = useToast();
 let loading = ref(false)
 let formData = reactive({

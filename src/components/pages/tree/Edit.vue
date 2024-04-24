@@ -75,9 +75,6 @@ import { useToast } from "vue-toastification";
 import { useHead } from '@vueuse/head'
 const route = useRoute()
 const router = useRouter()
-useHead({
-    title: computed(() => 'ویرایش پایه تحصیلی'),
-})
 const toast = useToast();
 let loading = ref(false)
 let updateLoading = ref(false)

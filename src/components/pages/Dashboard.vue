@@ -14,21 +14,7 @@
     // let loading = ref(true);
     // const toast = useToast()
     import { useHead } from '@vueuse/head'
-    const siteData = reactive({
-        title: `خرید بلیت کنسرت`,
-        description: `خرید بلیت کنسرت`,
-    })
-    useHead({
-        // Can be static or computed
-        title: computed(() => siteData.title),
-        meta: [
-            {
-                name: `description`,
-                content: computed(() => siteData.description),
-            },
-        ],
 
-    })
     // onMounted(async () => {
     //     try {
     //         const response = await homeApi.get('/');

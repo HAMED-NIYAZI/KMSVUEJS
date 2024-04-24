@@ -29,7 +29,7 @@ const routes = [{
             component: () => { return import ('./components/pages/grade/Create.vue') }
         }, {
             path: 'tree',
-            name: 'tree.index ',
+            name: 'tree.index',
             component: () => { return import ('./components/pages/tree/Index.vue') }
         }, ],
         beforeEnter: (to, from, next) => {

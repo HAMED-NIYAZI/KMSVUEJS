@@ -189,10 +189,7 @@ import User from "@/services/User"
 import { reactive, ref, computed } from 'vue'
 import { useToast } from "vue-toastification";
 import { useHead } from '@vueuse/head'
-useHead({
-    // Can be static or computed
-    title: computed(() => 'صفحه به روزرسانی پروفایل'),
-})
+
 const toast = useToast();
 let loading = ref(false)
 let formPasswordData = reactive({

@@ -27,7 +27,7 @@
                     <table class="table table-striped mg-b-0 text-md-nowrap table-hover" v-if="grades.length">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ردیف</th>
                                 <th>عنوان</th>
                                 <th>اولویت نمایش</th>
                                 <th>عملیات</th>
@@ -61,9 +61,6 @@ import { ref, computed } from 'vue'
 import { useToast } from "vue-toastification";
 import { useHead } from '@vueuse/head'
 import Swal from 'sweetalert2'
-useHead({
-    title: computed(() => 'لیست پایه تحصیلی'),
-})
 const toast = useToast();
 let loading = ref(false)
 let grades = ref([]);

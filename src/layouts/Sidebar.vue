@@ -6,8 +6,8 @@
                     class="main-logo" alt="logo"></a>
             <a class="desktop-logo logo-dark active" href="index.html"><img src="../assets/img/brand/logo-white.png"
                     class="main-logo dark-theme" alt="logo"></a>
-            <a class="logo-icon mobile-logo icon-light active" href="index.html"><img
-                    src="../assets/img/brand/favicon.png" class="logo-icon" alt="logo"></a>
+            <a class="logo-icon mobile-logo icon-light active" href="index.html"><img src="../assets/img/brand/favicon.png"
+                    class="logo-icon" alt="logo"></a>
             <a class="logo-icon mobile-logo icon-dark active" href="index.html">
                 <img src="../assets/img/brand/favicon-white.png" class="logo-icon dark-theme" alt="logo"></a>
         </div>
@@ -20,7 +20,7 @@
                             class="avatar-status profile-status bg-green"></span>
                     </div>
                     <div class="user-info">
-                        <h4 class="fw-semibold mt-3 mb-0">{{ userStore.getUser.firstName +" " +
+                        <h4 class="fw-semibold mt-3 mb-0">{{ userStore.getUser.firstName + " " +
                             userStore.getUser.lastName }}</h4>
                         <span class="mb-0 text-muted">مدیریت</span>
                     </div>
@@ -28,9 +28,8 @@
             </div>
             <ul class="side-menu">
                 <li class="slide">
-                    <router-link :to="{name:'dashboard'}" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="side-menu__icon" viewBox="0 0 24 24">
+                    <router-link :to="{ name: 'dashboard' }" class="side-menu__item">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                             <path d="M0 0h24v24H0V0z" fill="none" />
                             <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3" />
                             <path
@@ -39,7 +38,7 @@
                         <span class="side-menu__label">داشبورد</span>
                     </router-link>
                 </li>
-                 <li class="slide">
+                <li class="slide">
                     <a class="side-menu__item" @click.prevent="signOut($event)" href="#">
                         <span class="side-menu__label">خروج</span>
                     </a>
@@ -54,11 +53,15 @@
                                 d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
                         </svg><span class="side-menu__label">اطلاعات شخصی</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        <li><a class="slide-item" href="chart-morris.html">پروفایل من  </a></li>
+                        <li>
+                            <router-link :to="{ name: 'profile' }" class="slide-item">
+                                پروفایل من
+                            </router-link>
+                        </li>
                     </ul>
                 </li>
 
-          
+
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             class="side-menu__icon" viewBox="0 0 24 24">
@@ -68,14 +71,13 @@
                                 d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
                         </svg><span class="side-menu__label">اطلاعات پایه</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        <li><a class="slide-item" href="chart-morris.html">پایه تحصیلی</a></li>
-                        <li><a class="slide-item" href="chart-flot.html">   سازمان  </a></li>
- 
+                        <router-link :to="{ name: 'grades.index' }" class="slide-item"> پایه تحصیلی </router-link>
+                        <router-link :to="{ name: 'tree.index' }" class="slide-item"> سازمان </router-link>
                     </ul>
                 </li>
 
 
-
+                <!--
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             class="side-menu__icon" viewBox="0 0 24 24">
@@ -361,6 +363,9 @@
                         </li>
                     </ul>
                 </li>
+
+
+                -->
             </ul>
         </div>
     </aside>
@@ -372,154 +377,157 @@ const userStore = useUserStore()
 import { useRouter } from "vue-router";
 const router = useRouter()
 
-    onMounted(() => {
-        // Toggle Sidebar
-        $(document).on('click', '[data-bs-toggle="sidebar"]', function (event) {
-            event.preventDefault();
-            $('.app').toggleClass('sidenav-toggled');
-        });
+onMounted(() => {
+    // Toggle Sidebar
+    $(document).on('click', '[data-bs-toggle="sidebar"]', function (event) {
+        event.preventDefault();
+        $('.app').toggleClass('sidenav-toggled');
+    });
 
-        $(".app-sidebar").hover(function () {
-            if ($('body').hasClass('sidenav-toggled')) {
-                $('body').addClass('sidenav-toggled-open');
-            }
-        }, function () {
-            if ($('body').hasClass('sidenav-toggled')) {
-                $('body').removeClass('sidenav-toggled-open');
-            }
-        });
-
-        // Activate sidebar slide toggle
-        $("[data-bs-toggle='slide']").on('click', function (e) {
-            var $this = $(this);
-            var checkElement = $this.next();
-            var animationSpeed = 300,
-                slideMenuSelector = '.slide-menu';
-            if (checkElement.is(slideMenuSelector) && checkElement.is(':visible')) {
-                checkElement.slideUp(animationSpeed, function () {
-                    checkElement.removeClass('open');
-                });
-                checkElement.parent("li").removeClass("is-expanded");
-            } else if ((checkElement.is(slideMenuSelector)) && (!checkElement.is(':visible'))) {
-                var parent = $this.parents('ul').first();
-                var ul = parent.find('ul:visible').slideUp(animationSpeed);
-                ul.removeClass('open');
-                var parent_li = $this.parent("li");
-                checkElement.slideDown(animationSpeed, function () {
-                    checkElement.addClass('open');
-                    parent.find('li.is-expanded').removeClass('is-expanded');
-                    parent_li.addClass('is-expanded');
-                });
-            }
-            if (checkElement.is(slideMenuSelector)) {
-                e.preventDefault();
-            }
-        });
-
-        // Activate sidebar slide toggle
-        $("[data-bs-toggle='sub-slide']").on('click', function (e) {
-            var $this = $(this);
-            var checkElement = $this.next();
-            var animationSpeed = 300,
-                slideMenuSelector = '.sub-slide-menu';
-            if (checkElement.is(slideMenuSelector) && checkElement.is(':visible')) {
-                checkElement.slideUp(animationSpeed, function () {
-                    checkElement.removeClass('open');
-                });
-                checkElement.parent("li").removeClass("is-expanded");
-            } else if ((checkElement.is(slideMenuSelector)) && (!checkElement.is(':visible'))) {
-                var parent = $this.parents('ul').first();
-                var ul = parent.find('ul:visible').slideUp(animationSpeed);
-                ul.removeClass('open');
-                var parent_li = $this.parent("li");
-                checkElement.slideDown(animationSpeed, function () {
-                    checkElement.addClass('open');
-                    parent.find('li.is-expanded').removeClass('is-expanded');
-                    parent_li.addClass('is-expanded');
-                });
-            }
-            if (checkElement.is(slideMenuSelector)) {
-                e.preventDefault();
-            }
-        });
-
-        // Activate sidebar slide toggle
-        $("[data-bs-toggle='sub-slide-sub']").on('click', function (e) {
-            var $this = $(this);
-            var checkElement = $this.next();
-            var animationSpeed = 300,
-                slideMenuSelector = '.sub-slide-menu-sub';
-            if (checkElement.is(slideMenuSelector) && checkElement.is(':visible')) {
-                checkElement.slideUp(animationSpeed, function () {
-                    checkElement.removeClass('open');
-                });
-                checkElement.parent("li").removeClass("is-expanded");
-            } else if ((checkElement.is(slideMenuSelector)) && (!checkElement.is(':visible'))) {
-                var parent = $this.parents('ul').first();
-                var ul = parent.find('ul:visible').slideUp(animationSpeed);
-                ul.removeClass('open');
-                var parent_li = $this.parent("li");
-                checkElement.slideDown(animationSpeed, function () {
-                    checkElement.addClass('open');
-                    parent.find('li.is-expanded').removeClass('is-expanded');
-                    parent_li.addClass('is-expanded');
-                });
-            }
-            if (checkElement.is(slideMenuSelector)) {
-                e.preventDefault();
-            }
-        });
-
-        // ______________Active Class
-        $(".app-sidebar li a").each(function () {
-            var pageUrl = window.location.href.split(/[?#]/)[0];
-            if (this.href == pageUrl) {
-                $(this).addClass("active");
-                $(this).parent().addClass("is-expanded");
-                $(this).parent().parent().prev().addClass("active");
-                $(this).parent().parent().addClass("open");
-                $(this).parent().parent().prev().addClass("is-expanded");
-                $(this).parent().parent().parent().addClass("is-expanded");
-                $(this).parent().parent().parent().parent().addClass("open");
-                $(this).parent().parent().parent().parent().prev().addClass("active");
-                $(this).parent().parent().parent().parent().parent().addClass("is-expanded");
-            }
-        });
-
-        var toggleSidebar = function () {
-            var w = $(window);
-            if (w.outerWidth() <= 767) {
-                $("body").addClass("sidebar-gone");
-                $(document).off("click", "body").on("click", "body", function (e) {
-                    if ($(e.target).hasClass('sidebar-show') || $(e.target).hasClass('search-show')) {
-                        $("body").removeClass("sidebar-show");
-                        $("body").addClass("sidebar-gone");
-                        $("body").removeClass("search-show");
-                    }
-                });
-            } else {
-                $("body").removeClass("sidebar-gone");
-            }
+    $(".app-sidebar").hover(function () {
+        if ($('body').hasClass('sidenav-toggled')) {
+            $('body').addClass('sidenav-toggled-open');
         }
-        toggleSidebar();
-        $(window).resize(toggleSidebar);
-    })
+    }, function () {
+        if ($('body').hasClass('sidenav-toggled')) {
+            $('body').removeClass('sidenav-toggled-open');
+        }
+    });
 
-    function signOut() {
-        localStorage.removeItem('user');
-        router.push({ name: 'login' })
+    // Activate sidebar slide toggle
+    $("[data-bs-toggle='slide']").on('click', function (e) {
+        var $this = $(this);
+        var checkElement = $this.next();
+        var animationSpeed = 300,
+            slideMenuSelector = '.slide-menu';
+        if (checkElement.is(slideMenuSelector) && checkElement.is(':visible')) {
+            checkElement.slideUp(animationSpeed, function () {
+                checkElement.removeClass('open');
+            });
+            checkElement.parent("li").removeClass("is-expanded");
+        } else if ((checkElement.is(slideMenuSelector)) && (!checkElement.is(':visible'))) {
+            var parent = $this.parents('ul').first();
+            var ul = parent.find('ul:visible').slideUp(animationSpeed);
+            ul.removeClass('open');
+            var parent_li = $this.parent("li");
+            checkElement.slideDown(animationSpeed, function () {
+                checkElement.addClass('open');
+                parent.find('li.is-expanded').removeClass('is-expanded');
+                parent_li.addClass('is-expanded');
+            });
+        }
+        if (checkElement.is(slideMenuSelector)) {
+            e.preventDefault();
+        }
+    });
+
+    // Activate sidebar slide toggle
+    $("[data-bs-toggle='sub-slide']").on('click', function (e) {
+        var $this = $(this);
+        var checkElement = $this.next();
+        var animationSpeed = 300,
+            slideMenuSelector = '.sub-slide-menu';
+        if (checkElement.is(slideMenuSelector) && checkElement.is(':visible')) {
+            checkElement.slideUp(animationSpeed, function () {
+                checkElement.removeClass('open');
+            });
+            checkElement.parent("li").removeClass("is-expanded");
+        } else if ((checkElement.is(slideMenuSelector)) && (!checkElement.is(':visible'))) {
+            var parent = $this.parents('ul').first();
+            var ul = parent.find('ul:visible').slideUp(animationSpeed);
+            ul.removeClass('open');
+            var parent_li = $this.parent("li");
+            checkElement.slideDown(animationSpeed, function () {
+                checkElement.addClass('open');
+                parent.find('li.is-expanded').removeClass('is-expanded');
+                parent_li.addClass('is-expanded');
+            });
+        }
+        if (checkElement.is(slideMenuSelector)) {
+            e.preventDefault();
+        }
+    });
+
+    // Activate sidebar slide toggle
+    $("[data-bs-toggle='sub-slide-sub']").on('click', function (e) {
+        var $this = $(this);
+        var checkElement = $this.next();
+        var animationSpeed = 300,
+            slideMenuSelector = '.sub-slide-menu-sub';
+        if (checkElement.is(slideMenuSelector) && checkElement.is(':visible')) {
+            checkElement.slideUp(animationSpeed, function () {
+                checkElement.removeClass('open');
+            });
+            checkElement.parent("li").removeClass("is-expanded");
+        } else if ((checkElement.is(slideMenuSelector)) && (!checkElement.is(':visible'))) {
+            var parent = $this.parents('ul').first();
+            var ul = parent.find('ul:visible').slideUp(animationSpeed);
+            ul.removeClass('open');
+            var parent_li = $this.parent("li");
+            checkElement.slideDown(animationSpeed, function () {
+                checkElement.addClass('open');
+                parent.find('li.is-expanded').removeClass('is-expanded');
+                parent_li.addClass('is-expanded');
+            });
+        }
+        if (checkElement.is(slideMenuSelector)) {
+            e.preventDefault();
+        }
+    });
+
+    // ______________Active Class
+    $(".app-sidebar li a").each(function () {
+        var pageUrl = window.location.href.split(/[?#]/)[0];
+        if (this.href == pageUrl) {
+            $(this).addClass("active");
+            $(this).parent().addClass("is-expanded");
+            $(this).parent().parent().prev().addClass("active");
+            $(this).parent().parent().addClass("open");
+            $(this).parent().parent().prev().addClass("is-expanded");
+            $(this).parent().parent().parent().addClass("is-expanded");
+            $(this).parent().parent().parent().parent().addClass("open");
+            $(this).parent().parent().parent().parent().prev().addClass("active");
+            $(this).parent().parent().parent().parent().parent().addClass("is-expanded");
+        }
+    });
+
+    var toggleSidebar = function () {
+        var w = $(window);
+        if (w.outerWidth() <= 767) {
+            $("body").addClass("sidebar-gone");
+            $(document).off("click", "body").on("click", "body", function (e) {
+                if ($(e.target).hasClass('sidebar-show') || $(e.target).hasClass('search-show')) {
+                    $("body").removeClass("sidebar-show");
+                    $("body").addClass("sidebar-gone");
+                    $("body").removeClass("search-show");
+                }
+            });
+        } else {
+            $("body").removeClass("sidebar-gone");
+        }
     }
+    toggleSidebar();
+    $(window).resize(toggleSidebar);
+})
+
+function signOut() {
+    localStorage.removeItem('user');
+    router.push({ name: 'login' })
+}
 </script>
 <style>
-   .main-sidemenu {
-       height: 90%;
-       margin-top: 70px;
-       overflow-y: scroll;
-   }
-    .active {
-        color: green;
-    }
-    .mr-4 {
-        margin-right: 10px;;
-    }
+.main-sidemenu {
+    height: 90%;
+    margin-top: 70px;
+    overflow-y: scroll;
+}
+
+.active {
+    color: green;
+}
+
+.mr-4 {
+    margin-right: 10px;
+    ;
+}
 </style>
