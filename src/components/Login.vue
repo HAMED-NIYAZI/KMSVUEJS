@@ -113,7 +113,7 @@
 </template>
 <script setup>
 import { reactive, ref, computed } from "vue";
-import Auth from "../services/Auth";
+import AuthService from "../services/AuthService";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../store/user";
@@ -135,7 +135,7 @@ async function doLogin(e) {
   signInLoading.value = true;
   errors = {};
   try {
-    const response = await Auth.login(formData);
+    const response = await AuthService.login(formData);
     if (response.data.result == 0) {
       //success
       userStore.setUser(response.data.data);
@@ -206,7 +206,7 @@ async function getLoginPageInfo() {
   loading.value = true;
   errors = {};
   try {
-    const response = await Auth.getInfoForLoginPage();
+    const response = await AuthService.getInfoForLoginPage();
     if (response.data.result == 0) {
       loginPageInfo = response.data.data;
     } else if (response.data.result == 5) {

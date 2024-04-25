@@ -1,5 +1,5 @@
 import api from '@/axios/api'
-class Auth {
+class AuthService {
     async login(formData) {
         return await api.post(`api/Account/Login`, {
             userName: formData.userName,
@@ -14,4 +14,4 @@ class Auth {
     }
 }
 
-export default new Auth
+export default new AuthService
