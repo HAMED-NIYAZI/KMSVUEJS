@@ -2,7 +2,7 @@ import axios from "axios";
 import { useUserStore } from '@/store/user'
 const userStore = useUserStore()
 const api = axios.create({
-    baseURL: process.env.VUE_APP_BASE_URL ,
+    baseURL: process.env.VUE_APP_BASE_URL,
     timeout: 10000,
     headers: {
         'Accept': 'application/json'
@@ -18,6 +18,5 @@ api.interceptors.request.use(function(config) {
 }, err => new Promise.reject(err));
 
 api.interceptors.response.use(res => res, err => Promise.reject(err))
-
 
 export default api;
