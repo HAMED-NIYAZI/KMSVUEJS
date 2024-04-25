@@ -31,10 +31,9 @@
     </div>
 </template>
 <script setup>
-import Tree from "@/services/Tree"
-import { ref, computed, onMounted } from 'vue'
+import TreeService from "@/services/TreeService"
+import { ref, onMounted } from 'vue'
 import { useToast } from "vue-toastification";
-import { useHead } from '@vueuse/head'
 import Swal from 'sweetalert2'
 import TreeItem from "@/components/pages/tree/TreeItem.vue";
 const toast = useToast();
@@ -46,7 +45,7 @@ async function index() {
     loading.value = true;
     errors = {}
     try {
-        const response = await Tree.tree();
+        const response = await TreeService.tree();
         if (response.data.result == 0) {
             trees.value = response.data.data;
             setTimeout(() => {

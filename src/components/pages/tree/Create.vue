@@ -73,7 +73,7 @@
     </div>
 </template>
 <script setup>
-import Grade from "@/services/Grade"
+import Grade from "@/services/GradeService"
 import { reactive, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useToast } from "vue-toastification";

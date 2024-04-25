@@ -1,5 +1,5 @@
 import api from '@/axios/api'
-class User {
+class UserService {
     async updateProfile(formData) {
         return await api.post(`api/User/EditUserProfile`, formData);
     }
@@ -15,4 +15,4 @@ class User {
     }
 }
 
-export default new User
+export default new UserService

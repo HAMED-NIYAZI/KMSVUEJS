@@ -68,11 +68,11 @@
     </div>
 </template>
 <script setup>
-import Grade from "@/services/Grade"
-import { reactive, ref, computed } from 'vue'
+import GradeService from "@/services/GradeService"
+import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from "vue-toastification";
-import { useHead } from '@vueuse/head'
+let errors = {}
 const route = useRoute()
 const router = useRouter()
 const toast = useToast();
@@ -83,12 +83,11 @@ let formData = reactive({
     sortingNumber: '',
     id: route.params.id
 });
-let errors = {}
 async function getById() {
     loading.value = true;
     errors = {}
     try {
-        const response = await Grade.getById(route.params.id);
+        const response = await GradeService.getById(route.params.id);
         if (response.data.result == 0) {
             formData = response.data.data
         } else if (response.data.result == 5) {
@@ -110,7 +109,7 @@ async function updateGrade() {
     updateLoading.value = true;
     errors = {}
     try {
-        const response = await Grade.update(formData);
+        const response = await GradeService.update(formData);
         if (response.data.result == 0) {
             toast.success(response.data.message, {
                 timeout: 2000

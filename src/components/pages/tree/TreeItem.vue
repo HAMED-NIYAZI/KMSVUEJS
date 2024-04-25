@@ -20,10 +20,7 @@ import { defineProps, onMounted } from 'vue';
 defineProps(['trees']);
 import TreeItem from '@/components/pages/tree/TreeItem.vue'
 function a(id, parentId) {
-    // alert('id=' + id + " parent=" + parentId);
 }
-
-
 
 </script>
 <style>

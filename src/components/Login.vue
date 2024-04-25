@@ -117,7 +117,6 @@ import AuthService from "../services/AuthService";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../store/user";
-import { useHead } from "@vueuse/head";
 
 const userStore = useUserStore();
 const router = useRouter();

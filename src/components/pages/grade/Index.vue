@@ -13,7 +13,7 @@
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
                     <h4 class="card-title mg-b-0">لیست پایه تحصیلی</h4>
-                    <router-link :to="{name:'grades.create'}"
+                    <router-link :to="{ name: 'grades.create' }"
                         class="btn btn-outline-success btn-sm d-flex align-items-center">
                         <i class="ms-2 fa fa-plus"></i>جدید
                     </router-link>
@@ -41,7 +41,7 @@
                                 <td>
                                     <a href="#" @click.prevent="destroy(grade.id)"><i
                                             class=" fa fa-trash text-danger"></i></a>
-                                    <router-link :to="{name:'grades.edit', params:{id:grade.id}}" class="ms-2"><i
+                                    <router-link :to="{ name: 'grades.edit', params: { id: grade.id } }" class="ms-2"><i
                                             class=" fa fa-pen text-warning"></i></router-link>
                                 </td>
                             </tr>
@@ -56,21 +56,19 @@
     </div>
 </template>
 <script setup>
-import Grade from "@/services/Grade"
-import { ref, computed } from 'vue'
+import GradeService from "@/services/GradeService"
+import { ref } from 'vue'
 import { useToast } from "vue-toastification";
-import { useHead } from '@vueuse/head'
 import Swal from 'sweetalert2'
 const toast = useToast();
 let loading = ref(false)
 let grades = ref([]);
 let errors = {}
-
 async function index() {
     loading.value = true;
     errors = {}
     try {
-        const response = await Grade.index();
+        const response = await GradeService.index();
         if (response.data.result == 0) {
             grades.value = response.data.data;
             console.log(grades.value)
@@ -103,7 +101,7 @@ async function destroy(id) {
         if (result.isConfirmed) {
             errors = {}
             try {
-                const response = await Grade.delete(id);
+                const response = await GradeService.delete(id);
                 if (response.data.result == 0) {
                     toast.success(response.data.message);
                     index()
@@ -117,7 +115,7 @@ async function destroy(id) {
                     });
                 }
             } catch (err) {
-        
+
             } finally {
             }
         }
@@ -127,7 +125,7 @@ index()
 </script>
 
 <style scoped>
-.page{
- background: red;
+.page {
+    background: red;
 }
 </style>

@@ -1,5 +1,5 @@
 import api from '@/axios/api'
-class Tree {
+class TreeService {
     async tree() {
         return await api.get(`/api/Organization/GetOrganizationTree`);
     }
@@ -17,4 +17,4 @@ class Tree {
     }
 }
 
-export default new Tree
+export default new TreeService

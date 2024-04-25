@@ -129,15 +129,12 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref, computed } from "vue";
+import { reactive, ref } from "vue";
 import AuthService from "../services/AuthService";
 import { useToast } from "vue-toastification";
-import { useHead } from "@vueuse/head";
 
 const toast = useToast();
 let loading = ref(false);
-let getLoginPageInfoLoading = ref(false);
-let loginPageInfo = reactive({ imagePath: "", title: "", description: "" });
 let formData = reactive({
   firstName: "",
   lastName: "",

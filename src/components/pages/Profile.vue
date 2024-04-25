@@ -185,7 +185,7 @@
 <script setup>
 import { useUserStore } from '@/store/user'
 const userStore = useUserStore()
-import User from "@/services/User"
+import UserService from "@/services/UserService"
 import { reactive, ref, computed } from 'vue'
 import { useToast } from "vue-toastification";
 import { useHead } from '@vueuse/head'
@@ -213,7 +213,7 @@ async function updateProfile() {
     loading.value = true;
     errors = {}
     try {
-        const response = await User.updateProfile(formData);
+        const response = await UserService.updateProfile(formData);
         if (response.data.result == 0) {
             userStore.setUser(response.data.data);
             toast.success(response.data.message, {timeout: 2000});
@@ -236,7 +236,7 @@ async function updatePassword() {
     loading.value = true;
     errors = {}
     try {
-        const response = await User.updatePassword(formPasswordData);
+        const response = await UserService.updatePassword(formPasswordData);
         if (response.data.result == 0) {
             toast.success(response.data.message, {
                 timeout: 20000
@@ -273,7 +273,7 @@ async function loadAvatar(e) {
     let fd = new FormData()
     fd.append('file', avatar.value)
     try {
-        const response = await User.uploadAvatar(fd, userStore.getUser.userId);
+        const response = await UserService.uploadAvatar(fd, userStore.getUser.userId);
         if (response.data.result == 0) {
             toast.success(response.data.message, {
                 timeout: 2000

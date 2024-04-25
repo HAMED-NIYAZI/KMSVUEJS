@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <div class="card-footer text-center">
                     <div class="text-center" v-if="loading">
                         <span class="spinner-border spinner-border-sm"></span>
@@ -73,11 +73,10 @@
     </div>
 </template>
 <script setup>
-import Grade from "@/services/Grade"
-import { reactive, ref, computed } from 'vue'
+import GradeService from "@/services/GradeService"
+import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useToast } from "vue-toastification";
-import { useHead } from '@vueuse/head'
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, maxLength } from '@vuelidate/validators'
 const route = useRoute()
@@ -85,31 +84,29 @@ const toast = useToast();
 let loading = ref(false)
 let formData = reactive({
     gradeName: '',
-    sortingNumber:''
+    sortingNumber: ''
 });
 
 const rules = {
     gradeName: {
-        required, 
+        required,
         minLength: minLength(3),
-        maxLength: maxLength(5) 
+        maxLength: maxLength(5)
     },
-    sortingNumber: { 
-        required 
+    sortingNumber: {
+        required
     },
 }
 
 const v$ = useVuelidate(rules, formData)
-
-let errors = {}
 async function createGrade() {
     const isFormCorrect = await this.v$.$validate()
     if (!isFormCorrect) return
 
     loading.value = true;
-    errors = {}
+
     try {
-        const response = await Grade.create(formData);
+        const response = await GradeService.create(formData);
         if (response.data.result == 0) {
             formData = {}
             toast.success(response.data.message, { timeout: 2000 });
