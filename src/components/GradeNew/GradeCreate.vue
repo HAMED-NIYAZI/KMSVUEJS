@@ -5,9 +5,8 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">لیست پایه تحصیلی</h4>
-                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                    </div>
+                        <h4 class="card-title mg-b-0">ایجاد پایه تحصیلی</h4>
+                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -54,7 +53,7 @@
                         <span class="spinner-border spinner-border-sm"></span>
                     </div>
                     <template v-else>
-                        <button type="submit" class="btn btn-outline-primary btn-sm">ثبت</button>
+                        <button type="submit" class="btn btn-primary">ثبت</button>
                     </template>
                 </div>
             </div>

@@ -3,16 +3,10 @@
     <div class="my-auto">
 						<div class="d-flex">
 							<h4 class="content-title mb-0 my-auto">
-                                
-                                <router-link
-            :to="{ name: 'dashboard' }"
-            class="content-title mb-0 my-auto"
-            >داشبورد</router-link
-          >
-
+                                اطلاعات پایه
                             </h4>
                             <span class="text-muted mt-1 tx-13 ms-2 mb-0">
-                                <router-link :to="{ name: 'profile' }"> /&nbsp; پروفایل</router-link>
+                                <router-link :to="{ name: 'gradenew' }"> /&nbsp; پایه تحصیلی</router-link>
                             </span>
 						</div>
 					</div>

@@ -72,6 +72,7 @@
                         </svg><span class="side-menu__label">اطلاعات پایه</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <router-link :to="{ name: 'grades.index' }" class="slide-item"> پایه تحصیلی </router-link>
+                        <router-link :to="{ name: 'gradenew' }" class="slide-item"> پایه تحصیلی جدید</router-link>
                         <router-link :to="{ name: 'tree.index' }" class="slide-item"> سازمان </router-link>
                     </ul>
                 </li>
