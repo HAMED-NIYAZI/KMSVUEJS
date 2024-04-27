@@ -1,7 +1,16 @@
 <template>
-  <div class="text-center mt-5" v-if="loading">
+  <!-- <div class="text-center mt-5" v-if="loading">
     <span class="spinner-border spinner-border-sm"></span>
-  </div>
+  </div> -->
+
+          <!-- Loader -->
+          <!-- <div id="global-loader"  v-if="loading">
+			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
+		</div> -->
+
+    <Spinner  v-if="loading"/>
+		<!-- /Loader -->
+
   <div class="row no-gutter" v-else>
     <!-- The image half -->
     <div
@@ -117,6 +126,7 @@ import AuthService from "../services/AuthService";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../store/user";
+import Spinner from "./Spinner.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -224,11 +234,16 @@ async function getLoginPageInfo() {
 }
 getLoginPageInfo();
 
+ 
+
 const logoPath = computed(
   () => process.env.VUE_APP_BASE_URL + loginPageInfo.imagePath
 );
 </script>
 
+
+
+ 
 
 <style scoped>
 .mt-44 {
