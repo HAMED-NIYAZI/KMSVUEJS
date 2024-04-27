@@ -27,7 +27,13 @@ const routes = [{
             path: 'grades/create',
             name: 'grades.create',
             component: () => { return import ('./components/pages/grade/Create.vue') }
-        }, {
+        }, 
+        {
+            path: 'gradenew',
+            name: 'gradenew',
+            component: () => { return import ('./components/GradeNew/GradePage.vue') }
+        },
+        {
             path: 'tree',
             name: 'tree.index',
             component: () => { return import ('./components/pages/tree/Index.vue') }
