@@ -1,7 +1,5 @@
 <template>
     <h4>به داشبورد خود خوش آمدید</h4>
-
-
 </template>
 <script setup>
     // import ConcertList from './ConcertList.vue'
