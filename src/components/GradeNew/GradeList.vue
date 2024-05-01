@@ -60,7 +60,6 @@
             const response = await GradeService.index();
             if (response.data.result == 0) {
                 grades.value = response.data.data;
-                console.log(grades.value)
             } else if (response.data.result == 5) {
                 toast.warning(response.data.message, {
                     timeout: 2000
