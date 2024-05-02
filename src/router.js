@@ -15,7 +15,9 @@ const routes = [{
             path: 'profile',
             name: 'profile',
             component: () => { return import ('./components/pages/Profile.vue') }
-        }, {
+        },
+        
+        {
             path: 'grades',
             name: 'grades.index',
             component: () => { return import ('./components/pages/grade/Index.vue') }
