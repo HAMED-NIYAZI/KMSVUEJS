@@ -125,11 +125,11 @@ import { reactive, ref, computed } from "vue";
 import AuthService from "../../services/AuthService";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
-import { useUserStore } from "../../store/user";
+import { LocalStorageService } from "../../services/LocalStorageService";
 import Spinner from "@/components/Spinners/Spinner.vue";
 import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
 
-const userStore = useUserStore();
+const localStorageService = LocalStorageService();
 const router = useRouter();
 const toast = useToast();
 let signInLoading = ref(false);
@@ -148,7 +148,7 @@ async function doLogin(e) {
     const response = await AuthService.login(formData);
     if (response.data.result == 0) {
       //success
-      userStore.setUser(response.data.data);
+      localStorageService.setUser(response.data.data);
       router.push({ name: "dashboard" });
     } else if (response.data.result == 5) {
       // user not found

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useUserStore } from '@/store/user'
-const userStore = useUserStore()
+import { LocalStorageService } from '@/services/LocalStorageService'
+const localStorageService = LocalStorageService()
 const api = axios.create({
     baseURL: process.env.VUE_APP_BASE_URL,
     timeout: 10000,
@@ -10,7 +10,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(function(config) {
-    let token = userStore.getUser.token;
+    let token = localStorageService.getUser.token;
 
     config.headers.Authorization = 'Bearer ' + token;
 

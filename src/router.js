@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { isAuth } from '@/utils/helpers'
+import { isAuth } from '@/services/HelperService'
 const routes = [{
         path: '/',
-        component: () => { return import ('./components/layouts/Master.vue') },
+        component: () => { return import ('./components/Layout/Master.vue') },
         name: 'master',
         meta: {
             authRequired: true

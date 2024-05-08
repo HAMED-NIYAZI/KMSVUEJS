@@ -268,7 +268,7 @@
 
                     <div class="dropdown main-profile-menu nav nav-item nav-link">
                         <a class="profile-user d-flex" href="#">
-                            <img :alt="userStore.getUser.firstName + ' ' + userStore.getUser.lastName"
+                            <img :alt="localStorageService.getUser.firstName + ' ' + localStorageService.getUser.lastName"
                                 :src="avatarPath">
                         </a>
                         <div class="dropdown-menu">
@@ -278,7 +278,7 @@
                                             :src="avatarPath" class="">
                                     </div>
                                     <div class="ms-3 my-auto">
-                                        <h6>{{ userStore.getUser.firstName + ' ' + userStore.getUser.lastName }}</h6>
+                                        <h6>{{ localStorageService.getUser.firstName + ' ' + localStorageService.getUser.lastName }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -307,13 +307,13 @@
 <script setup>
 import { onMounted,computed } from 'vue'
 import { useRouter } from "vue-router";
-import { useUserStore } from '@/store/user'
+import { LocalStorageService } from '@/services/LocalStorageService'
 
 
 const router = useRouter()
 
 
-const userStore = useUserStore()
+const localStorageService = LocalStorageService()
 
 
 onMounted(() => {
@@ -346,7 +346,7 @@ function signOut() {
 
 
 const avatarPath = computed(
-  () => process.env.VUE_APP_BASE_URL + userStore.getUser.imagePath
+  () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
 );
 
 

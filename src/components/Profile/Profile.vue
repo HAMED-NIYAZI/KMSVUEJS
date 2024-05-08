@@ -24,9 +24,9 @@
               <div class="main-img-user profile-user">
                 <img
                   :alt="
-                    userStore.getUser.firstName +
+                    localStorageService.getUser.firstName +
                     ' ' +
-                    userStore.getUser.lastName
+                    localStorageService.getUser.lastName
                   "
                   :src="avatarPath"
                 />
@@ -48,9 +48,9 @@
                 <div>
                   <h5 class="main-profile-name">
                     {{
-                      userStore.getUser.firstName +
+                      localStorageService.getUser.firstName +
                       " " +
-                      userStore.getUser.lastName
+                      localStorageService.getUser.lastName
                     }}
                   </h5>
                 </div>
@@ -58,7 +58,7 @@
               <h6>بیوگرافی</h6>
               <div class="main-profile-bio">
                 <p>
-                  {{ userStore.getUser.about }}
+                  {{ localStorageService.getUser.about }}
                 </p>
               </div>
             </div>
@@ -296,8 +296,8 @@
   </div>
 </template>
 <script setup>
-import { useUserStore } from "@/store/user";
-const userStore = useUserStore();
+import { LocalStorageService } from "@/services/LocalStorageService";
+const localStorageService = LocalStorageService();
 import UserService from "@/services/UserService";
 import { reactive, ref, computed } from "vue";
 import { useToast } from "vue-toastification";
@@ -306,19 +306,19 @@ import Spinner_btn from "../Spinners/Spinner_btn.vue";
 const toast = useToast();
 let loading = ref(false);
 let formPasswordData = reactive({
-  id: userStore.getUser.userId,
+  id: localStorageService.getUser.userId,
   oldPassword: "",
   newPassword: "",
   confirmPassword: "",
 });
 let formData = reactive({
-  id: userStore.getUser.userId,
-  firstName: userStore.getUser.firstName,
-  lastName: userStore.getUser.lastName,
-  phone: userStore.getUser.phone,
-  email: userStore.getUser.email,
-  address: userStore.getUser.address,
-  about: userStore.getUser.about,
+  id: localStorageService.getUser.userId,
+  firstName: localStorageService.getUser.firstName,
+  lastName: localStorageService.getUser.lastName,
+  phone: localStorageService.getUser.phone,
+  email: localStorageService.getUser.email,
+  address: localStorageService.getUser.address,
+  about: localStorageService.getUser.about,
 });
 let errors = {};
 
@@ -328,10 +328,10 @@ async function updateProfile() {
   try {
     const response = await UserService.updateProfile(formData);
     if (response.data.result == 0) {
-     response.data.data.token=userStore.getUser.token;
-     response.data.data.expires_at=userStore.getUser.expires_at;
+     response.data.data.token=localStorageService.getUser.token;
+     response.data.data.expires_at=localStorageService.getUser.expires_at;
       
-      userStore.setUser(response.data.data);
+      localStorageService.setUser(response.data.data);
 
       toast.success(response.data.message, { timeout: 2000 });
     } else if (response.data.result == 5) {
@@ -390,7 +390,7 @@ async function loadAvatar(e) {
   try {
     const response = await UserService.uploadAvatar(
       fd,
-      userStore.getUser.userId
+      localStorageService.getUser.userId
     );
     if (response.data.result == 0) {
       toast.success(response.data.message, {
@@ -411,7 +411,7 @@ async function loadAvatar(e) {
 }
 
 const avatarPath = computed(
-  () => process.env.VUE_APP_BASE_URL + userStore.getUser.imagePath
+  () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
 );
 </script>
 

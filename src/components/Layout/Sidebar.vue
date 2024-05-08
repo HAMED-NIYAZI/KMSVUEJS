@@ -20,8 +20,8 @@
                             class="avatar-status profile-status bg-green"></span>
                     </div>
                     <div class="user-info">
-                        <h4 class="fw-semibold mt-3 mb-0">{{ userStore.getUser.firstName + " " +
-                            userStore.getUser.lastName }}</h4>
+                        <h4 class="fw-semibold mt-3 mb-0">{{ localStorageService.getUser.firstName + " " +
+                            localStorageService.getUser.lastName }}</h4>
                         <span class="mb-0 text-muted">مدیریت</span>
                     </div>
                 </div>
@@ -71,8 +71,7 @@
                                 d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
                         </svg><span class="side-menu__label">اطلاعات پایه</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        <router-link :to="{ name: 'grades.index' }" class="slide-item"> پایه تحصیلی </router-link>
-                        <router-link :to="{ name: 'grade' }" class="slide-item"> پایه تحصیلی جدید</router-link>
+                         <router-link :to="{ name: 'grade' }" class="slide-item"> پایه تحصیلی  </router-link>
                         <router-link :to="{ name: 'tree.index' }" class="slide-item"> سازمان </router-link>
                     </ul>
                 </li>
@@ -373,8 +372,8 @@
 </template>
 <script setup>
 import { onMounted,computed } from "vue";
-import { useUserStore } from '@/store/user'
-const userStore = useUserStore()
+import { LocalStorageService } from '@/services/LocalStorageService'
+const localStorageService = LocalStorageService()
 import { useRouter } from "vue-router";
 const router = useRouter()
 
@@ -517,7 +516,7 @@ function signOut() {
 }
 
 const avatarPath = computed(
-  () => process.env.VUE_APP_BASE_URL + userStore.getUser.imagePath
+  () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
 );
 </script>
 

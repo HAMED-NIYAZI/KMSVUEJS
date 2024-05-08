@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 
-export const useUserStore = defineStore('user', {
+export const LocalStorageService = defineStore('user', {
     state: () => {
         return {
             user: JSON.parse(localStorage.getItem('user')) || {
