@@ -1,18 +1,12 @@
 <template>
-    <div class="breadcrumb-header justify-content-between">
-        <div class="my-auto">
-            <div class="d-flex">
-                <router-link :to="{ name: 'dashboard' }" class="content-title mb-0 my-auto">داشبورد</router-link>
-                <span class="text-muted mt-1 tx-13 ms-2 mb-0">/</span>
-                <span class="text-muted">نمای درختی</span>
-            </div>
-        </div>
-    </div>
+ 
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                    <h4 class="card-title mg-b-0">نمای درختی</h4>
+                    <h4 class="card-title mg-b-0">سازمان ها </h4>
+                    <button type="button" class="btn btn-success btn-icon"  ><i
+                            class="mdi mdi-refresh"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -22,7 +16,7 @@
                             <span class=" spinner-border spinner-border-sm"></span>
                         </div>
                         <ul id="treeview1" v-else class="tree">
-                            <TreeItem :trees="trees" />
+                            <Tree :trees="trees" />
                         </ul>
                     </div>
                 </div>
@@ -31,7 +25,7 @@
     </div>
 </template>
 <script setup>
-import TreeService from "@/services/TreeService"
+import OrganizationService from "@/services/OrganizationService"
 import { ref, onMounted } from 'vue'
 import { useToast } from "vue-toastification";
 import Swal from 'sweetalert2'
@@ -45,7 +39,7 @@ async function index() {
     loading.value = true;
     errors = {}
     try {
-        const response = await TreeService.tree();
+        const response = await OrganizationService.GetOrganizationTree();
         if (response.data.result == 0) {
             trees.value = response.data.data;
             setTimeout(() => {
@@ -116,7 +110,7 @@ async function index() {
                 $('#treeview1').treed();
 
 
-            }, 500);
+            }, 10);
         } else if (response.data.result == 5) {
             toast.warning(response.data.message, {
                 timeout: 2000

@@ -1,6 +1,6 @@
 import api from '@/axios/api'
 class OrganizationService {
-    async tree() {
+    async GetOrganizationTree() {
         return await api.get(`/api/Organization/GetOrganizationTree`);
     }
     // async create(data) {

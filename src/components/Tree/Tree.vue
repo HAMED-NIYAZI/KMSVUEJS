@@ -11,7 +11,7 @@
             {{ item.persianTitle }}
         </div>
         <ul v-if="item.children.length">
-            <TreeItem :trees="item.children" />
+            <Tree :trees="item.children" />
         </ul>
     </li>
 </template>

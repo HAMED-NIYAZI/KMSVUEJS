@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import AppComponent from './App.vue'
-import router from './router.js'
+import AppComponent from './App'
+import router from './router'
 
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";

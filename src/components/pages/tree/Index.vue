@@ -116,7 +116,7 @@ async function index() {
                 $('#treeview1').treed();
 
 
-            }, 500);
+            }, 100);
         } else if (response.data.result == 5) {
             toast.warning(response.data.message, {
                 timeout: 2000
