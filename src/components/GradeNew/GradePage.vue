@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <div class="col-lg-5" v-if="WhichCreateOrEdit == 'CreateGrade'">
-      <GradeCreate @updateGradeList="FupdateGradeList" />
+      <GradeCreate :key="componentKey" @updateGradeList="FupdateGradeList" />
     </div>
     <div class="col-lg-5" v-else-if="WhichCreateOrEdit == 'EditGrade'">
       <GradeEdit :id="selectedId" :key="selectedId" @updateGradeList="FupdateGradeList"/>
@@ -36,6 +36,8 @@ function FWhichCreateOrEdit(id) {
 
 function FupdateGradeList() {
   componentKey.value += 1; // Increment the key to force re-render
+  WhichCreateOrEdit = 'CreateGrade';  
+
 }
 
 

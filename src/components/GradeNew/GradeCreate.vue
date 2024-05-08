@@ -14,8 +14,8 @@
                   <label>عنوان پایه تحصیلی</label>
                   <input class="form-control" v-model="formData.gradeName" placeholder="عنوان پایه تحصیلی را وارد کنید" type="text">
                   <div class="text-danger" v-if="v$.gradeName.required.$invalid">وارد کردن فیلد عنوان الزمی است</div>
-                  <div class="text-danger" v-if="v$.gradeName.minLength.$invalid">طول فیلد نباید کمتر از 3 کاراکتر باشد</div>
-                  <div class="text-danger" v-if="v$.gradeName.maxLength.$invalid">طول فیلد نیاید بیشتر از 5 کاراکتر باشد</div>
+                  <div class="text-danger" v-if="v$.gradeName.minLength.$invalid">طول فیلد نباید کمتر از 1 کاراکتر باشد</div>
+                  <div class="text-danger" v-if="v$.gradeName.maxLength.$invalid">طول فیلد نیاید بیشتر از 30 کاراکتر باشد</div>
                 </div>
               </div>
               <div class="col-6">
@@ -67,8 +67,8 @@
  const rules = {
    gradeName: {
      required,
-     minLength: minLength(3),
-     maxLength: maxLength(5)
+     minLength: minLength(1),
+     maxLength: maxLength(30)
    },
    sortingNumber: {
      required
@@ -80,11 +80,19 @@
  const emit = defineEmits(['updateGradeList']); // Define emit
  
  async function createGrade() {
+  debugger;
+
    const isFormCorrect = await v$.value.$validate();
    if (!isFormCorrect) return;
  
    loading.value = true;
    try {
+    debugger;
+if(formData.gradeName==undefined){   
+      toast.error('فیلد  عنوان پایه تحصیلی الزامی می باشد', { timeout: 2000 });
+      return;
+}
+ 
      const response = await GradeService.create(formData);
      if (response.data.result === 0) {
        formData = {};
@@ -95,7 +103,7 @@
      }
    } catch (err) {
        debugger;
-     toast.error("An error occurred while creating the grade.", { timeout: 2000 });
+     toast.error(err.message, { timeout: 2000 });
    } finally {
        debugger;
  
