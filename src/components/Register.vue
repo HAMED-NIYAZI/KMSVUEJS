@@ -100,9 +100,7 @@
                         </div>
 
                         <div class="form-group col-lg-6" style="margin-top: 40px;">
-                          <div class="text-center" v-if="loading">
-                            <span class="spinner-border spinner-border-sm"></span>
-                          </div>
+                          <Spinner_btn  v-if="loading"/>
                           <button type="button" v-else @click="doRegister($event)"
                             class="btn btn-main-primary btn-block">
                             ثبت درخواست
@@ -132,7 +130,7 @@
 import { reactive, ref } from "vue";
 import AuthService from "../services/AuthService";
 import { useToast } from "vue-toastification";
-
+import Spinner_btn from '@/components/Spinners/Spinner_btn.vue'
 const toast = useToast();
 let loading = ref(false);
 let formData = reactive({

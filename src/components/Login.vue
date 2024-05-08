@@ -3,13 +3,13 @@
     <span class="spinner-border spinner-border-sm"></span>
   </div> -->
 
-          <!-- Loader -->
-          <!-- <div id="global-loader"  v-if="loading">
+  <!-- Loader -->
+  <!-- <div id="global-loader"  v-if="loading">
 			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
 		</div> -->
 
-    <Spinner  v-if="loading"/>
-		<!-- /Loader -->
+  <Spinner v-if="loading" />
+  <!-- /Loader -->
 
   <div class="row no-gutter" v-else>
     <!-- The image half -->
@@ -83,9 +83,9 @@
                             {{ errors.password.shift() }}
                           </div>
                         </div>
-                        <div class="text-center" v-if="signInLoading">
-                          <span class="spinner-border spinner-border-sm"></span>
-                        </div>
+
+                        <Spinner_btn  v-if="signInLoading"/>
+     
                         <button
                           type=" button"
                           v-else
@@ -126,7 +126,8 @@ import AuthService from "../services/AuthService";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../store/user";
-import Spinner from "./Spinner.vue";
+import Spinner from "@/components/Spinners/Spinner.vue";
+import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -168,27 +169,25 @@ async function doLogin(e) {
   } catch (err) {
     console.log(err);
 
- if(err.code=='ERR_BAD_REQUEST'){
-
-  if (
-      err.response.status == 404 &&
-      err.message == "Request failed with status code 404"
-    ) {
-      toast.error(err.response.data.message, {
-              timeout: 4000,
-            });
+    if (err.code == "ERR_BAD_REQUEST") {
+      if (
+        err.response.status == 404 &&
+        err.message == "Request failed with status code 404"
+      ) {
+        toast.error(err.response.data.message, {
+          timeout: 4000,
+        });
+      }
+    }
+    //server is down
+    if (err.code == "ERR_NETWORK") {
+      toast.error("سرور در دسترس نیست", {
+        timeout: 4000,
+      });
+      return;
     }
 
- }
-//server is down
-    if(err.code=='ERR_NETWORK'){
-        toast.error('سرور در دسترس نیست', {
-              timeout: 4000,
-            });  
-            return;
-    }
- 
-//validation errors occurred
+    //validation errors occurred
     if (
       err.response.data.status == 400 &&
       err.response.data.title == "One or more validation errors occurred."
@@ -204,9 +203,6 @@ async function doLogin(e) {
         }
       }
     }
-
-
-
   } finally {
     signInLoading.value = false;
   }
@@ -233,8 +229,6 @@ async function getLoginPageInfo() {
   }
 }
 getLoginPageInfo();
-
- 
 
 const logoPath = computed(
   () => process.env.VUE_APP_BASE_URL + loginPageInfo.imagePath

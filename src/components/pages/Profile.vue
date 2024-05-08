@@ -1,21 +1,19 @@
 <template>
   <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">
-                                
-                                <router-link
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">
+          <router-link
             :to="{ name: 'dashboard' }"
             class="content-title mb-0 my-auto"
             >داشبورد</router-link
           >
-
-                            </h4>
-                            <span class="text-muted mt-1 tx-13 ms-2 mb-0">
-                                <router-link :to="{ name: 'profile' }"> /&nbsp; پروفایل</router-link>
-                            </span>
-						</div>
-					</div>
+        </h4>
+        <span class="text-muted mt-1 tx-13 ms-2 mb-0">
+          <router-link :to="{ name: 'profile' }"> /&nbsp; پروفایل</router-link>
+        </span>
+      </div>
+    </div>
   </div>
   <div class="row row-sm">
     <div class="col-lg-4">
@@ -206,11 +204,9 @@
                     </div>
                   </form>
                 </div>
-                <div class="card-footer text-left">
-                  <span
-                    class="spinner-border spinner-border-sm"
-                    v-if="loading"
-                  ></span>
+                <div class="card-footer text-center">
+                  <Spinner_btn v-if="loading" />
+
                   <button
                     type="submit"
                     v-else
@@ -278,11 +274,10 @@
                     </div>
                   </form>
                 </div>
-                <div class="card-footer text-left">
-                  <span
-                    class="spinner-border spinner-border-sm"
-                    v-if="loading"
-                  ></span>
+                <div class="card-footer text-center">
+
+                  <Spinner_btn v-if="loading" />
+
                   <button
                     type="submit"
                     v-else
@@ -307,7 +302,7 @@ import UserService from "@/services/UserService";
 import { reactive, ref, computed } from "vue";
 import { useToast } from "vue-toastification";
 import { useHead } from "@vueuse/head";
-
+import Spinner_btn from "../Spinners/Spinner_btn.vue";
 const toast = useToast();
 let loading = ref(false);
 let formPasswordData = reactive({
@@ -333,7 +328,11 @@ async function updateProfile() {
   try {
     const response = await UserService.updateProfile(formData);
     if (response.data.result == 0) {
+     response.data.data.token=userStore.getUser.token;
+     response.data.data.expires_at=userStore.getUser.expires_at;
+      
       userStore.setUser(response.data.data);
+
       toast.success(response.data.message, { timeout: 2000 });
     } else if (response.data.result == 5) {
       toast.warning(response.data.message, {

@@ -7,7 +7,7 @@
       <GradeCreate @updateGradeList="FupdateGradeList" />
     </div>
     <div class="col-lg-5" v-else-if="WhichCreateOrEdit == 'EditGrade'">
-      <GradeEdit :id="selectedId" />
+      <GradeEdit :id="selectedId" :key="selectedId" @updateGradeList="FupdateGradeList"/>
     </div>
 
     <div class="col-lg-7">
@@ -25,12 +25,13 @@ import { ref } from 'vue';
 
 
 let componentKey = ref(0);
-let WhichCreateOrEdit = ref('CreateGrade');
+let WhichCreateOrEdit = ref('CreateGrade')
 let selectedId = ref(null); // Initialize it with the ID you want to pass
 
 
-function FWhichCreateOrEdit() {
-  WhichCreateOrEdit = 'EditGrade';
+function FWhichCreateOrEdit(id) {
+  WhichCreateOrEdit = 'EditGrade';  
+  selectedId.value = id;
 }
 
 function FupdateGradeList() {
@@ -38,8 +39,6 @@ function FupdateGradeList() {
 }
 
 
-function setSelectedId(id) {
-  selectedId.value = id;
-}
+ 
 
 </script>

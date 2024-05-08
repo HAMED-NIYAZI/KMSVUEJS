@@ -269,13 +269,13 @@
                     <div class="dropdown main-profile-menu nav nav-item nav-link">
                         <a class="profile-user d-flex" href="#">
                             <img :alt="userStore.getUser.firstName + ' ' + userStore.getUser.lastName"
-                                :src="'https://freelancework.ir/' + userStore.getUser.imagePath">
+                                :src="avatarPath">
                         </a>
                         <div class="dropdown-menu">
                             <div class="main-header-profile bg-primary p-3">
                                 <div class="d-flex wd-100p">
                                     <div class="main-img-user"><img alt=""
-                                            :src="'https://freelancework.ir/' + userStore.getUser.imagePath" class="">
+                                            :src="avatarPath" class="">
                                     </div>
                                     <div class="ms-3 my-auto">
                                         <h6>{{ userStore.getUser.firstName + ' ' + userStore.getUser.lastName }}</h6>
@@ -305,11 +305,17 @@
     </div>
 </template>
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted,computed } from 'vue'
 import { useRouter } from "vue-router";
-const router = useRouter()
 import { useUserStore } from '@/store/user'
+
+
+const router = useRouter()
+
+
 const userStore = useUserStore()
+
+
 onMounted(() => {
     $('.close-toggle').addClass('d-none')
     $('.open-toggle').on('click', e => {
@@ -331,11 +337,22 @@ onMounted(() => {
         $('.dropdown.main-profile-menu.nav.nav-item.nav-link').removeClass('show')
     });
 })
+
+
 function signOut() {
     localStorage.removeItem('user');
     router.push({ name: 'login' })
 }
+
+
+const avatarPath = computed(
+  () => process.env.VUE_APP_BASE_URL + userStore.getUser.imagePath
+);
+
+
 </script>
+
+
 <style>
     /* .active {
         color: green;

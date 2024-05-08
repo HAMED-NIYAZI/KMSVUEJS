@@ -10,7 +10,8 @@
             </div>
             <div class="card-body">
                 <div class="text-center" v-if="loading">
-                    <span class="spinner-border spinner-border-sm"></span>
+                    <!-- <span class="spinner-border spinner-border-sm"></span> -->
+<Spinner_Gride/>
                 </div>
                 <div class="table-responsive" v-else>
                     <table class="table table-striped mg-b-0 text-md-nowrap table-hover" v-if="grades.length">
@@ -32,7 +33,7 @@
                                             class="fa fa-trash text-danger mr-10" ></i></a>
                                     <!-- <router-link :to="{ name: 'grades.edit', params: { id: grade.id } }" class="ms-2"><i
                                             class="fa fa-pen text-warning"></i></router-link> -->
-                                            <a href="#" @click="EditGrade" class="ms-2"><i
+                                            <a href="#" @click="EditGrade(grade.id)"  class="ms-2"><i
                                             class="fa fa-pen text-warning" ></i></a>
 
                                 </td>
@@ -52,6 +53,7 @@ import GradeService from "@/services/GradeService"
 import { ref } from 'vue'
 import { useToast } from "vue-toastification";
 import Swal from 'sweetalert2'
+import Spinner_Gride from '@/components/Spinners/Spinner_Gride.vue'
 const toast = useToast();
 let loading = ref(false)
 let State = ref('CreateGrade')
@@ -59,6 +61,8 @@ let grades = ref([]);
 let errors = {}
 
 const emit = defineEmits(['EditGrade']); // Define emit
+  
+
  
 
 async function index() {
@@ -67,20 +71,8 @@ async function index() {
     try {
         const response = await GradeService.index();
         if (response.data.result == 0) {
-            debugger;
-
-            // Assuming response.data.data is an array of objects with a 'sorthingNumber' field
-            const sortedData = response.data.data.sort((a, b) => a.sortingNumber - b.sortingNumber);
-
- 
-            // Assign the sorted data to grades.value
-            grades.value = sortedData;
-
+           grades.value =  response.data.data;
          } else if (response.data.result == 5) {
-            toast.warning(response.data.message, {
-                timeout: 2000
-            });
-        } else {
             toast.warning(response.data.message, {
                 timeout: 2000
             });
@@ -128,8 +120,10 @@ async function DeleteGrade(id) {
 function RefreshGridGrade() {
     index();
 }
-function EditGrade(){
-     emit('ReloadEditGrade'); // Use emit instead of this.$emit
+function EditGrade( id){
+   //  emit('ReloadEditGrade'); // Use emit instead of this.$emit
+var emitid=id
+   emit('ReloadEditGrade', emitid);
 }
  
 

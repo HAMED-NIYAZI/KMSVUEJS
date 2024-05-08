@@ -16,7 +16,7 @@
                 <div class="dropdown user-pro-body">
                     <div class="">
                         <img alt="user-img" class="avatar avatar-xl brround"
-                            :src="'https://freelancework.ir/' + userStore.getUser.imagePath"><span
+                            :src="avatarPath"><span
                             class="avatar-status profile-status bg-green"></span>
                     </div>
                     <div class="user-info">
@@ -372,7 +372,7 @@
     </aside>
 </template>
 <script setup>
-import { onMounted } from "vue";
+import { onMounted,computed } from "vue";
 import { useUserStore } from '@/store/user'
 const userStore = useUserStore()
 import { useRouter } from "vue-router";
@@ -515,7 +515,12 @@ function signOut() {
     localStorage.removeItem('user');
     router.push({ name: 'login' })
 }
+
+const avatarPath = computed(
+  () => process.env.VUE_APP_BASE_URL + userStore.getUser.imagePath
+);
 </script>
+
 <style>
 .main-sidemenu {
     height: 90%;
