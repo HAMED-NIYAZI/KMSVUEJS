@@ -122,10 +122,10 @@
 </template>
 <script setup>
 import { reactive, ref, computed } from "vue";
-import AuthService from "../services/AuthService";
+import AuthService from "../../services/AuthService";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
-import { useUserStore } from "../store/user";
+import { useUserStore } from "../../store/user";
 import Spinner from "@/components/Spinners/Spinner.vue";
 import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
 

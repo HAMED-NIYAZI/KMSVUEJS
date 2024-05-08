@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { isAuth } from '@/utils/helpers'
 const routes = [{
         path: '/',
-        component: () => { return import ('./layouts/Master.vue') },
+        component: () => { return import ('./components/layouts/Master.vue') },
         name: 'master',
         meta: {
             authRequired: true
@@ -14,7 +14,7 @@ const routes = [{
         }, {
             path: 'profile',
             name: 'profile',
-            component: () => { return import ('./components/pages/Profile.vue') }
+            component: () => { return import ('./components/Profile/Profile.vue') }
         },
         
         {
@@ -31,9 +31,9 @@ const routes = [{
             component: () => { return import ('./components/pages/grade/Create.vue') }
         }, 
         {
-            path: 'gradenew',
-            name: 'gradenew',
-            component: () => { return import ('./components/GradeNew/GradePage.vue') }
+            path: 'grade',
+            name: 'grade',
+            component: () => { return import ('./components/Grade/GradePage.vue') }
         },
         {
             path: 'tree',
@@ -49,11 +49,11 @@ const routes = [{
     },
     {
         path: '/:pathMatch(.*)*',
-        component: () => { return import ('./components/NotFound.vue') },
+        component: () => { return import ('./components/NotFound/NotFound.vue') },
         name: 'notfound'
     }, {
         path: '/login',
-        component: () => { return import ('./components/Login.vue') },
+        component: () => { return import ('./components/Login/Login.vue') },
         name: 'login',
         beforeEnter: (to, from, next) => {
             if (!isAuth()) {
@@ -64,7 +64,7 @@ const routes = [{
     },
     {
         path: '/register',
-        component: () => { return import ('./components/Register.vue') },
+        component: () => { return import ('./components/Register/Register.vue') },
         name: 'register',
         beforeEnter: (to, from, next) => {
             if (!isAuth()) {

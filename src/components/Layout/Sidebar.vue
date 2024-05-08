@@ -2,14 +2,14 @@
     <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
     <aside class="app-sidebar sidebar-scroll">
         <div class="main-sidebar-header active">
-            <a class="desktop-logo logo-light active" href="index.html"><img src="../assets/img/brand/logo.png"
+            <a class="desktop-logo logo-light active" href="index.html"><img src="../../assets/img/brand/logo.png"
                     class="main-logo" alt="logo"></a>
-            <a class="desktop-logo logo-dark active" href="index.html"><img src="../assets/img/brand/logo-white.png"
+            <a class="desktop-logo logo-dark active" href="index.html"><img src="../../assets/img/brand/logo-white.png"
                     class="main-logo dark-theme" alt="logo"></a>
-            <a class="logo-icon mobile-logo icon-light active" href="index.html"><img src="../assets/img/brand/favicon.png"
+            <a class="logo-icon mobile-logo icon-light active" href="index.html"><img src="../../assets/img/brand/favicon.png"
                     class="logo-icon" alt="logo"></a>
             <a class="logo-icon mobile-logo icon-dark active" href="index.html">
-                <img src="../assets/img/brand/favicon-white.png" class="logo-icon dark-theme" alt="logo"></a>
+                <img src="../../assets/img/brand/favicon-white.png" class="logo-icon dark-theme" alt="logo"></a>
         </div>
         <div class="main-sidemenu">
             <div class="app-sidebar__user clearfix">
@@ -72,7 +72,7 @@
                         </svg><span class="side-menu__label">اطلاعات پایه</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <router-link :to="{ name: 'grades.index' }" class="slide-item"> پایه تحصیلی </router-link>
-                        <router-link :to="{ name: 'gradenew' }" class="slide-item"> پایه تحصیلی جدید</router-link>
+                        <router-link :to="{ name: 'grade' }" class="slide-item"> پایه تحصیلی جدید</router-link>
                         <router-link :to="{ name: 'tree.index' }" class="slide-item"> سازمان </router-link>
                     </ul>
                 </li>

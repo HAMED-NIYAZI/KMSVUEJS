@@ -128,7 +128,7 @@
 </template>
 <script setup>
 import { reactive, ref } from "vue";
-import AuthService from "../services/AuthService";
+import AuthService from "../../services/AuthService";
 import { useToast } from "vue-toastification";
 import Spinner_btn from '@/components/Spinners/Spinner_btn.vue'
 const toast = useToast();

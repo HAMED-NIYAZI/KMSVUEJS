@@ -3,11 +3,11 @@
         <div class="container-fluid">
             <div class="main-header-left ">
                 <div class="responsive-logo">
-                    <a href="index.html"><img src="../assets/img/brand/logo.png" class="logo-1" alt="لوگو"></a>
-                    <a href="index.html"><img src="../assets/img/brand/logo-white.png" class="dark-logo-1"
+                    <a href="index.html"><img src="../../assets/img/brand/logo.png" class="logo-1" alt="لوگو"></a>
+                    <a href="index.html"><img src="../../assets/img/brand/logo-white.png" class="dark-logo-1"
                             alt="لوگو"></a>
-                    <a href="index.html"><img src="../assets/img/brand/favicon.png" class="logo-2" alt="لوگو"></a>
-                    <a href="index.html"><img src="../assets/img/brand/favicon.png" class="dark-logo-2" alt="لوگو"></a>
+                    <a href="index.html"><img src="../../assets/img/brand/favicon.png" class="logo-2" alt="لوگو"></a>
+                    <a href="index.html"><img src="../../assets/img/brand/favicon.png" class="dark-logo-2" alt="لوگو"></a>
                 </div>
                 <div>
                     <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
@@ -25,7 +25,7 @@
                             <a href="#" class="d-flex  nav-item country-flag1" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <span class="avatar country-Flag me-0 align-self-center bg-transparent"><img
-                                        src="../assets/img/flags/us_flag.jpg" alt="img"></span>
+                                        src="../../assets/img/flags/us_flag.jpg" alt="img"></span>
                                 <div class="my-auto">
                                     <strong class="me-2 ms-2 my-auto">انگلیسی</strong>
                                 </div>
@@ -33,35 +33,35 @@
                             <div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
                                 <a href="#" class="dropdown-item d-flex ">
                                     <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                            src="../assets/img/flags/french_flag.jpg" alt="img"></span>
+                                            src="../../assets/img/flags/french_flag.jpg" alt="img"></span>
                                     <div class="d-flex">
                                         <span class="mt-2">فرانسوی</span>
                                     </div>
                                 </a>
                                 <a href="#" class="dropdown-item d-flex">
                                     <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                            src="../assets/img/flags/germany_flag.jpg" alt="img"></span>
+                                            src="../../assets/img/flags/germany_flag.jpg" alt="img"></span>
                                     <div class="d-flex">
                                         <span class="mt-2">آلمان</span>
                                     </div>
                                 </a>
                                 <a href="#" class="dropdown-item d-flex">
                                     <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                            src="../assets/img/flags/italy_flag.jpg" alt="img"></span>
+                                            src="../../assets/img/flags/italy_flag.jpg" alt="img"></span>
                                     <div class="d-flex">
                                         <span class="mt-2">ایتالیا</span>
                                     </div>
                                 </a>
                                 <a href="#" class="dropdown-item d-flex">
                                     <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                            src="../assets/img/flags/russia_flag.jpg" alt="img"></span>
+                                            src="../../assets/img/flags/russia_flag.jpg" alt="img"></span>
                                     <div class="d-flex">
                                         <span class="mt-2">روسیه</span>
                                     </div>
                                 </a>
                                 <a href="#" class="dropdown-item d-flex">
                                     <span class="avatar  m-e-c-3 align-self-center bg-transparent"><img
-                                            src="../assets/img/flags/spain_flag.jpg" alt="img"></span>
+                                            src="../../assets/img/flags/spain_flag.jpg" alt="img"></span>
                                     <div class="d-flex">
                                         <span class="mt-2">اسپانیا</span>
                                     </div>
@@ -114,7 +114,7 @@
                             <div class="main-message-list chat-scroll">
                                 <a href="#" class="p-3 d-flex border-bottom">
                                     <div class="  drop-img  cover-image  "
-                                        data-bs-image-src="../assets/img/faces/3.jpg">
+                                        data-bs-image-src="../../assets/img/faces/3.jpg">
                                         <span class="avatar-status bg-teal"></span>
                                     </div>
                                     <div class="wd-90p">
@@ -127,7 +127,7 @@
                                     </div>
                                 </a>
                                 <a href="#" class="p-3 d-flex border-bottom">
-                                    <div class="drop-img cover-image" data-bs-image-src="../assets/img/faces/2.jpg">
+                                    <div class="drop-img cover-image" data-bs-image-src="../../assets/img/faces/2.jpg">
                                         <span class="avatar-status bg-teal"></span>
                                     </div>
                                     <div class="wd-90p">
@@ -140,7 +140,7 @@
                                     </div>
                                 </a>
                                 <a href="#" class="p-3 d-flex border-bottom">
-                                    <div class="drop-img cover-image" data-bs-image-src="../assets/img/faces/9.jpg">
+                                    <div class="drop-img cover-image" data-bs-image-src="../../assets/img/faces/9.jpg">
                                         <span class="avatar-status bg-teal"></span>
                                     </div>
                                     <div class="wd-90p">
