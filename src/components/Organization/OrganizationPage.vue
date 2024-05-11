@@ -11,7 +11,7 @@
       </div>
   
       <div class="col-lg-7">
-        <OrganizationTree :key="componentKey" @ReloadOrganizationEdit="FReloadOrganizationEdit" />
+        <OrganizationTree :key="componentKey" @ReloadOrganizationEdit="FReloadOrganizationEdit" :treeKey="treeKey"/>
       </div>
     </div>
   </template>
@@ -28,7 +28,7 @@ import { ref } from 'vue';
 let componentKey = ref(0);
 let WhichCreateOrEdit = ref('OrganizationCreate')
 let selectedId = ref(null); // Initialize it with the ID you want to pass
-
+const treeKey="OrganizationTree";
 
 function FWhichCreateOrEdit(id) {
   WhichCreateOrEdit = 'OrganizationEdit';  

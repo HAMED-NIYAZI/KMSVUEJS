@@ -5,18 +5,18 @@
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
                     <h4 class="card-title mg-b-0">سازمان ها </h4>
-                    <button type="button" class="btn btn-success btn-icon"  ><i
+                    <button type="button" class="btn btn-success btn-icon" @click="ReloadTreeInside"  ><i
                             class="mdi mdi-refresh"></i></button>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div v-if="loading">
-                            <span class=" spinner-border spinner-border-sm"></span>
-                        </div>
-                        <ul id="treeview1" v-else class="tree">
-                            <Tree :trees="trees" />
+                    <div class="col-lg-12">
+                  
+                        <Spinner_Gride  v-if="loading" />
+                  
+                        <ul  id="treeview1" v-else class="tree">
+                            <Tree :trees="trees" :treeKey="treeKey"/>
                         </ul>
                     </div>
                 </div>
@@ -30,16 +30,19 @@ import { ref, onMounted } from 'vue'
 import { useToast } from "vue-toastification";
 import Swal from 'sweetalert2'
 import Tree from "@/components/Tree/Tree.vue";
+import Spinner_Gride from "@/components/Spinners/Spinner_Gride.vue";
 const toast = useToast();
 let loading = ref(false)
 let trees = ref();
+let treeKey = ref();
 let errors = {}
+ defineProps(['trees','treeKey']);
 
 async function index() {
     loading.value = true;
     errors = {}
     try {
-        const response = await OrganizationService.GetOrganizationTree();
+        const response = await OrganizationService.getOrganizationTree();
         if (response.data.result == 0) {
             trees.value = response.data.data;
             setTimeout(() => {
@@ -106,11 +109,10 @@ async function index() {
                 });
 
                 //Initialization of treeviews
-
                 $('#treeview1').treed();
 
 
-            }, 10);
+            }, 100);
         } else if (response.data.result == 5) {
             toast.warning(response.data.message, {
                 timeout: 2000
@@ -127,8 +129,12 @@ async function index() {
     }
 }
 onMounted(() => {
-    index()
+     index()
 
 
 })
+
+async function ReloadTreeInside(){
+    index();
+}
 </script>

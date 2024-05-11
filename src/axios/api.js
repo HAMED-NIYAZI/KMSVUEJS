@@ -3,7 +3,7 @@ import { LocalStorageService } from '@/services/LocalStorageService'
 const localStorageService = LocalStorageService()
 const api = axios.create({
     baseURL: process.env.VUE_APP_BASE_URL,
-    timeout: 10000,
+    timeout: 650000,
     headers: {
         'Accept': 'application/json'
     }
