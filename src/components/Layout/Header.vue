@@ -7,7 +7,8 @@
                     <a href="index.html"><img src="../../assets/img/brand/logo-white.png" class="dark-logo-1"
                             alt="لوگو"></a>
                     <a href="index.html"><img src="../../assets/img/brand/favicon.png" class="logo-2" alt="لوگو"></a>
-                    <a href="index.html"><img src="../../assets/img/brand/favicon.png" class="dark-logo-2" alt="لوگو"></a>
+                    <a href="index.html"><img src="../../assets/img/brand/favicon.png" class="dark-logo-2"
+                            alt="لوگو"></a>
                 </div>
                 <div>
                     <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
@@ -92,7 +93,7 @@
                         </form>
                     </div>
 
-<!--                     
+                    <!--                     
                     <div class="dropdown nav-item main-header-message ">
                         <a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                                 class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -274,11 +275,11 @@
                         <div class="dropdown-menu">
                             <div class="main-header-profile bg-primary p-3">
                                 <div class="d-flex wd-100p">
-                                    <div class="main-img-user"><img alt=""
-                                            :src="avatarPath" class="">
+                                    <div class="main-img-user"><img alt="" :src="avatarPath" class="">
                                     </div>
                                     <div class="ms-3 my-auto">
-                                        <h6>{{ localStorageService.getUser.firstName + ' ' + localStorageService.getUser.lastName }}</h6>
+                                        <h6>{{ localStorageService.getUser.firstName + ' ' +
+                                localStorageService.getUser.lastName }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +306,7 @@
     </div>
 </template>
 <script setup>
-import { onMounted,computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRouter } from "vue-router";
 import { LocalStorageService } from '@/services/LocalStorageService'
 
@@ -341,12 +342,14 @@ onMounted(() => {
 
 function signOut() {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('expires_at');
     router.push({ name: 'login' })
 }
 
 
 const avatarPath = computed(
-  () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
+    () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
 );
 
 
@@ -354,7 +357,7 @@ const avatarPath = computed(
 
 
 <style>
-    /* .active {
+/* .active {
         color: green;
     }
     .mr-4 {

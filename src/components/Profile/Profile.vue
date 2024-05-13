@@ -21,7 +21,7 @@
                 <img :alt="localStorageService.getUser.firstName +
             ' ' +
             localStorageService.getUser.lastName
-            " :src="avatarPath" />
+            " :src="'https://freelancework.ir/' + localStorageService.getUser.imagePath" />
                 <a class="fas fa-camera profile-edit curser-hand" title=" آپلود تصویر جدید"
                   @click.prevent="selectAvatar($event)">
                 </a>
@@ -316,10 +316,7 @@ async function loadAvatar(e) {
   }
 }
 
-const avatarPath = computed(
-
-  () => { process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath }
-);
+let avatarPath = computed(() => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath);
 </script>
 
 <style scoped>

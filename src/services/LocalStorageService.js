@@ -33,7 +33,13 @@ export const LocalStorageService = defineStore('user', {
     },
     getters: {
         getUser(state) {
-            return state.user
+            return state.user || JSON.parse(localStorage.getItem('user'))
+        },
+        getToken(state) {
+            return state.token
+        },
+        getExpiresAt(state) {
+            return Number(state.expires_at) || Number(localStorage.getItem('expires_at'));
         },
         isAuth(state) {
             return state.token && state.expires_at && state.expires_at > Math.floor(Date.now() / 1000);
