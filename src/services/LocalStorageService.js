@@ -26,9 +26,9 @@ export const LocalStorageService = defineStore('user', {
                 chartPersianTitleName: '',
                 organizationId: '',
                 organizationPersianTitleName: '',
-                token: '',
-                expires_at: ''
             },
+            token: '',
+            expires_at: ''
         }
     },
     getters: {
@@ -36,15 +36,22 @@ export const LocalStorageService = defineStore('user', {
             return state.user
         },
         isAuth(state) {
-            // return state.user.token && state.user.expires_at && state.user.expires_at > Math.floor(Date.now() / 1000);
-            return state.user.token && Math.floor(new Date('2025-2-2').getTime() / 1000) > Math.floor(Date.now() / 1000);
+            return state.token && state.expires_at && state.expires_at > Math.floor(Date.now() / 1000);
         },
     },
     actions: {
         setUser(user) {
             this.user = user
             localStorage.setItem('user', JSON.stringify(user));
+        },
+        setToken(token) {
+            this.token = token
+            localStorage.setItem('token', token);
 
+        },
+        setExpiresAt(expires_at) {
+            this.expires_at = expires_at
+            localStorage.setItem('expires_at', expires_at);
         }
     }
 })

@@ -63,8 +63,6 @@ let errors = {}
 const emit = defineEmits(['EditGrade']); // Define emit
   
 
- 
-
 async function index() {
     loading.value = true;
     errors = {}

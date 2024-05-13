@@ -13,16 +13,10 @@
 
   <div class="row no-gutter" v-else>
     <!-- The image half -->
-    <div
-      class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent"
-    >
+    <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
       <div class="row wd-100p mr-center text-center">
         <div class="col-md-12 col-lg-12 col-xl-12 my-auto mr-center wd-100p">
-          <img
-            src="assets/img/media/login.png"
-            class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mr-center"
-            alt="logo"
-          />
+          <img src="assets/img/media/login.png" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mr-center" alt="logo" />
         </div>
       </div>
     </div>
@@ -36,12 +30,7 @@
               <div class="card-sigin">
                 <div class="card-sigin">
                   <div class="card-sigin d-flex mb-5">
-                    <a href="#"
-                      ><img
-                        :src="logoPath"
-                        class="sign-favicon-a ht-90"
-                        alt="logo"
-                      />
+                    <a href="#"><img :src="logoPath" class="sign-favicon-a ht-90" alt="logo" />
                     </a>
                     <h1 class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44">
                       {{ loginPageInfo.title }}
@@ -53,45 +42,24 @@
                       <form action="#">
                         <div class="form-group">
                           <label>نام کاربری</label>
-                          <input
-                            class="form-control"
-                            v-model.lazy="formData.userName"
-                            placeholder="نام کاربری خود را وارد کنید"
-                            type="text"
-                          />
-                          <div
-                            style="font-size: 11px"
-                            v-if="Object.hasOwn(errors, 'userName')"
-                            class="text-danger"
-                          >
+                          <input class="form-control" v-model.lazy="formData.userName"
+                            placeholder="نام کاربری خود را وارد کنید" type="text" />
+                          <div style="font-size: 11px" v-if="Object.hasOwn(errors, 'userName')" class="text-danger">
                             {{ errors.userName.shift() }}
                           </div>
                         </div>
                         <div class="form-group">
                           <label>کلمه عبور</label>
-                          <input
-                            class="form-control"
-                            v-model.lazy="formData.password"
-                            placeholder="رمز عبور خود را وارد کنید"
-                            type="password"
-                          />
-                          <div
-                            style="font-size: 11px"
-                            v-if="Object.hasOwn(errors, 'password')"
-                            class="text-danger"
-                          >
+                          <input class="form-control" v-model.lazy="formData.password"
+                            placeholder="رمز عبور خود را وارد کنید" type="password" />
+                          <div style="font-size: 11px" v-if="Object.hasOwn(errors, 'password')" class="text-danger">
                             {{ errors.password.shift() }}
                           </div>
                         </div>
 
-                        <Spinner_btn  v-if="signInLoading"/>
-     
-                        <button
-                          type=" button"
-                          v-else
-                          @click="doLogin($event)"
-                          class="btn btn-main-primary btn-block"
-                        >
+                        <Spinner_btn v-if="signInLoading" />
+
+                        <button type=" button" v-else @click="doLogin($event)" class="btn btn-main-primary btn-block">
                           ورود
                         </button>
                       </form>
@@ -100,9 +68,7 @@
                           <a href="forgot.html">رمز عبور را فراموش کرده اید؟</a>
                         </p>
                         <p>
-                          حساب کاربری ندارید؟<router-link
-                            :to="{ name: 'register' }"
-                          >
+                          حساب کاربری ندارید؟<router-link :to="{ name: 'register' }">
                             ایجاد یک حساب کاربری
                           </router-link>
                         </p>
@@ -148,7 +114,9 @@ async function doLogin(e) {
     const response = await AuthService.login(formData);
     if (response.data.result == 0) {
       //success
-      localStorageService.setUser(response.data.data);
+      localStorageService.setUser(response.data.data.user);
+      localStorageService.setToken(response.data.data.token);
+      localStorageService.setExpiresAt(response.data.data.expires_at);
       router.push({ name: "dashboard" });
     } else if (response.data.result == 5) {
       // user not found
@@ -237,7 +205,7 @@ const logoPath = computed(
 
 
 
- 
+
 
 <style scoped>
 .mt-44 {

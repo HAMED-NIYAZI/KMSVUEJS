@@ -3,11 +3,7 @@
     <div class="my-auto">
       <div class="d-flex">
         <h4 class="content-title mb-0 my-auto">
-          <router-link
-            :to="{ name: 'dashboard' }"
-            class="content-title mb-0 my-auto"
-            >داشبورد</router-link
-          >
+          <router-link :to="{ name: 'dashboard' }" class="content-title mb-0 my-auto">داشبورد</router-link>
         </h4>
         <span class="text-muted mt-1 tx-13 ms-2 mb-0">
           <router-link :to="{ name: 'profile' }"> /&nbsp; پروفایل</router-link>
@@ -22,36 +18,23 @@
           <div class="pl-0">
             <div class="main-profile-overview">
               <div class="main-img-user profile-user">
-                <img
-                  :alt="
-                    localStorageService.getUser.firstName +
-                    ' ' +
-                    localStorageService.getUser.lastName
-                  "
-                  :src="avatarPath"
-                />
-                <a
-                  class="fas fa-camera profile-edit curser-hand"
-                  title=" آپلود تصویر جدید"
-                  @click.prevent="selectAvatar($event)"
-                >
+                <img :alt="localStorageService.getUser.firstName +
+            ' ' +
+            localStorageService.getUser.lastName
+            " :src="avatarPath" />
+                <a class="fas fa-camera profile-edit curser-hand" title=" آپلود تصویر جدید"
+                  @click.prevent="selectAvatar($event)">
                 </a>
-                <input
-                  type="file"
-                  ref="avatar"
-                  @change="loadAvatar($event)"
-                  id="avatar"
-                  class="d-none"
-                />
+                <input type="file" ref="avatar" @change="loadAvatar($event)" id="avatar" class="d-none" />
               </div>
               <div class="d-flex justify-content-between mg-b-20">
                 <div>
                   <h5 class="main-profile-name">
                     {{
-                      localStorageService.getUser.firstName +
-                      " " +
-                      localStorageService.getUser.lastName
-                    }}
+            localStorageService.getUser.firstName +
+            " " +
+            localStorageService.getUser.lastName
+          }}
                   </h5>
                 </div>
               </div>
@@ -71,41 +54,20 @@
         <div class="card-body">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button
-                class="nav-link active"
-                id="home-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#home"
-                type="button"
-                role="tab"
-                aria-controls="home"
-                aria-selected="true"
-              >
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">
                 مشخصات
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button
-                class="nav-link"
-                id="profile-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#profile"
-                type="button"
-                role="tab"
-                aria-controls="profile"
-                aria-selected="false"
-              >
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">
                 کلمه عبور
               </button>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div
-              class="tab-pane fade show active"
-              id="home"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-            >
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <div class="card">
                 <div class="card-body">
                   <div class="mb-4 main-content-label">اطلاعات شخصی</div>
@@ -116,12 +78,8 @@
                           <label class="form-label">نام</label>
                         </div>
                         <div class="col-md-9">
-                          <input
-                            type="text"
-                            v-model.lazy="formData.firstName"
-                            class="form-control"
-                            placeholder="نام کوچک"
-                          />
+                          <input type="text" v-model.lazy="formData.firstName" class="form-control"
+                            placeholder="نام کوچک" />
                         </div>
                       </div>
                     </div>
@@ -131,12 +89,8 @@
                           <label class="form-label">نام خانوادگی</label>
                         </div>
                         <div class="col-md-9">
-                          <input
-                            type="text"
-                            v-model.lazy="formData.lastName"
-                            class="form-control"
-                            placeholder="نام خانوادگی"
-                          />
+                          <input type="text" v-model.lazy="formData.lastName" class="form-control"
+                            placeholder="نام خانوادگی" />
                         </div>
                       </div>
                     </div>
@@ -146,12 +100,8 @@
                           <label class="form-label">شماره موبایل</label>
                         </div>
                         <div class="col-md-9">
-                          <input
-                            class="form-control"
-                            v-model.lazy="formData.phone"
-                            placeholder="شماره موبایل خود را وارد کنید"
-                            type="text"
-                          />
+                          <input class="form-control" v-model.lazy="formData.phone"
+                            placeholder="شماره موبایل خود را وارد کنید" type="text" />
                         </div>
                       </div>
                     </div>
@@ -161,12 +111,8 @@
                           <label class="form-label">آدرس ایمیل</label>
                         </div>
                         <div class="col-md-9">
-                          <input
-                            class="form-control"
-                            v-model.lazy="formData.email"
-                            placeholder="آدرس ایمیل خود را وارد کنید"
-                            type="text"
-                          />
+                          <input class="form-control" v-model.lazy="formData.email"
+                            placeholder="آدرس ایمیل خود را وارد کنید" type="text" />
                         </div>
                       </div>
                     </div>
@@ -176,13 +122,8 @@
                           <label class="form-label">نشانی</label>
                         </div>
                         <div class="col-md-9">
-                          <textarea
-                            class="form-control"
-                            style="resize: none"
-                            v-model.lazy="formData.address"
-                            rows="4"
-                            placeholder="نشانی"
-                          ></textarea>
+                          <textarea class="form-control" style="resize: none" v-model.lazy="formData.address" rows="4"
+                            placeholder="نشانی"></textarea>
                         </div>
                       </div>
                     </div>
@@ -192,13 +133,8 @@
                           <label class="form-label">درباره من </label>
                         </div>
                         <div class="col-md-9">
-                          <textarea
-                            class="form-control"
-                            style="resize: none"
-                            v-model.lazy="formData.about"
-                            rows="8"
-                            placeholder=""
-                          ></textarea>
+                          <textarea class="form-control" style="resize: none" v-model.lazy="formData.about" rows="8"
+                            placeholder=""></textarea>
                         </div>
                       </div>
                     </div>
@@ -207,23 +143,13 @@
                 <div class="card-footer text-center">
                   <Spinner_btn v-if="loading" />
 
-                  <button
-                    type="submit"
-                    v-else
-                    @click.prevent="updateProfile"
-                    class="btn btn-main-primary"
-                  >
+                  <button type="submit" v-else @click.prevent="updateProfile" class="btn btn-main-primary">
                     بروزرسانی پروفایل
                   </button>
                 </div>
               </div>
             </div>
-            <div
-              class="tab-pane fade"
-              id="profile"
-              role="tabpanel"
-              aria-labelledby="profile-tab"
-            >
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <div class="card">
                 <div class="card-body">
                   <form class="form-horizontal">
@@ -233,12 +159,8 @@
                           <label class="form-label">کلمه عبور جاری</label>
                         </div>
                         <div class="col-md-9">
-                          <input
-                            class="form-control"
-                            v-model.lazy="formPasswordData.oldPassword"
-                            placeholder="کلمه عبور خود را وارد کنید"
-                            type="password"
-                          />
+                          <input class="form-control" v-model.lazy="formPasswordData.oldPassword"
+                            placeholder="کلمه عبور خود را وارد کنید" type="password" />
                         </div>
                       </div>
                     </div>
@@ -248,12 +170,8 @@
                           <label class="form-label">کلمه عبور جدید</label>
                         </div>
                         <div class="col-md-9">
-                          <input
-                            class="form-control"
-                            v-model.lazy="formPasswordData.newPassword"
-                            placeholder="کلمه عبور جدید خود را وارد کنید"
-                            type="password"
-                          />
+                          <input class="form-control" v-model.lazy="formPasswordData.newPassword"
+                            placeholder="کلمه عبور جدید خود را وارد کنید" type="password" />
                         </div>
                       </div>
                     </div>
@@ -263,12 +181,8 @@
                           <label class="form-label">تکرار کلمه عبور جدید</label>
                         </div>
                         <div class="col-md-9">
-                          <input
-                            class="form-control"
-                            v-model.lazy="formPasswordData.confirmPassword"
-                            placeholder="تکرار کلمه عبور جدید خود را وارد کنید"
-                            type="password"
-                          />
+                          <input class="form-control" v-model.lazy="formPasswordData.confirmPassword"
+                            placeholder="تکرار کلمه عبور جدید خود را وارد کنید" type="password" />
                         </div>
                       </div>
                     </div>
@@ -278,12 +192,7 @@
 
                   <Spinner_btn v-if="loading" />
 
-                  <button
-                    type="submit"
-                    v-else
-                    @click.prevent="updatePassword"
-                    class="btn btn-main-primary"
-                  >
+                  <button type="submit" v-else @click.prevent="updatePassword" class="btn btn-main-primary">
                     بروزرسانی کلمه عبور
                   </button>
                 </div>
@@ -320,7 +229,6 @@ let formData = reactive({
   address: localStorageService.getUser.address,
   about: localStorageService.getUser.about,
 });
-let errors = {};
 
 async function updateProfile() {
   loading.value = true;
@@ -328,9 +236,6 @@ async function updateProfile() {
   try {
     const response = await UserService.updateProfile(formData);
     if (response.data.result == 0) {
-     response.data.data.token=localStorageService.getUser.token;
-     response.data.data.expires_at=localStorageService.getUser.expires_at;
-      
       localStorageService.setUser(response.data.data);
 
       toast.success(response.data.message, { timeout: 2000 });
@@ -396,6 +301,7 @@ async function loadAvatar(e) {
       toast.success(response.data.message, {
         timeout: 2000,
       });
+      localStorageService.setUser(response.data.data)
     } else if (response.data.result == 5) {
       toast.warning(response.data.message, {
         timeout: 2000,
@@ -411,7 +317,8 @@ async function loadAvatar(e) {
 }
 
 const avatarPath = computed(
-  () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
+
+  () => { process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath }
 );
 </script>
 
