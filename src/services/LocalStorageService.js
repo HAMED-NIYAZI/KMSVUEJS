@@ -27,23 +27,15 @@ export const LocalStorageService = defineStore('user', {
                 organizationId: '',
                 organizationPersianTitleName: '',
             },
-            token: '',
-            expires_at: ''
+            token: localStorage.getItem('token') || '',
+            expires_at: Number(localStorage.getItem('expires_at')) || ''
         }
     },
     getters: {
-        getUser(state) {
-            return state.user || JSON.parse(localStorage.getItem('user'))
-        },
-        getToken(state) {
-            return state.token
-        },
-        getExpiresAt(state) {
-            return Number(state.expires_at) || Number(localStorage.getItem('expires_at'));
-        },
-        isAuth(state) {
-            return state.token && state.expires_at && state.expires_at > Math.floor(Date.now() / 1000);
-        },
+        getUser: (state) => state.user,
+        getToken: (state) => state.token,
+        getExpiresAt: (state) => state.expires_at,
+        isAuth: state => state.token && state.expires_at && state.expires_at > Math.floor(Date.now() / 1000)
     },
     actions: {
         setUser(user) {
@@ -53,7 +45,6 @@ export const LocalStorageService = defineStore('user', {
         setToken(token) {
             this.token = token
             localStorage.setItem('token', token);
-
         },
         setExpiresAt(expires_at) {
             this.expires_at = expires_at

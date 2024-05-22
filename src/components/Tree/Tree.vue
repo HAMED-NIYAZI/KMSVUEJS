@@ -1,5 +1,5 @@
 <template>
-    <li :class="{ branch: item.children.length, 'tree-item': true }" v-for="(item, i) in    trees   " :key="i">
+    <li :class="{ branch: item.children.length, 'tree-item': true }" v-for="(item, i) in trees" :key="i">
         <div class=" d-flex align-items-center" style="white-space: nowrap;">
             <div :class="{ 'checkbox d-flex': true }">
                 <div
@@ -36,11 +36,9 @@ function a(id, parentId) {
     cursor: pointer;
     margin-right: 1px !important;
 }
-
 .mr_18 {
     margin-right: 18px;
 }
- 
 .tree li i{
     margin-top: 8px !important;
 }
@@ -51,7 +49,6 @@ function a(id, parentId) {
     padding-right: 9px !important;
 }
 .custom-control {
-    padding-right: 23px;}
-    
- 
+    padding-right: 23px;
+} 
 </style>
