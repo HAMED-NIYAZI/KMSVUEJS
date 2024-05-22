@@ -21,7 +21,7 @@
                 <img :alt="localStorageService.getUser.firstName +
             ' ' +
             localStorageService.getUser.lastName
-            " :src="'https://freelancework.ir/' + localStorageService.getUser.imagePath" />
+            " :src="avatarPath" />
                 <a class="fas fa-camera profile-edit curser-hand" title=" آپلود تصویر جدید"
                   @click.prevent="selectAvatar($event)">
                 </a>
