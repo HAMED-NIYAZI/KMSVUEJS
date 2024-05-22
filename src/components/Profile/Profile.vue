@@ -214,7 +214,7 @@
 import { LocalStorageService } from "@/services/LocalStorageService";
 const localStorageService = LocalStorageService();
 import UserService from "@/services/UserService";
-import { reactive, ref } from "vue";
+import { reactive, ref ,computed} from "vue";
 import { useToast } from "vue-toastification";
 import Spinner_btn from "../Spinners/Spinner_btn.vue";
 const toast = useToast();
@@ -320,6 +320,9 @@ async function loadAvatar(e) {
 	} finally {
 	}
 }
+
+let avatarPath = computed(() => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath);
+
 </script>
 
 <style scoped>
