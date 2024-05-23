@@ -28,14 +28,16 @@ export const LocalStorageService = defineStore('user', {
                 organizationPersianTitleName: '',
             },
             token: localStorage.getItem('token') || '',
-            expires_at: Number(localStorage.getItem('expires_at')) || ''
+            expires_at: Number(localStorage.getItem('expires_at')) || '',
+            tree: { oneTree: '', towTree: '' },
         }
     },
     getters: {
         getUser: (state) => state.user,
         getToken: (state) => state.token,
         getExpiresAt: (state) => state.expires_at,
-        isAuth: state => state.token && state.expires_at && state.expires_at > Math.floor(Date.now() / 1000)
+        isAuth: state => state.token && state.expires_at && state.expires_at > Math.floor(Date.now() / 1000),
+        getTreeSelectedItem: (state) => (tree_name) => state.tree[tree_name],
     },
     actions: {
         setUser(user) {
@@ -49,6 +51,9 @@ export const LocalStorageService = defineStore('user', {
         setExpiresAt(expires_at) {
             this.expires_at = expires_at
             localStorage.setItem('expires_at', expires_at);
+        },
+        setTreeSelectedItem(tree_name, treeSelectedItem) {
+            this.tree[tree_name] = treeSelectedItem;
         }
     }
 })

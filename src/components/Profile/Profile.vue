@@ -259,9 +259,9 @@ async function updateProfile() {
 }
 async function updatePassword() {
 	loading.value = true;
-	errors = {};
 	try {
 		const response = await UserService.updatePassword(formPasswordData);
+		
 		if (response.data.result == 0) {
 			toast.success(response.data.message, {
 				timeout: 20000,
@@ -285,48 +285,47 @@ async function updatePassword() {
 function selectAvatar(e) {
 	$("#avatar").click();
 }
+
 let avatar = ref(null);
+
 async function loadAvatar(e) {
 	const target = e.target;
+
 	if (target && target.files) {
 		avatar.value = target.files[0];
 	}
+
 	if (!avatar.value) {
 		return false;
 	}
-	let fd = new FormData();
-	fd.append("file", avatar.value);
+
 	try {
+		let fd = new FormData();
+		fd.append("file", avatar.value);
+
 		const response = await UserService.uploadAvatar(
 			fd,
 			localStorageService.getUser.userId
 		);
+
 		if (response.data.result == 0) {
-			toast.success(response.data.message, {
-				timeout: 2000,
-			});
-			console.log(response.data);
+			toast.success(response.data.message);
+
 			localStorageService.setUser(response.data.data)
 		} else if (response.data.result == 5) {
-			toast.warning(response.data.message, {
-				timeout: 2000,
-			});
+			toast.warning(response.data.message);
 		} else {
-			toast.warning(response.data.message, {
-				timeout: 2000,
-			});
+			toast.warning(response.data.message);
 		}
 	} catch (err) {
-	} finally {
 	}
 }
 
 let avatarPath = computed(() => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath);
-
 </script>
 
 <style scoped>
-.curser-hand {
-	cursor: pointer;
-}
+	.curser-hand {
+		cursor: pointer;
+	}
 </style>
