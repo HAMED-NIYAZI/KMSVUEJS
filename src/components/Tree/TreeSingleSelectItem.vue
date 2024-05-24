@@ -4,15 +4,15 @@
             <div :class="{ 'checkbox d-flex': true }">
                 <div :class="{ 'leaf': item.children.length==0, 'custom-checkbox custom-control': true }">
                     <input type="checkbox" @change="checkboxClick(item)" :class="['custom-control-input', tree_name]"
-                        :id="item.id">
-                    <label :for="item.id" class="custom-control-label mt-1"> <span class="pr-4"></span>
+                        :id="item.id+tree_name">
+                    <label :for="item.id+tree_name" class="custom-control-label mt-1"> <span class="pr-4"></span>
                     </label>
                 </div>
             </div>
             {{ item.persianTitle }}
         </div>
         <ul v-if="item.children.length">
-            <TreeItem :tree_name="tree_name" :trees="item.children" />
+            <TreeSingleSelectItem :tree_name="tree_name" :trees="item.children" />
         </ul>
     </li>
 </template>
@@ -21,10 +21,10 @@ import { defineProps } from 'vue';
 import { LocalStorageService } from '@/services/LocalStorageService';
 const useLocalStorageService = LocalStorageService()
 const props = defineProps({ trees: Array, tree_name: String });
-import TreeItem from '@/components/pages/tree/TreeItem.vue'
+import TreeSingleSelectItem from "@/components/Tree/TreeSingleSelectItem.vue";
 function checkboxClick(item) {
     $('.' + props.tree_name).prop('checked', false);
-    $('#' + item.id).prop('checked', true);
+    $('#' + item.id+props.tree_name).prop('checked', true);
     useLocalStorageService.setTreeSelectedItem(props.tree_name, item);
 }
 </script>

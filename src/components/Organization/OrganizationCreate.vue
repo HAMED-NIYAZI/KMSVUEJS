@@ -38,7 +38,7 @@
                   class="text-danger"
                   v-if="v$.persianTitle.maxLength.$invalid"
                 >
-                  طول فیلد نیاید بیشتر از 30 کاراکتر باشد
+                  طول فیلد نیاید بیشتر از 50 کاراکتر باشد
                 </div>
               </div>
             </div>
@@ -83,7 +83,8 @@
                   type="text"
                 /> </div>
 
-<div class="col-2">        <OrganizationTreeModalSingleSelect/>       
+<div class="col-2">    
+     <OrganizationTreeModalSingleSelect/>     
 </div>
 
                 </div>
@@ -129,7 +130,7 @@ const rules = {
     persianTitle: {
     required,
     minLength: minLength(1),
-    maxLength: maxLength(30),
+    maxLength: maxLength(50),
   },
  
 };

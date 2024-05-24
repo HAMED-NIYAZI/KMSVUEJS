@@ -26,7 +26,7 @@
             </button>
           </div>
           <div class="modal-body">
-          <OrganizationTree  :treeKey='treeKey'/>
+            <OrganizationTree :key="componentKeyOrganizationTree" @ReloadOrganizationEdit="FReloadOrganizationEdit" :tree_name="tree_name"/>
           </div>
           <div class="modal-footer">
             <button class="btn ripple btn-primary" type="button">
@@ -51,10 +51,18 @@
  import OrganizationTree from "./OrganizationTree.vue";
  import { ref, onMounted } from 'vue'
 
+ let componentKeyOrganizationTree = ref(0);
+ let tree_name = ref('OrganizationViewList_ModalCreate'); 
 
  const treeKey="ModalForCreateOrganization";
 onMounted(() => {
  
 })
+
+
+function FupdateOrganizationTree() {
+  componentKeyOrganizationTree.value += 1; // Increment the key to force re-render
+ }
+
 
  </script>

@@ -11,7 +11,7 @@
       </div>
   
       <div class="col-lg-7">
-        <OrganizationTree :key="componentKey" @ReloadOrganizationEdit="FReloadOrganizationEdit" :treeKey="treeKey"/>
+        <OrganizationTree :key="componentKeyOrganizationTree" @ReloadOrganizationEdit="FReloadOrganizationEdit" :tree_name="tree_name"/>
       </div>
     </div>
   </template>
@@ -25,20 +25,18 @@ import OrganizationEdit from "./OrganizationEdit.vue";
 import { ref } from 'vue';
 
 
-let componentKey = ref(0);
+let componentKeyOrganizationTree = ref(0);
 let WhichCreateOrEdit = ref('OrganizationCreate')
 let selectedId = ref(null); // Initialize it with the ID you want to pass
-const treeKey="OrganizationTree";
-
+let tree_name = ref('OrganizationViewList'); 
 function FWhichCreateOrEdit(id) {
   WhichCreateOrEdit = 'OrganizationEdit';  
   selectedId.value = id;
 }
 
 function FupdateOrganizationTree() {
-  componentKey.value += 1; // Increment the key to force re-render
+  componentKeyOrganizationTree.value += 1; // Increment the key to force re-render
   WhichCreateOrEdit = 'OrganizationCreate';  
-
 }
 
 

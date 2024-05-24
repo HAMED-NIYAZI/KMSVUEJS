@@ -10,7 +10,7 @@ const routes = [{
     children: [{
         path: 'dashboard',
         name: 'dashboard',
-        component: () => { return import('./components/pages/Dashboard.vue') }
+        component: () => { return import('./components/Dashboard/Dashboard.vue') }
     }, {
         path: 'profile',
         name: 'profile',
