@@ -29,7 +29,7 @@ export const LocalStorageService = defineStore('user', {
             },
             token: localStorage.getItem('token') || '',
             expires_at: Number(localStorage.getItem('expires_at')) || '',
-            tree: { oneTree: '', towTree: '' },
+            tree: { oneTree: '', towTree: '', OrganizationViewList_ModalCreate: '' },
         }
     },
     getters: {

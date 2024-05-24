@@ -2,10 +2,10 @@
     <li :class="{ branch: item.children.length, 'tree-item': true }" v-for="(item, i) in trees" :key="i">
         <div class="d-flex align-items-center" style="white-space: nowrap;">
             <div :class="{ 'checkbox d-flex': true }">
-                <div :class="{ 'leaf': item.children.length==0, 'custom-checkbox custom-control': true }">
+                <div :class="{ 'leaf': item.children.length == 0, 'custom-checkbox custom-control': true }">
                     <input type="checkbox" @change="checkboxClick(item)" :class="['custom-control-input', tree_name]"
-                        :id="item.id+tree_name">
-                    <label :for="item.id+tree_name" class="custom-control-label mt-1"> <span class="pr-4"></span>
+                        :id="item.id + tree_name">
+                    <label :for="item.id + tree_name" class="custom-control-label mt-1"> <span class="pr-4"></span>
                     </label>
                 </div>
             </div>
@@ -24,13 +24,12 @@ const props = defineProps({ trees: Array, tree_name: String });
 import TreeSingleSelectItem from "@/components/Tree/TreeSingleSelectItem.vue";
 function checkboxClick(item) {
     $('.' + props.tree_name).prop('checked', false);
-    $('#' + item.id+props.tree_name).prop('checked', true);
+    $('#' + item.id + props.tree_name).prop('checked', true);
     useLocalStorageService.setTreeSelectedItem(props.tree_name, item);
 }
 </script>
 <style>
 .tree li i {
-    margin-left: 2px;
     font-weight: bold;
     color: #0162e8;
     float: right;
@@ -38,19 +37,24 @@ function checkboxClick(item) {
     cursor: pointer;
     margin-right: 1px !important;
 }
+
 .mr_18 {
     margin-right: 18px;
 }
-.tree li i{
+
+.tree li i {
     margin-top: 8px !important;
 }
-.leaf{
+
+.leaf {
     padding-right: 40px !important;
 }
+
 .tree ul li {
     padding-right: 9px !important;
 }
+
 .custom-control {
     padding-right: 23px;
-} 
+}
 </style>

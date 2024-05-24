@@ -3,20 +3,18 @@
     <div class="card">
       <div class="card-header pb-0">
         <div class="d-flex justify-content-between">
-          <h4 class="card-title mg-b-0"  style="padding-top: 10px !important;">
+          <h4 class="card-title mg-b-0" style="padding-top: 10px !important;">
             سازمان ها
             <span v-if="OrganizationViewList_Value" class="badg_select">
               {{ OrganizationViewList_Value.persianTitle }}
             </span>
           </h4>
+          <div class="d-flex gap-1">
+            <button type="button" class="btn btn-success btn-icon" @click="ReloadTreeInside">
+              <i class="mdi mdi-refresh"></i>
+            </button>
 
-          <button
-            type="button"
-            class="btn btn-success btn-icon"
-            @click="ReloadTreeInside"
-          >
-            <i class="mdi mdi-refresh"></i>
-          </button>
+          </div>
         </div>
       </div>
       <div class="card-body">
@@ -26,7 +24,7 @@
 
             <template v-else>
               <div>
-                <TreeSingleSelect :tree_name="props.tree_name" :trees="trees" />
+                <TreeSingleSelect :tree_name="tree_name" :trees="trees" />
               </div>
             </template>
           </div>
@@ -46,20 +44,16 @@ const useLocalStorageService = LocalStorageService();
 
 const toast = useToast();
 let loading = ref(false);
-let trees = ref();
-let treeKey = ref();
-let tree_name = ref();
-let errors = {};
-const props=defineProps(["trees","tree_name"]);
-  
+let trees = ref([]);
+const props = defineProps(["tree_name"]);
+
 async function index() {
   loading.value = true;
-  errors = {};
   try {
     const response = await OrganizationService.getOrganizationTree();
     if (response.data.result == 0) {
       trees.value = response.data.data;
-  
+
     } else if (response.data.result == 5) {
       toast.warning(response.data.message, {
         timeout: 2000,
@@ -75,7 +69,6 @@ async function index() {
   }
 }
 onMounted(() => {
-  tree_name.value=props.tree_name;
   index();
 });
 
@@ -90,6 +83,13 @@ const OrganizationViewList_Value = computed(() =>
 
 <style scoped>
 .badg_select {
-  background-color: orange;padding-left: 15px; padding-right: 15px; padding-top: 0px; border-radius: 7px; font-size: 12px;font-weight: 400;color: black;
+  background-color: orange;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 0px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
 }
 </style>

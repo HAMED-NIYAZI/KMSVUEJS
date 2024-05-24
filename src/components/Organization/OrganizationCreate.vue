@@ -8,6 +8,8 @@
         <div class="card-header pb-0">
           <div class="d-flex justify-content-between">
             <h4 class="card-title mg-b-0">اضافه کردن سازمان</h4>
+            <router-link :to="{ name: 'organization' }" class=" btn btn-primary btn-sm"><i
+                class="fa  fa-arrow-left"></i></router-link>
           </div>
         </div>
         <div class="card-body">
@@ -16,28 +18,15 @@
             <div class="col-lg-8">
               <div class="form-group">
                 <label>نام سازمان</label>
-                <input
-                  class="form-control"
-                  v-model="formData.persianTitle"
-                  placeholder="نام سازمان را وارد کنید"
-                  type="text"
-                />
-                <div
-                  class="text-danger"
-                  v-if="v$.persianTitle.required.$invalid"
-                >
+                <input class="form-control" v-model="formData.persianTitle" placeholder="نام سازمان را وارد کنید"
+                  type="text" />
+                <div class="text-danger" v-if="v$.persianTitle.required.$invalid">
                   وارد کردن فیلد نام سازمان الزمی است
                 </div>
-                <div
-                  class="text-danger"
-                  v-if="v$.persianTitle.minLength.$invalid"
-                >
+                <div class="text-danger" v-if="v$.persianTitle.minLength.$invalid">
                   طول فیلد نباید کمتر از 1 کاراکتر باشد
                 </div>
-                <div
-                  class="text-danger"
-                  v-if="v$.persianTitle.maxLength.$invalid"
-                >
+                <div class="text-danger" v-if="v$.persianTitle.maxLength.$invalid">
                   طول فیلد نیاید بیشتر از 50 کاراکتر باشد
                 </div>
               </div>
@@ -67,36 +56,25 @@
                   <option value="19">19</option>
                   <option value="20">20</option>
                 </select>
- 
+
               </div>
             </div>
 
             <div class="col-lg-12">
-             
-                <label>نام سرشاحه</label>
-                <div class="row">
-<div class="col-10"
->                 <input
-                  class="form-control"
-                  v-model="formData.parentId"
-                  placeholder="نام سرشاحه را وارد کنید"
-                  type="text"
-                /> </div>
 
-<div class="col-2">    
-     <OrganizationTreeModalSingleSelect/>     
-</div>
-
+              <label>نام سرشاحه</label>
+              <div class="row">
+                <div class="col-10">
+                  <input class="form-control" disabled="true"
+                    :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle"
+                    type="text" />
                 </div>
 
-
-             </div>
-
-        
-      
-          <div>
-   
-          </div>
+                <div class="col-2">
+                  <OrganizationTreeModalSingleSelect />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="card-footer text-center">
@@ -104,35 +82,39 @@
             <span class="spinner-border spinner-border-sm"></span>
           </div>
           <template v-else>
-            <button type="submit" class="btn btn-primary">ذخیره</button>
+            <button type="submit" class="btn btn-primary btn-sm">ذخیره</button>
           </template>
         </div>
       </div>
     </form>
   </div>
 </template>
- <script setup>
+<script setup>
 import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+import { LocalStorageService } from "@/services/LocalStorageService";
+const useLocalStorageService = LocalStorageService()
+import OrganizationService from "@/services/OrganizationService";
 import { useToast } from "vue-toastification";
 import { useVuelidate } from "@vuelidate/core";
-import OrganizationService from "@/services/OrganizationService";
 import { required, minLength, maxLength } from "@vuelidate/validators";
- import OrganizationTreeModalSingleSelect from './OrganizationTreeModalSingleSelect.vue'
+import OrganizationTreeModalSingleSelect from './OrganizationTreeModalSingleSelect.vue'
 const toastService = useToast();
 let loading = ref(false);
 let formData = reactive({
-    persianTitle: "",
-    parentId: "",
-    sortingNumber: "",
+  persianTitle: '',
+  parentId: null,
+  sortingNumber: "",
 });
 
 const rules = {
-    persianTitle: {
+  persianTitle: {
     required,
     minLength: minLength(1),
     maxLength: maxLength(50),
   },
- 
+
 };
 
 const v$ = useVuelidate(rules, formData);
@@ -151,12 +133,18 @@ async function createOrganization() {
       });
       return;
     }
-
+    formData.parentId = useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id || null;
     const response = await OrganizationService.create(formData);
     if (response.data.result === 0) {
-      formData = {};
+      formData = {
+        persianTitle: '',
+        parentId: null,
+        sortingNumber: "",
+      };
       toastService.success(response.data.message, { timeout: 2000 });
-       emit('updateOrganizationTree'); 
+      emit('updateOrganizationTree');
+      useLocalStorageService.setTreeSelectedItem('OrganizationViewList_ModalCreate', '')
+      router.push({ name: 'organization' });
     } else {
       toastService.warning(response.data.message, { timeout: 2000 });
     }
@@ -170,15 +158,5 @@ async function createOrganization() {
   }
 }
 </script>
- 
-<style scoped>
-</style>
 
-  
-
-
-
-
-
-
- 
+<style scoped></style>
