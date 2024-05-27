@@ -66,7 +66,7 @@
               <div class="row">
                 <div class="col-10">
                   <input class="form-control" disabled="true"
-                    :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle"
+                    :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate') !=null ? useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle : ''"
                     type="text" />
                 </div>
 
