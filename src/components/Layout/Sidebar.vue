@@ -2,27 +2,35 @@
     <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
     <aside class="app-sidebar sidebar-scroll">
         <div class="main-sidebar-header active">
-            <a class="desktop-logo logo-light active" href="index.html"><img src="../../assets/img/brand/logo.png"
-                    class="main-logo" alt="logo"></a>
-            <a class="desktop-logo logo-dark active" href="index.html"><img src="../../assets/img/brand/logo-white.png"
+            <a class="desktop-logo logo-light active" href="/dashboard"><img src="../../assets/img/brand/logo.png"
+                    class="main-logo" alt="logo">
+                 </a>
+            <a class="desktop-logo logo-dark active" href="/dashboard"><img src="../../assets/img/brand/logo-white.png"
                     class="main-logo dark-theme" alt="logo"></a>
-            <a class="logo-icon mobile-logo icon-light active" href="index.html"><img
+            <a class="logo-icon mobile-logo icon-light active" href="/dashboard"><img
                     src="../../assets/img/brand/favicon.png" class="logo-icon" alt="logo"></a>
-            <a class="logo-icon mobile-logo icon-dark active" href="index.html">
+            <a class="logo-icon mobile-logo icon-dark active" href="/dashboard">
                 <img src="../../assets/img/brand/favicon-white.png" class="logo-icon dark-theme" alt="logo"></a>
         </div>
         <div class="main-sidemenu">
+            <h6 class="center darktext">   {{ organizationPersianTitleName }}</h6>
             <div class="app-sidebar__user clearfix">
                 <div class="dropdown user-pro-body">
+
                     <div class="">
-                        <img alt="user-img" class="avatar avatar-xl brround" :src="avatarPath"><span
+                        <router-link :to="{ name: 'profile' }">
+
+                         <img alt="user-img" class="avatar avatar-xl brround" :src="avatarPath"><span
                             class="avatar-status profile-status bg-green"></span>
+                        </router-link>
+
                     </div>
                     <div class="user-info">
                         <h4 class="fw-semibold mt-3 mb-0">{{ localStorageService.getUser.firstName + " " +
                             localStorageService.getUser.lastName }}</h4>
                         <span class="mb-0 text-muted">مدیریت</span>
                     </div>
+
                 </div>
             </div>
             <ul class="side-menu">
@@ -503,6 +511,11 @@ function signOut() {
 const avatarPath = computed(
     () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
 );
+
+const organizationPersianTitleName = computed(
+    () => localStorageService.getUser.organizationPersianTitleName
+);
+
 </script>
 
 <style>
@@ -519,5 +532,14 @@ const avatarPath = computed(
 .mr-4 {
     margin-right: 10px;
     ;
+}
+.center{
+       display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.darktext{
+    color: black;
 }
 </style>
