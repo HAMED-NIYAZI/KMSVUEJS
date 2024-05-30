@@ -1,6 +1,8 @@
 <template>
   <div>
-    <a class="btn ripple btn-primary btn-sm" data-bs-target="#modal1" data-bs-toggle="modal" href="#">...</a>
+    <a class="btn btn-primary btn-icon" data-bs-target="#modal1" data-bs-toggle="modal" href="#">
+      <i class="fa fa-ellipsis-h"></i>
+    </a>
   </div>
 
   <div class="modal" id="modal1" style="display: none" aria-hidden="true">

@@ -8,7 +8,7 @@
         <div class="card-header pb-0">
           <div class="d-flex justify-content-between">
             <h4 class="card-title mg-b-0">اضافه کردن سازمان</h4>
-            <router-link :to="{ name: 'organization' }" class=" btn btn-primary btn-sm"><i
+            <router-link :to="{ name: 'organization' }" class=" btn btn-primary btn-icon"><i
                 class="fa  fa-arrow-left"></i></router-link>
           </div>
         </div>
@@ -78,11 +78,9 @@
           </div>
         </div>
         <div class="card-footer text-center">
-          <div class="text-center" v-if="loading">
-            <span class="spinner-border spinner-border-sm"></span>
-          </div>
+          <Spinner_btn v-if="loading" />
           <template v-else>
-            <button type="submit" class="btn btn-primary btn-sm">ذخیره</button>
+            <button type="submit" class="btn btn-success">ذخیره</button>
           </template>
         </div>
       </div>
@@ -100,6 +98,7 @@ import { useToast } from "vue-toastification";
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength } from "@vuelidate/validators";
 import OrganizationTreeModalSingleSelect from './OrganizationTreeModalSingleSelect.vue'
+import Spinner_btn from "../Spinners/Spinner_btn.vue";
 const toastService = useToast();
 let loading = ref(false);
 let formData = reactive({
