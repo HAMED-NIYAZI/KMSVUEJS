@@ -284,7 +284,7 @@
                                 </div>
                             </div>
                             <router-link :to="{name:'profile'}" class="dropdown-item"><i
-                                    class="bx bx-user-circle"></i>مشخصات</router-link>
+                                    class="bx bx-user-circle"></i>پروفایل من</router-link>
                             <a class="dropdown-item" href="#" @click.prevent="signOut()"><i class="bx bx-log-out"></i>
                                 خروج از سیستم</a>
                         </div>
