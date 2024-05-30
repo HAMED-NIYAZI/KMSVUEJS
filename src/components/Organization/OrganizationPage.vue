@@ -1,13 +1,23 @@
 <template>
   <div class="breadcrumb-header justify-content-between">
-    <!-- Other elements -->
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">
+          <router-link :to="{ name: 'organization' }" class="content-title mb-0 my-auto">سازمان ها</router-link>
+        </h4>
+ 
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <router-link :to="{ name: 'create_organization' }" class="btn btn-success btn-sm" title="ایجاد سازمان"><i
-          class="fa fa-plus"></i></router-link>
-      <OrganizationTree :key="componentKeyOrganizationTree" @ReloadOrganizationEdit="FReloadOrganizationEdit"
-        :tree_name="tree_name" />
+      <div class="row pad">
+
+         <router-link :to="{ name: 'create_organization' }" class="btn btn-success btn-icon"  title="ایجاد سازمان"><i class="fa fa-plus"></i></router-link>
+
+     </div>
+
+      <OrganizationTree :key="componentKeyOrganizationTree" @ReloadOrganizationEdit="FReloadOrganizationEdit" :tree_name="tree_name" />
     </div>
   </div>
 </template>
@@ -36,3 +46,11 @@ function FupdateOrganizationTree() {
 
 
 </script>
+
+<style scoped>
+.pad{
+padding-right: 25px;
+padding-bottom: 5px;
+
+}
+</style>
