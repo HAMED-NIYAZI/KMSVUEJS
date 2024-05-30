@@ -3,7 +3,7 @@
 		<Sidebar/>
 		<div class="main-content app-content">
 			<Header />
-			<div class="container-fluid">
+			<div class="container-fluid page1">
 				<router-view></router-view>
 			</div>
 		</div>
@@ -19,8 +19,8 @@
     import Footer from './Footer.vue'
 </script>
 <style>
-.page {
-		margin-top: 75px;
+.page1 {
+	 	padding-top: 75px; 
 }
 </style>
 
