@@ -47,7 +47,7 @@ function checkboxClick(item) {
 }
 
 .leaf {
-    padding-right: 40px !important;
+    padding-right: 43px !important;
 }
 
 .tree ul li {
