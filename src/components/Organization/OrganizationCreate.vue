@@ -2,6 +2,18 @@
     
 </template> -->
 <template>
+      <div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+      <div class="d-flex">
+        <h4 class="content-title mb-0 my-auto">
+          <router-link :to="{ name: 'organization' }" class="content-title mb-0 my-auto">سازمان ها</router-link>
+        </h4>
+        <span class="text-muted mt-1 tx-13 ms-2 mb-0">
+          <router-link :to="{ name: 'create_organization' }"> /&nbsp; اضافه کردن سازمان </router-link>
+        </span>
+      </div>
+    </div>
+  </div>
   <div class="col-xl-12">
     <form @submit.prevent="createOrganization">
       <div class="card">
