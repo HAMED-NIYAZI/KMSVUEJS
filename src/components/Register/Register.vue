@@ -71,7 +71,7 @@
                             {{ errors.personnelNumber.shift() }}
                           </div>
                         </div>
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-12">
                           <label>شناسه نمودار</label>
                           <input class="form-control" v-model.lazy="formData.chartId"
                             placeholder="شناسه نمودار خود را وارد کنید" type="text" />
@@ -79,6 +79,7 @@
                             {{ errors.chartId.shift() }}
                           </div>
                         </div>
+ 
                         <div class="form-group col-lg-6">
                           <label>کلمه عبور</label>
                           <input class="form-control" v-model.lazy="formData.password"
@@ -96,9 +97,7 @@
                             {{ errors.password.shift() }}
                           </div>
                         </div>
-                        <div class="form-group col-lg-6">
-                        </div>
-
+         
                         <div class="form-group col-lg-6" style="margin-top: 40px;">
                           <Spinner_btn  v-if="loading"/>
                           <button type="button" v-else @click="doRegister($event)"
@@ -131,6 +130,8 @@ import { reactive, ref } from "vue";
 import AuthService from "../../services/AuthService";
 import { useToast } from "vue-toastification";
 import Spinner_btn from '@/components/Spinners/Spinner_btn.vue'
+import OrganizationTreeModalSingleSelect from '../Organization/OrganizationTreeModalSingleSelect.vue'
+
 const toast = useToast();
 let loading = ref(false);
 let formData = reactive({
