@@ -4,7 +4,6 @@
         <i class="fa fa-ellipsis-h"></i>
       </a>
     </div>
-  
     <div class="modal" id="modal1" style="display: none" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
@@ -28,8 +27,6 @@
     </div>
   </template>
   
-  
-  
   <script setup>
   import KnowledgeFieldTree from "./KnowledgeFieldTree.vue";
   import { ref, onMounted } from 'vue'
@@ -42,11 +39,8 @@
   
   })
   
-  
   function FupdateKnowledgeFieldTree() {
-    componentKeyKnowledgeFieldTree.value += 1; // Increment the key to force re-render
+    componentKeyKnowledgeFieldTree.value += 1;
   }
   
-  
   </script>
-  

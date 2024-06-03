@@ -43,6 +43,16 @@ const routes = [{
         component: () => { return import('./components/Chart/ChartCreate.vue') }
     },
     {
+        path: 'knowledgefield',
+        name: 'knowledgefield',
+        component: () => { return import('./components/KnowledgeField/KnowledgeFieldPage.vue') }
+    },
+    {
+        path: 'knowledgefield/create',
+        name: 'create_knowledgefield',
+        component: () => { return import('./components/KnowledgeField/KnowledgeFieldCreate.vue') }
+    },
+    {
         path: 'tree',
         name: 'tree.index',
         component: () => { return import('./components/pages/tree/Index.vue') }

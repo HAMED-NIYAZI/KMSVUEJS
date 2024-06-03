@@ -8,4 +8,6 @@
 .mt-10{
   margin-top: 100px !important;
 }
+.loader-img {
+  animation: spin 0.6s linear infinite; }
 </style>
