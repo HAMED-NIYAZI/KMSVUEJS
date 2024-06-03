@@ -2,7 +2,7 @@
     
 </template> -->
 <template>
-      <div class="breadcrumb-header justify-content-between">
+  <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
       <div class="d-flex">
         <h4 class="content-title mb-0 my-auto">
@@ -78,7 +78,7 @@
               <div class="row">
                 <div class="col-10">
                   <input class="form-control" disabled="true"
-                    :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate') !=null ? useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle : ''"
+                    :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle : ''"
                     type="text" />
                 </div>
 
@@ -100,9 +100,8 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-const router = useRouter();
 import { LocalStorageService } from "@/services/LocalStorageService";
 const useLocalStorageService = LocalStorageService()
 import OrganizationService from "@/services/OrganizationService";
@@ -111,6 +110,9 @@ import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength } from "@vuelidate/validators";
 import OrganizationTreeModalSingleSelect from './OrganizationTreeModalSingleSelect.vue'
 import Spinner_btn from "../Spinners/Spinner_btn.vue";
+
+let tree_name = ref('OrganizationViewList');
+const router = useRouter();
 const toastService = useToast();
 let loading = ref(false);
 let formData = reactive({
@@ -168,6 +170,11 @@ async function createOrganization() {
     loading.value = false;
   }
 }
+
+onMounted(() => {
+
+  useLocalStorageService.setTreeSelectedItem(tree_name.value, null)
+})
 </script>
 
 <style scoped></style>
