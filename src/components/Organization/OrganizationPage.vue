@@ -16,16 +16,16 @@
         </router-link>
         <router-link v-if="OrganizationViewList_Value && OrganizationViewList_Value.id"
           :to="{ name: 'edit_organization', params: { id: OrganizationViewList_Value.id } }"
-          class="btn btn-warning btn-icon ms-2" title="ویرایش سازمان">
-          <i class="fa fa-edit"></i>
+          class="btn btn-warning btn-icon mr-2" title="ویرایش سازمان">
+          <i class="fa fa-pen"></i>
         </router-link>
         <div v-if="loadingRemove" class="spinner-border text-primary" role="status">
           <span class="sr-only"></span>
         </div>
         <template v-else>
           <a href="#" @click="remove(OrganizationViewList_Value.id)"
-            v-if="OrganizationViewList_Value && OrganizationViewList_Value.id" class="btn btn-danger btn-icon ms-2"
-            title="remove سازمان">
+            v-if="OrganizationViewList_Value && OrganizationViewList_Value.id" class="btn btn-danger btn-icon mr-2"
+            title="حذف سازمان">
             <i class="fa fa-trash"></i>
           </a>
         </template>
@@ -81,5 +81,9 @@ async function remove(id) {
   padding-right: 25px;
   padding-bottom: 5px;
 
+}
+
+.mr-2{
+  margin-right: 10px;
 }
 </style>
