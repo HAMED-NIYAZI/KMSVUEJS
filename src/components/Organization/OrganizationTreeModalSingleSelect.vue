@@ -20,7 +20,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">
-            بستن
+            تایید
           </button>
         </div>
       </div>

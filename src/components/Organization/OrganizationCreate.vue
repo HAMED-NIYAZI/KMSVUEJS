@@ -146,7 +146,8 @@ async function createOrganization() {
       });
       return;
     }
-    formData.parentId = useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id || null;
+
+    formData.parentId = useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')?.id || null;
     const response = await OrganizationService.create(formData);
     if (response.data.result === 0) {
       formData = {
