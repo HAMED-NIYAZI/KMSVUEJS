@@ -95,21 +95,29 @@ async function remove(id, name) {
 
   loadingRemove.value = true;
   try {
-    await OrganizationService.delete(id);
+    let response = await OrganizationService.delete(id);
 
-    useLocalStorageService.setTreeSelectedItem(tree_name.value, null);
+    if (
+      response.data.result == 4 &&
+      response.data.message == "سرشاخه قابل حذف نیست"
+    ) {
+      toastService.error(response.data.message, { timeout: 2000 });
+      return;
+    }
 
-    FupdateOrganizationTree();
+    if (response.data.result == 0) {
+      toastService.success("عملیات حذف با موفقیت انجام شد", { timeout: 2000 });
+
+      useLocalStorageService.setTreeSelectedItem(tree_name.value, null);
+
+      FupdateOrganizationTree();
+    }
   } catch (err) {
     toastService.error(err.message, { timeout: 2000 });
   } finally {
     loadingRemove.value = false;
   }
 }
-
-
-
-
 </script>
 <style scoped>
 .pad {

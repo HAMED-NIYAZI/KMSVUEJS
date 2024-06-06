@@ -74,7 +74,7 @@
 
             <div class="col-lg-12">
 
-              <label>نام سرشاحه</label>
+              <label>نام سرشاخه</label>
               <div class="row">
                 <div class="col-10">
                   <input class="form-control" disabled="true"

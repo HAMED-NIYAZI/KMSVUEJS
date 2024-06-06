@@ -49,7 +49,9 @@
                 KnowledgeFieldViewList_Value.persianTitle
               )
             "
-            v-if="KnowledgeFieldViewList_Value && KnowledgeFieldViewList_Value.id"
+            v-if="
+              KnowledgeFieldViewList_Value && KnowledgeFieldViewList_Value.id
+            "
             class="btn btn-danger btn-icon mr-2"
             title="حذف فیلد دانش"
           >
@@ -95,21 +97,29 @@ async function remove(id, name) {
 
   loadingRemove.value = true;
   try {
-    await KnowledgeFieldService.delete(id);
+    let response = await KnowledgeFieldService.delete(id);
 
-    useLocalStorageService.setTreeSelectedItem(tree_name.value, null);
+    if (
+      response.data.result == 4 &&
+      response.data.message == "سرشاخه قابل حذف نیست"
+    ) {
+      toastService.error(response.data.message, { timeout: 2000 });
+      return;
+    }
 
-    FupdateKnowledgeFieldTree();
+    if (response.data.result == 0) {
+      toastService.success('عملیات حذف با موفقیت انجام شد', { timeout: 2000 });
+     
+      useLocalStorageService.setTreeSelectedItem(tree_name.value, null);
+
+      FupdateKnowledgeFieldTree();
+    }
   } catch (err) {
     toastService.error(err.message, { timeout: 2000 });
   } finally {
     loadingRemove.value = false;
   }
 }
-
-
-
-
 </script>
 <style scoped>
 .pad {
