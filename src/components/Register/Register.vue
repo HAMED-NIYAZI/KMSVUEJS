@@ -71,15 +71,32 @@
                             {{ errors.personnelNumber.shift() }}
                           </div>
                         </div>
-                        <div class="form-group col-lg-12">
+                        <!-- <div class="form-group col-lg-12">
                           <label>شناسه نمودار</label>
                           <input class="form-control" v-model.lazy="formData.chartId"
                             placeholder="شناسه نمودار خود را وارد کنید" type="text" />
                           <div style="font-size: 11px" v-if="Object.hasOwn(errors, 'chartId')" class="text-danger">
                             {{ errors.chartId.shift() }}
                           </div>
-                        </div>
- 
+                        </div> -->
+                        <div class="form-group col-lg-6">
+
+<label>سازمان</label>
+<div class="row" style="margin-top: -5px;">
+  <div class="col-10">
+    <input class="form-control" disabled="true"
+      :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle : ''"
+      type="text" />
+  </div>
+
+  <div class="col-2">
+    <OrganizationTreeModalSingleSelect />
+  </div>
+</div>
+</div>
+<div class="form-group col-lg-6">
+</div>
+
                         <div class="form-group col-lg-6">
                           <label>کلمه عبور</label>
                           <input class="form-control" v-model.lazy="formData.password"
@@ -131,6 +148,8 @@ import AuthService from "../../services/AuthService";
 import { useToast } from "vue-toastification";
 import Spinner_btn from '@/components/Spinners/Spinner_btn.vue'
 import OrganizationTreeModalSingleSelect from '../Organization/OrganizationTreeModalSingleSelect.vue'
+import { LocalStorageService } from "@/services/LocalStorageService";
+const useLocalStorageService = LocalStorageService()
 
 const toast = useToast();
 let loading = ref(false);

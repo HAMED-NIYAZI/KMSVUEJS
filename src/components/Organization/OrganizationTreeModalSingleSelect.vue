@@ -9,7 +9,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content modal-content-demo">
         <div class="modal-header">
-          <h6 class="modal-title">انتخاب سرشاخه</h6>
+          <h6 class="modal-title"> </h6>
           <button aria-label="بستن" class="close" data-bs-dismiss="modal" type="button">
             <span aria-hidden="true">×</span>
           </button>
