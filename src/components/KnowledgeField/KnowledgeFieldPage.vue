@@ -90,39 +90,6 @@ let KnowledgeFieldViewList_Value = computed(() =>
   useLocalStorageService.getTreeSelectedItem(tree_name.value)
 );
 
-async function remove2(id, name) {
-  let res = confirm("آیا مایل به حذف  (" + name + ")  هستید؟");
-  if (!res) {
-    return false;
-  }
-
-  loadingRemove.value = true;
-  try {
-    let response = await KnowledgeFieldService.delete(id);
-
-    if (
-      response.data.result == 4 &&
-      response.data.message == "سرشاخه قابل حذف نیست"
-    ) {
-      toastService.error(response.data.message, { timeout: 2000 });
-      return;
-    }
-
-    if (response.data.result == 0) {
-      toastService.success('عملیات حذف با موفقیت انجام شد', { timeout: 2000 });
-     
-      useLocalStorageService.setTreeSelectedItem(tree_name.value, null);
-
-      FupdateKnowledgeFieldTree();
-    }
-  } catch (err) {
-    toastService.error(err.message, { timeout: 2000 });
-  } finally {
-    loadingRemove.value = false;
-  }
-}
-
-
 async function remove(id,name) {
     Swal.fire({
         title: "آیا مایل به حذف  (" + name + ")  هستید؟",

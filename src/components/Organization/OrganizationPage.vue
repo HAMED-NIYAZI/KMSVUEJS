@@ -72,6 +72,7 @@ import OrganizationService from "@/services/OrganizationService";
 import { LocalStorageService } from "@/services/LocalStorageService";
 import { useToast } from "vue-toastification";
 import Spinner_btn from "../Spinners/Spinner_btn.vue";
+import Swal from 'sweetalert2'
 
 const toastService = useToast();
 const useLocalStorageService = LocalStorageService();
@@ -87,36 +88,42 @@ let OrganizationViewList_Value = computed(() =>
   useLocalStorageService.getTreeSelectedItem(tree_name.value)
 );
 
-async function remove(id, name) {
-  let res = confirm("آیا مایل به حذف  (" + name + ")  هستید؟");
-  if (!res) {
-    return false;
-  }
-
-  loadingRemove.value = true;
+async function remove(id,name) {
+    Swal.fire({
+        title: "آیا مایل به حذف  (" + name + ")  هستید؟",
+        text: "آیتم حذف شده قابل بازیابی نمی باشد",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "بله، حذف کن!",
+        cancelButtonText: "انصراف"
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+          loadingRemove.value = true;
   try {
     let response = await OrganizationService.delete(id);
 
     if (
-      response.data.result == 4 &&
-      response.data.message == "سرشاخه قابل حذف نیست"
-    ) {
+      response.data.result == 4 ) {
       toastService.error(response.data.message, { timeout: 2000 });
       return;
     }
 
     if (response.data.result == 0) {
-      toastService.success("عملیات حذف با موفقیت انجام شد", { timeout: 2000 });
-
+      toastService.success('عملیات حذف با موفقیت انجام شد', { timeout: 2000 });
+     
       useLocalStorageService.setTreeSelectedItem(tree_name.value, null);
 
-      FupdateOrganizationTree();
+      FupdateKnowledgeFieldTree();
     }
   } catch (err) {
     toastService.error(err.message, { timeout: 2000 });
   } finally {
     loadingRemove.value = false;
   }
+        }
+    });
 }
 </script>
 <style scoped>
