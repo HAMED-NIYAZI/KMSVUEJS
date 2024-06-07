@@ -5,7 +5,7 @@
             <div class="my-auto">
                 <div class="d-flex">
                     <h4 class="content-title mb-0 my-auto">
-                        <router-link :to="{ name: 'knowledgefield' }" class="content-title mb-0 my-auto">فیلد های دانش</router-link>
+                        <router-link :to="{ name: 'knowledgefield' }" class="content-title mb-0 my-auto">فیلدهای دانش</router-link>
                     </h4>
                     <span class="text-muted mt-1 tx-13 ms-2 mb-0">ویرایش فیلد دانش</span>
                 </div>

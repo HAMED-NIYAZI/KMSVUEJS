@@ -4,7 +4,7 @@
         <div class="card-header pb-0">
           <div class="d-flex justify-content-between">
             <h4 class="card-title mg-b-0" style="padding-top: 10px !important;">
-              فیلد های دانش
+              فیلدهای دانش
               <span v-if="KnowledgeFieldViewList_Value" class="badg_select">
                 {{ KnowledgeFieldViewList_Value.persianTitle }}
               </span>

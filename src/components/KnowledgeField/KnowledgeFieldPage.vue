@@ -6,7 +6,7 @@
           <router-link
             :to="{ name: 'knowledgefield' }"
             class="content-title mb-0 my-auto"
-            >فیلد های دانش</router-link
+            >فیلدهای دانش</router-link
           >
         </h4>
       </div>
