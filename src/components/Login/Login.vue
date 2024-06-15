@@ -37,14 +37,22 @@
                 <div class="card-sigin">
                   <div class="card-sigin d-flex mb-5">
                     <a href="#"
-                      ><img
+                      ><img v-if="logoPath"
                         :src="logoPath"
                         class="sign-favicon-a ht-90"
                         alt="logo"
                       />
+                      <img v-else
+                        src="assets/img/brand/favicon.png"
+                        class="sign-favicon-a" style="padding-top: 20px;"
+                        alt="logo"
+                      />
                     </a>
-                    <h1 class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44">
+                    <h1 class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44" v-if="loginPageInfo.title">
                       {{ loginPageInfo.title }}
+                    </h1>
+                    <h1 class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44" v-else>
+                     سازمان پیشفرض
                     </h1>
                   </div>
                   <div class="card-sigin">
@@ -247,7 +255,7 @@ async function getLoginPageInfo() {
 getLoginPageInfo();
 
 const logoPath = computed(
-  () => process.env.VUE_APP_BASE_URL + loginPageInfo.imagePath
+  () =>  loginPageInfo.imagePath!='' ? process.env.VUE_APP_BASE_URL + loginPageInfo.imagePath : null
 );
 </script>
 

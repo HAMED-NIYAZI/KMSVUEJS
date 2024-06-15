@@ -95,6 +95,19 @@
 </div>
 </div>
 <div class="form-group col-lg-6">
+
+<label>چارت سازمانی</label>
+<div class="row" style="margin-top: -5px;">
+  <div class="col-10">
+    <input class="form-control" disabled="true"  
+      :value="useLocalStorageService.getTreeSelectedItem('ChViewList_ModalCreate') != null ? useLocalStorageService.getTreeSelectedItem('ChViewList_ModalCreate').persianTitle : ''"
+      type="text" />
+  </div>
+
+  <div class="col-2">
+    <ChTreeModalSingleSelect />
+  </div>
+</div>
 </div>
 
                         <div class="form-group col-lg-6">
@@ -148,6 +161,7 @@ import AuthService from "../../services/AuthService";
 import { useToast } from "vue-toastification";
 import Spinner_btn from '@/components/Spinners/Spinner_btn.vue'
 import OrganizationTreeModalSingleSelect from '../Organization/OrganizationTreeModalSingleSelect.vue'
+import ChTreeModalSingleSelect from './ChTreeModalSingleSelect.vue'
 import { LocalStorageService } from "@/services/LocalStorageService";
 const useLocalStorageService = LocalStorageService()
 
@@ -163,10 +177,13 @@ let formData = reactive({
   codeMeli: "",
   personnelNumber: "",
   chartId: "",
+  organizationId: "",
 });
 let errors = {};
 
 async function doRegister(e) {
+  formData.organizationId=useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').Id ;
+  formData.chartId=useLocalStorageService.getTreeSelectedItem('ChViewList_ModalCreate').Id; 
   loading.value = true;
   errors = {};
   try {
