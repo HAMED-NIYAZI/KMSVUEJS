@@ -12,7 +12,7 @@
                   <div class="bd pd-20 clearfix" style="display: flex; justify-content: center; align-items: center;">
     <div class="main-img-user profile-user">
         <img :src="logoPath" />
-        <a class="fas fa-camera profile-edit curser-hand" title=" آپلود تصویر جدید" @click.prevent="selectAvatar($event)"></a>
+        <a class="fas fa-camera profile-edit" style="cursor: pointer;" title=" آپلود تصویر جدید" @click.prevent="selectAvatar($event)"></a>
         <input type="file" ref="avatar" @change="loadAvatar($event)" id="avatar" class="d-none" />
     </div>
 </div>

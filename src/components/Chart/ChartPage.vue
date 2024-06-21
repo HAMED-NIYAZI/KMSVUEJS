@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">
                     <router-link :to="{ name: 'chart' }" class="content-title mb-0 my-auto">
-                        چارت ها سازمانی
+                        چارت های سازمانی
                     </router-link>
                 </h4>
             </div>
@@ -20,7 +20,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0" style="padding-top: 10px !important;">
-                            چارت سازمانی
+                            چارت های سازمانی
                         </h4>
                         <router-link :to="{ name: 'create_chart' }" class="btn btn-success btn-icon" title="ایجاد چارت">
                             <i class="fa fa-plus"></i>
@@ -84,6 +84,7 @@ let OrganizationChartViewList_Value = computed(() => {
 });
 
 watch(OrganizationViewList_Value, async (n, o) => {
+    if(n==null) return;
     const response = await ChartService.getOrganizationChartTree(n.id)
     if (response.data.result == 0) {
         trees.value = response.data.data;
