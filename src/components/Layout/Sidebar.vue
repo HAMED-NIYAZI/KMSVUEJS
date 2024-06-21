@@ -2,15 +2,15 @@
     <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
     <aside class="app-sidebar sidebar-scroll">
         <div class="main-sidebar-header active">
-            <a class="desktop-logo logo-light active" href="/dashboard"><img src="../../assets/img/brand/logo.png"
+            <a class="desktop-logo logo-light active" href="/dashboard"><img :src="logoPath" style="width: 45px !important;height: 45px !important;"
                     class="main-logo" alt="logo">
                  </a>
-            <a class="desktop-logo logo-dark active" href="/dashboard"><img src="../../assets/img/brand/logo-white.png"
+            <a class="desktop-logo logo-dark active" href="/dashboard"><img :src="logoPath"
                     class="main-logo dark-theme" alt="logo"></a>
             <a class="logo-icon mobile-logo icon-light active" href="/dashboard"><img
-                    src="../../assets/img/brand/favicon.png" class="logo-icon" alt="logo"></a>
+                    :src="logoPath" class="logo-icon" alt="logo"></a>
             <a class="logo-icon mobile-logo icon-dark active" href="/dashboard">
-                <img src="../../assets/img/brand/favicon-white.png" class="logo-icon dark-theme" alt="logo"></a>
+                <img :src="logoPath" class="logo-icon dark-theme" alt="logo"></a>
         </div>
         <div class="main-sidemenu">
             <h6 class="center darktext">   {{ organizationPersianTitleName }}</h6>
@@ -372,6 +372,9 @@ import { LocalStorageService } from '@/services/LocalStorageService'
 const localStorageService = LocalStorageService()
 import { useRouter } from "vue-router";
 const router = useRouter()
+
+
+ let logoPath = computed(() => process.env.VUE_APP_BASE_URL +localStorageService.getHomePageSetting.imagePath);
 
 onMounted(() => {
     // Toggle Sidebar

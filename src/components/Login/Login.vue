@@ -1,12 +1,4 @@
 <template>
-  <!-- <div class="text-center mt-5" v-if="loading">
-    <span class="spinner-border spinner-border-sm"></span>
-  </div> -->
-
-  <!-- Loader -->
-  <!-- <div id="global-loader"  v-if="loading">
-			<img src="assets/img/loader.svg" class="loader-img" alt="Loader">
-		</div> -->
 
   <Spinner v-if="loading" />
   <!-- /Loader -->
@@ -23,7 +15,7 @@
             class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mr-center"
             alt="logo"
           />
-        </div>
+          </div>
       </div>
     </div>
     <!-- The content half -->
@@ -37,22 +29,31 @@
                 <div class="card-sigin">
                   <div class="card-sigin d-flex mb-5">
                     <a href="#"
-                      ><img v-if="logoPath"
+                      ><img
+                        v-if="logoPath"
                         :src="logoPath"
                         class="sign-favicon-a ht-90"
                         alt="logo"
                       />
-                      <img v-else
+                      <img
+                        v-else
                         src="assets/img/brand/favicon.png"
-                        class="sign-favicon-a" style="padding-top: 20px;"
+                        class="sign-favicon-a"
+                        style="padding-top: 20px"
                         alt="logo"
                       />
                     </a>
-                    <h1 class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44" v-if="loginPageInfo.title">
+                    <h1
+                      class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44"
+                      v-if="loginPageInfo.title"
+                    >
                       {{ loginPageInfo.title }}
                     </h1>
-                    <h1 class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44" v-else>
-                     سازمان پیشفرض
+                    <h1
+                      class="main-logo1 ms-1 me-0 my-auto tx-20 ps-1 mt-44"
+                      v-else
+                    >
+                      سازمان پیشفرض
                     </h1>
                   </div>
                   <div class="card-sigin">
@@ -102,22 +103,32 @@
                         >
                           ورود
                         </button>
+
+                        <router-link
+                        :to="{ name: 'register' }"
+                        class="btn btn-success btn-block"
+                        >
+                        درخواست عضویت     
+                        </router-link>
+
                       </form>
                       <div class="main-signin-footer mt-5">
-                        <p>
+                        <!-- <p>
                           <a href="forgot.html">رمز عبور را فراموش کرده اید؟</a>
-                        </p>
-                        <p>
+                        </p> -->
+                        <!-- <p>
                           حساب کاربری ندارید؟<router-link
                             :to="{ name: 'register' }"
                           >
-                            ایجاد یک حساب کاربری
-                          </router-link>
-                        </p>
+                          درخواست عضویت                          </router-link>
+                        </p> -->
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="card-sigin" v-if="loginPageInfo.description" style="margin-top: 60px; border: solid 2px #e1e5ef; border-radius: 5px;padding: 15px;" >
+                {{ loginPageInfo.description }}
               </div>
             </div>
           </div>
@@ -133,9 +144,9 @@ import { reactive, ref, computed } from "vue";
 import AuthService from "../../services/AuthService";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
-import { LocalStorageService } from "../../services/LocalStorageService";
 import Spinner from "@/components/Spinners/Spinner.vue";
 import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
+import { LocalStorageService } from "../../services/LocalStorageService";
 
 const localStorageService = LocalStorageService();
 const router = useRouter();
@@ -224,6 +235,7 @@ async function getLoginPageInfo() {
     const response = await AuthService.getInfoForLoginPage();
     if (response.data.result == 0) {
       loginPageInfo = response.data.data;
+      localStorageService.setHomePageSetting(response.data.data);
     } else if (response.data.result == 5) {
       toast.warning(response.data.message, {
         timeout: 2000,
@@ -254,8 +266,10 @@ async function getLoginPageInfo() {
 }
 getLoginPageInfo();
 
-const logoPath = computed(
-  () =>  loginPageInfo.imagePath!='' ? process.env.VUE_APP_BASE_URL + loginPageInfo.imagePath : null
+const logoPath = computed(() =>
+  loginPageInfo.imagePath != ""
+    ? process.env.VUE_APP_BASE_URL + loginPageInfo.imagePath
+    : null
 );
 </script>
 

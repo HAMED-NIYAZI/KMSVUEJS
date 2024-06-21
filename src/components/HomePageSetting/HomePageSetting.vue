@@ -1,8 +1,8 @@
 <!-- template -->
 <template>
 <div class="row">
-<div class="col-lg-9 col-12"><EditInfoHomePageSetting/></div>
-<div class="col-lg-3 col-12"><LogoHomePageSetting/></div>
+<div class="col-lg-10 col-12"><EditInfoHomePageSetting/></div>
+<div class="col-lg-2 col-12"><LogoHomePageSetting/></div>
 </div>
 </template>
 <!-- template -->

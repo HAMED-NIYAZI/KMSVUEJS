@@ -1,3 +1,4 @@
+<!-- template -->
 <template>
     <div class="row">
       <div class="col-xl-12 col-md-12">
@@ -8,14 +9,14 @@
               <form>
    
                 <div class="form-group">
-    <div class="bd pd-20 clearfix">
-        <img alt="Your Image Description" class="rounded" src="assets/img/photos/1.jpg" style="float:left; margin-right:10px;" width="100px" height="100px">
-    <div class="buttons-container">
-  
-        <button type="button" class="btn btn-primary mt-1 mb-1" style="width: 120px;">جدید  </button>
-        <button type="button" class="btn btn-warning mt-1 mb-1" style="width: 120px;">جایگزین کردن  </button>
+                  <div class="bd pd-20 clearfix" style="display: flex; justify-content: center; align-items: center;">
+    <div class="main-img-user profile-user">
+        <img :src="logoPath" />
+        <a class="fas fa-camera profile-edit curser-hand" title=" آپلود تصویر جدید" @click.prevent="selectAvatar($event)"></a>
+        <input type="file" ref="avatar" @change="loadAvatar($event)" id="avatar" class="d-none" />
     </div>
-    </div>
+</div>
+
 </div>
 
 
@@ -30,11 +31,32 @@
     
     </div>
   </template>
-   <script>
+<!-- template -->
+
+
+
+
+
+  <!-- script -->
+   <script setup>
+   import { reactive, ref, computed } from "vue";
+
+
+   import { LocalStorageService } from "../../services/LocalStorageService";
+const localStorageService = LocalStorageService();
+
+ let logoPath = computed(() => process.env.VUE_APP_BASE_URL +localStorageService.getHomePageSetting.imagePath);
+
+
   </script>
+  <!-- script -->
    
     
+
+
+  <!-- style -->
     <style scoped>
+
   .card-footer {
     display: flex;
     justify-content: center; 
@@ -48,6 +70,8 @@
     flex-direction: column; /* Stack buttons vertically */
     align-items: flex-start; /* Align buttons to the start of the container */
     margin-left: -25px; /* Adjust based on the width of the.bd pd-20 clearfix div */
+    margin-top: 24px;
+
 }
 
 .right-button {
@@ -60,4 +84,18 @@
     margin-top: 5px; /* Space between buttons */
 }
 
+.main-img-user img {
+    border-radius: 0%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.main-img-user {
+    height: 75px;
+    position: relative;
+    width: 75px;
+}
+ 
+
   </style>
+<!-- style -->
+

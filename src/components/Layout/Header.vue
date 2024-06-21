@@ -348,9 +348,7 @@ function signOut() {
 }
 
 
-const avatarPath = computed(
-    () => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath
-);
+const avatarPath = computed(() => process.env.VUE_APP_BASE_URL + localStorageService.getUser.imagePath);
 
 
 </script>
