@@ -2,7 +2,7 @@ import axios from "axios";
 import { LocalStorageService } from '@/services/LocalStorageService'
 const localStorageService = LocalStorageService()
 const api = axios.create({
-    baseURL: 'https://freelancework.ir/',
+    baseURL: process.env.VUE_APP_BASE_URL,
     headers: {
         'Accept': 'application/json'
     }
