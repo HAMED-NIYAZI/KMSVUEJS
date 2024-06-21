@@ -83,21 +83,21 @@ let OrganizationChartViewList_Value = computed(() => {
 });
 
 
-watch(OrganizationViewList_Value, async (n, o) => {
-    if(n==null) return;
-    const response = await ChartService.getOrganizationChartTree(n.id)
-    if (response.data.result == 0) {
-        trees.value = response.data.data;
+// watch(OrganizationViewList_Value, async (n, o) => {
+    // if(n==null) return;
+    // const response = await ChartService.getOrganizationChartTree(n.id)
+    // if (response.data.result == 0) {
+    //     trees.value = response.data.data;
 
-        // زمانی که سازمانی انتخاب میشود در صورت وجود دکمه های حذف و ویرایش برای چارت، این دکمه ها ناپدید میشن
-        useLocalStorageService.setTreeSelectedItem(chart_tree_name.value, null)
+    //     // زمانی که سازمانی انتخاب میشود در صورت وجود دکمه های حذف و ویرایش برای چارت، این دکمه ها ناپدید میشن
+    //     useLocalStorageService.setTreeSelectedItem(chart_tree_name.value, null)
 
-    } else {
-        toast.warning(response.data.message, {
-            timeout: 2000,
-        });
-    }
-})
+    // } else {
+    //     toast.warning(response.data.message, {
+    //         timeout: 2000,
+    //     });
+    // }
+// })
 
 async function remove(id, name) {
     let res = confirm("آیا مایل به حذف  (" + name + ")  هستید؟");
