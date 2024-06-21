@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">
                     <router-link :to="{ name: 'chart' }" class="content-title mb-0 my-auto">
-                        چارت های سازمانی
+                        چارت سازمانی
                     </router-link>
                 </h4>
             </div>
@@ -43,8 +43,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <TreeSingleSelect :tree_name="chart_tree_name" :trees="trees"
-                                :key="componentKeyChartTree" />
+                            <chart-tree v-if="OrganizationChartViewList_Value"
+                                :organizationId="OrganizationChartViewList_Value.id" />
                         </div>
                     </div>
                 </div>
@@ -59,15 +59,15 @@ import ChartService from "@/services/ChartService";
 import { LocalStorageService } from "@/services/LocalStorageService";
 import { useToast } from "vue-toastification";
 import Spinner_btn from "../Spinners/Spinner_btn.vue";
-import TreeSingleSelect from "@/components/Tree/TreeSingleSelect.vue";
 
 const toastService = useToast();
 const useLocalStorageService = LocalStorageService();
-let trees = ref([]);
+
 let componentKeyOrganizationTree = ref(0);
-let componentKeyChartTree = ref(0);
+
 let tree_name = ref("OrganizationViewList");
 let chart_tree_name = ref("OrganizationChartViewList");
+
 let loadingRemove = ref(false);
 
 function FupdateOrganizationTree() {
@@ -81,6 +81,7 @@ let OrganizationViewList_Value = computed(() => {
 let OrganizationChartViewList_Value = computed(() => {
     return useLocalStorageService.getTreeSelectedItem(chart_tree_name.value)
 });
+
 
 watch(OrganizationViewList_Value, async (n, o) => {
     if(n==null) return;

@@ -40,7 +40,6 @@ import { useToast } from "vue-toastification";
 import TreeSingleSelect from "@/components/Tree/TreeSingleSelect.vue";
 import Spinner_Gride from "@/components/Spinners/Spinner_Gride.vue";
 import { LocalStorageService } from "@/services/LocalStorageService";
-// const emit = defineEmits(['editNode']); // Define emit
 const useLocalStorageService = LocalStorageService();
 
 const toast = useToast();
@@ -80,14 +79,6 @@ async function ReloadTreeInside() {
 const OrganizationViewList_Value = computed(() =>
   useLocalStorageService.getTreeSelectedItem(props.tree_name)
 );
-// if (OrganizationViewList_Value.value.id) {
-
-//   function EditGrade(id) {
-//     //  emit('ReloadEditGrade'); // Use emit instead of this.$emit
-//     var emitid = id
-//     emit('editNode', OrganizationViewList_Value.value.id);
-//   }
-// }
 </script>
 
 <style scoped>
