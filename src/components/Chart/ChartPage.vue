@@ -12,8 +12,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <OrganizationTree :key="componentKeyOrganizationTree" @ReloadOrganizationEdit="FReloadOrganizationEdit"
-                :tree_name="tree_name" />
+            <OrganizationTree :key="componentKeyOrganizationTree" :tree_name="tree_name" />
         </div>
         <div class="col-lg-6">
             <div class="card">
