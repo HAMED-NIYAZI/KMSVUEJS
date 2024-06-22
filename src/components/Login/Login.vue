@@ -11,7 +11,8 @@
       <div class="row wd-100p mr-center text-center">
         <div class="col-md-12 col-lg-12 col-xl-12 my-auto mr-center wd-100p">
           <img
-            src="assets/img/media/login.png"
+            src="assets/img/media/4.jpg"
+            style="border-radius: 10px;"
             class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mr-center"
             alt="logo"
           />
