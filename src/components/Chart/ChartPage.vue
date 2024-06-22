@@ -37,14 +37,12 @@
                     )" class="btn btn-danger btn-icon mr-2" title="حذف چارت">
                             <i class="fa fa-trash"></i>
                         </a>
-
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <chart-tree v-if="OrganizationChartViewList_Value"
-                                :organizationId="OrganizationChartViewList_Value.id" />
+                            <chart-tree />
                         </div>
                     </div>
                 </div>
@@ -53,51 +51,22 @@
     </div>
 </template>
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import OrganizationTree from "@/components/Organization/OrganizationTree.vue";
-import ChartService from "@/services/ChartService";
+import ChartTree from '@/components/Chart/ChartTree.vue'
 import { LocalStorageService } from "@/services/LocalStorageService";
 import { useToast } from "vue-toastification";
-import Spinner_btn from "../Spinners/Spinner_btn.vue";
 
 const toastService = useToast();
 const useLocalStorageService = LocalStorageService();
 
 let componentKeyOrganizationTree = ref(0);
-
 let tree_name = ref("OrganizationViewList");
 let chart_tree_name = ref("OrganizationChartViewList");
-
-let loadingRemove = ref(false);
-
-function FupdateOrganizationTree() {
-    componentKeyOrganizationTree.value += 1; // Increment the key to force re-render
-}
-
-let OrganizationViewList_Value = computed(() => {
-    return useLocalStorageService.getTreeSelectedItem(tree_name.value)
-});
 
 let OrganizationChartViewList_Value = computed(() => {
     return useLocalStorageService.getTreeSelectedItem(chart_tree_name.value)
 });
-
-
-// watch(OrganizationViewList_Value, async (n, o) => {
-    // if(n==null) return;
-    // const response = await ChartService.getOrganizationChartTree(n.id)
-    // if (response.data.result == 0) {
-    //     trees.value = response.data.data;
-
-    //     // زمانی که سازمانی انتخاب میشود در صورت وجود دکمه های حذف و ویرایش برای چارت، این دکمه ها ناپدید میشن
-    //     useLocalStorageService.setTreeSelectedItem(chart_tree_name.value, null)
-
-    // } else {
-    //     toast.warning(response.data.message, {
-    //         timeout: 2000,
-    //     });
-    // }
-// })
 
 async function remove(id, name) {
     let res = confirm("آیا مایل به حذف  (" + name + ")  هستید؟");
