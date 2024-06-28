@@ -26,6 +26,7 @@
               <tr>
                 <th>ردیف</th>
                 <th>عنوان</th>
+                <th>توضیحات</th>
                 <th>نوع فرم</th>
                 <th>اولویت نمایش</th>
                 <th>عملیات</th>
@@ -35,21 +36,28 @@
               <tr v-for="(form, index) in forms" :key="form.id">
                 <th scope="row">{{ 1 + index }}</th>
                 <td>{{ form.name }}</td>
+                <td>{{ form.description }}</td>
                 <td>{{  getFormName(form.formType)
                 
                 }}</td>
                 <td>
-                  <span class="badge bg-info">{{ form.sortingNumber }}</span>
+                  <span class="badge bg-info" title="ترتیب نمایش" >{{ form.sortingNumber }}</span>
                 </td>
                 <td>
-                  <a href="#" @click.prevent="DeleteGrade(form.id)"
+                  <a href="#" @click.prevent="DeleteGrade(form.id)" title="حذف فرم"
                     ><i class="fa fa-trash text-danger mr-10"></i
                   ></a>
                   <!-- <router-link :to="{ name: 'grades.edit', params: { id: grade.id } }" class="ms-2"><i
                                             class="fa fa-pen text-warning"></i></router-link> -->
-                  <a href="#" @click="EditGrade(grade.id)" class="ms-2"
+                  <a href="#" @click="EditGrade(form.id)" class="ms-2" title="ویرایش فرم"
                     ><i class="fa fa-pen text-warning"></i
                   ></a>
+
+
+                               <router-link :to="{ name: '', params: { id: form.id } }" class="btn btn-success btn-sm ms-2">
+                              اضافه کردن فیلد های خاص  
+                              </router-link>  
+
                 </td>
               </tr>
             </tbody>

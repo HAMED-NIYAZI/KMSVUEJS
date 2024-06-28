@@ -71,6 +71,11 @@ const routes = [{
                 path: 'homepagesetting',
                 name: 'homepagesetting',
                 component: () => { return import('./components/HomePageSetting/HomePageSetting.vue') }
+            },
+            {
+                path: 'knowledgeformpage',
+                name: 'knowledgeformpage',
+                component: () => { return import('./components/Form/Knowledge/KnowledgeFormPage.vue') }
             }
         ],
         beforeEnter: (to, from, next) => {
