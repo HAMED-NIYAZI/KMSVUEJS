@@ -17,13 +17,16 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header pb-0">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex">
                         <h4 class="card-title mg-b-0" style="padding-top: 10px !important;">
                             چارت های سازمانی
                         </h4>
-                        <router-link :to="{ name: 'create_chart' }" class="btn btn-success btn-icon" title="ایجاد چارت">
+
+                        
+                        <router-link :to="{ name: 'create_chart' }" class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
                             <i class="fa fa-plus"></i>
                         </router-link>
+
 
                         <router-link v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id"
                             :to="{ name: 'edit_chart', params: { id: OrganizationChartViewList_Value.id } }"
@@ -37,6 +40,10 @@
                     )" class="btn btn-danger btn-icon mr-2" title="حذف چارت">
                             <i class="fa fa-trash"></i>
                         </a>
+
+              
+     
+
                     </div>
                 </div>
                 <div class="card-body">

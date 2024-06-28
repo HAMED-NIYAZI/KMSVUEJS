@@ -20,6 +20,7 @@ let OrganizationViewList_Value = computed(() => {
 });
 
 watch(OrganizationViewList_Value, (n, o) => {
+    if(n==null) return;
     ChartService.getOrganizationChartTree(n.id).then(response => {
         if (response.data.result == 0) {
             trees.value = response.data.data;
