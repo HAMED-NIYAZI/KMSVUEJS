@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { isAuth } from '@/services/HelperService'
 const routes = [{
-        path: '/',
-        component: () => { return import ('./components/Layout/Master.vue') },
-        name: 'master',
-        meta: {
-            authRequired: true
-        },
-        children: [{
-                path: 'dashboard',
-                name: 'dashboard',
-                component: () => { return import ('./components/Dashboard/Dashboard.vue') }
-            }, {
-                path: 'profile',
-                name: 'profile',
-                component: () => { return import ('./components/Profile/Profile.vue') }
-            },
+    path: '/',
+    component: () => { return import('./components/Layout/Master.vue') },
+    name: 'master',
+    meta: {
+        authRequired: true
+    },
+    children: [{
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => { return import('./components/Dashboard/Dashboard.vue') }
+    }, {
+        path: 'profile',
+        name: 'profile',
+        component: () => { return import('./components/Profile/Profile.vue') }
+    },
 
             {
                 path: 'grade',
@@ -71,11 +71,6 @@ const routes = [{
                 path: 'homepagesetting',
                 name: 'homepagesetting',
                 component: () => { return import('./components/HomePageSetting/HomePageSetting.vue') }
-            },
-            {
-                path: 'knowledgeformpage',
-                name: 'knowledgeformpage',
-                component: () => { return import('./components/Form/Knowledge/KnowledgeFormPage.vue') }
             }
         ],
         beforeEnter: (to, from, next) => {
