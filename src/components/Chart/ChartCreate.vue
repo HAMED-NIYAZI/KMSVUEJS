@@ -41,23 +41,7 @@
                                 <input type="text" class="form-control" v-model="formData.sortingNumber">
                             </div>
                         </div>
-
-                        <div class="col-lg-12 mb-3">
-                            <label>سرشاخه</label>
-                            <div class="row">
-                                <div class="col-10">
-                                    <input class="form-control" disabled="true"
-                                        :value="useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList').persianTitle : ''"
-                                        type="text" />
-                                </div>
-
-                                <div class="col-2">
-                                    <ChartTreeModalSingleSelect :id="route.params.id" />
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-12">
-
                             <label>نام سازمان</label>
                             <div class="row">
                                 <div class="col-10">
@@ -71,6 +55,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-12 mb-3"
+                            v-if="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')">
+                            <label>سرشاخه</label>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-control" disabled="true"
+                                        :value="useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList').persianTitle : ''"
+                                        type="text" />
+                                </div>
+
+                                <div class="col-2">
+                                    <ChartTreeModalSingleSelect
+                                        :key="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id"
+                                        :id="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id" />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="card-footer text-center">
@@ -133,8 +135,13 @@ async function createChart() {
             return;
         }
 
-        formData.parentId = useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList')?.id || null;
-        formData.organizationId = useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')?.id || null;
+        formData.parentId = useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList')?.id;
+        formData.organizationId = useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')?.id;
+        if (!formData.parentId && !formData.organizationId) {
+            toastService.warning('انتخاب سازمان و سرشاخه الزامیست', { timeout: 2000 });
+            return;
+        }
+
         const response = await ChartService.create(formData);
         if (response.data.result === 0) {
             formData = {
@@ -158,11 +165,6 @@ async function createChart() {
         loading.value = false;
     }
 }
-
-onMounted(() => {
-
-    // useLocalStorageService.setTreeSelectedItem(tree_name.value, null)
-})
 </script>
 
 <style scoped></style>

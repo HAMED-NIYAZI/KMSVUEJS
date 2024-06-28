@@ -40,8 +40,7 @@
                                 <i class="fa fa-pen"></i>
                             </router-link>
                             <router-link v-if="OrganizationViewList_Value && OrganizationViewList_Value.id"
-                                :to="{ name: 'create_chart', params: { id: OrganizationViewList_Value.id } }"
-                                class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
+                                :to="{ name: 'create_chart' }" class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
                                 <i class="fa fa-plus"></i>
                             </router-link>
 
