@@ -17,31 +17,31 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header pb-0">
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0" style="padding-top: 10px !important;">
                             چارت های سازمانی
                         </h4>
 
-                        
-                        <router-link :to="{ name: 'create_chart' }" class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
-                            <i class="fa fa-plus"></i>
-                        </router-link>
+                        <div   class="d-flex justify-content-between">
 
-
-                        <router-link v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id"
-                            :to="{ name: 'edit_chart', params: { id: OrganizationChartViewList_Value.id } }"
-                            class="btn btn-warning btn-icon mr-2" title="ویرایش چارت">
-                            <i class="fa fa-pen"></i>
-                        </router-link>
 
                         <a href="#" v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id" @click="remove(
                         OrganizationChartViewList_Value.id,
                         OrganizationChartViewList_Value.persianTitle
                     )" class="btn btn-danger btn-icon mr-2" title="حذف چارت">
                             <i class="fa fa-trash"></i>
-                        </a>
+                        </a> 
+                        
+                        <router-link v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id"
+                            :to="{ name: 'edit_chart', params: { id: OrganizationChartViewList_Value.id } }"
+                            class="btn btn-warning btn-icon mr-2" title="ویرایش چارت">
+                            <i class="fa fa-pen"></i>
+                        </router-link>
+                        <router-link :to="{ name: 'create_chart' }" class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
+                            <i class="fa fa-plus"></i>
+                        </router-link>
 
-              
+                    </div>
      
 
                     </div>
