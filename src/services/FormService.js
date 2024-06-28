@@ -12,9 +12,9 @@ class FormService {
     // async update(data) {
     //     return await api.put(`api/Form/update`, data);
     // }
-    // async delete(id) {
-    //     return await api.delete(`api/Form/DeleteById/${id}`);
-    // }
+    async delete(id) {
+        return await api.delete(`api/Form/DeleteById/${id}`);
+    }
 }
 
 export default new FormService
