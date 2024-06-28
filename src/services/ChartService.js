@@ -6,6 +6,12 @@ class ChartService {
     async getOrganizationChartTree(id) {
         return await api.get(`/api/Chart/GetChartTreeWithOrganizationId?organizationId=${id}`);
     }
+    async create(data) {
+        return await api.post(`api/Chart/Add`, data);
+    }
+    async delete(id) {
+        return await api.delete(`api/Chart/DeleteById/${id}`);
+    }
 }
 
 export default new ChartService;

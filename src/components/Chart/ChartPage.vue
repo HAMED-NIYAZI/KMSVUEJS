@@ -22,34 +22,39 @@
                             چارت های سازمانی
                         </h4>
 
-                        <div   class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between">
 
 
-                        <a href="#" v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id" @click="remove(
+                            <a href="#" v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id"
+                                @click="remove(
+                        OrganizationViewList_Value?.id,
                         OrganizationChartViewList_Value.id,
-                        OrganizationChartViewList_Value.persianTitle
+                        OrganizationChartViewList_Value.persianTitle,
                     )" class="btn btn-danger btn-icon mr-2" title="حذف چارت">
-                            <i class="fa fa-trash"></i>
-                        </a> 
-                        
-                        <router-link v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id"
-                            :to="{ name: 'edit_chart', params: { id: OrganizationChartViewList_Value.id } }"
-                            class="btn btn-warning btn-icon mr-2" title="ویرایش چارت">
-                            <i class="fa fa-pen"></i>
-                        </router-link>
-                        <router-link :to="{ name: 'create_chart' }" class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
-                            <i class="fa fa-plus"></i>
-                        </router-link>
+                                <i class="fa fa-trash"></i>
+                            </a>
 
-                    </div>
-     
+                            <router-link v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id"
+                                :to="{ name: 'edit_chart', params: { id: OrganizationChartViewList_Value.id } }"
+                                class="btn btn-warning btn-icon mr-2" title="ویرایش چارت">
+                                <i class="fa fa-pen"></i>
+                            </router-link>
+                            <router-link v-if="OrganizationViewList_Value && OrganizationViewList_Value.id"
+                                :to="{ name: 'create_chart', params: { id: OrganizationViewList_Value.id } }"
+                                class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
+                                <i class="fa fa-plus"></i>
+                            </router-link>
+
+                        </div>
+
 
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <chart-tree />
+
+                            <TreeSingleSelect :tree_name="chart_tree_name" :trees="trees" />
                         </div>
                     </div>
                 </div>
@@ -58,53 +63,93 @@
     </div>
 </template>
 <script setup>
-import { computed, ref } from "vue";
 import OrganizationTree from "@/components/Organization/OrganizationTree.vue";
-import ChartTree from '@/components/Chart/ChartTree.vue'
+import TreeSingleSelect from "@/components/Tree/TreeSingleSelect.vue";
 import { LocalStorageService } from "@/services/LocalStorageService";
+import { ref, computed, watch } from 'vue'
+import ChartService from "@/services/ChartService";
 import { useToast } from "vue-toastification";
-
-const toastService = useToast();
+const toastService = useToast()
 const useLocalStorageService = LocalStorageService();
+let chart_tree_name = ref("OrganizationChartViewList");
+let componentKeyChartTree = ref(0);
+let trees = ref([]);
+let tree_name = ref("OrganizationViewList");
+
+let OrganizationViewList_Value = computed(() => {
+    return useLocalStorageService.getTreeSelectedItem(tree_name.value)
+});
+
+watch(OrganizationViewList_Value, (n, o) => {
+    if (n == null) return;
+    ChartService.getOrganizationChartTree(n.id).then(response => {
+        if (response.data.result == 0) {
+            trees.value = response.data.data;
+
+            // زمانی که سازمانی انتخاب میشود در صورت وجود دکمه های حذف و ویرایش برای چارت، این دکمه ها ناپدید میشن
+            useLocalStorageService.setTreeSelectedItem(chart_tree_name.value, null)
+
+        } else {
+            toastService.warning(response.data.message, {
+                timeout: 2000,
+            });
+        }
+    })
+
+})
+
+
 
 let componentKeyOrganizationTree = ref(0);
-let tree_name = ref("OrganizationViewList");
-let chart_tree_name = ref("OrganizationChartViewList");
+
+let chart_tree_key = ref(0);
 
 let OrganizationChartViewList_Value = computed(() => {
     return useLocalStorageService.getTreeSelectedItem(chart_tree_name.value)
 });
 
-async function remove(id, name) {
+async function remove(organizationId, id, name) {
     let res = confirm("آیا مایل به حذف  (" + name + ")  هستید؟");
     if (!res) {
         return false;
     }
 
     // loadingRemove.value = true;
-    // try {
-    //     let response = await OrganizationService.delete(id);
+    try {
+        let response = await ChartService.delete(id);
 
-    //     if (
-    //         response.data.result == 4 &&
-    //         response.data.message == "سرشاخه قابل حذف نیست"
-    //     ) {
-    //         toastService.error(response.data.message, { timeout: 2000 });
-    //         return;
-    //     }
+        // if (
+        //     response.data.result == 4 &&
+        //     response.data.message == "سرشاخه قابل حذف نیست"
+        // ) {
+        //     toastService.error(response.data.message, { timeout: 2000 });
+        //     return;
+        // }
 
-    //     if (response.data.result == 0) {
-    //         toastService.success("عملیات حذف با موفقیت انجام شد", { timeout: 2000 });
+        if (response.data.result == 0) {
+            toastService.success("عملیات حذف با موفقیت انجام شد", { timeout: 2000 });
 
-    //         useLocalStorageService.setTreeSelectedItem(tree_name.value, null);
+            $(`#${id}${chart_tree_name.value}`).prop('checked', false)
 
-    //         FupdateOrganizationTree();
-    //     }
-    // } catch (err) {
-    //     toastService.error(err.message, { timeout: 2000 });
-    // } finally {
-    //     loadingRemove.value = false;
-    // }
+            const res = await ChartService.getOrganizationChartTree(organizationId)
+            if (res.data.result == 0) {
+                trees.value = res.data.data;
+
+                // زمانی که سازمانی انتخاب میشود در صورت وجود دکمه های حذف و ویرایش برای چارت، این دکمه ها ناپدید میشن
+                useLocalStorageService.setTreeSelectedItem(chart_tree_name.value, null)
+
+            } else {
+                toastService.warning(res.data.message, {
+                    timeout: 2000,
+                });
+            }
+
+        }
+    } catch (err) {
+        toastService.error(err.message, { timeout: 2000 });
+    } finally {
+        // loadingRemove.value = false;
+    }
 }
 </script>
 <style scoped>
