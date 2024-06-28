@@ -62,7 +62,6 @@
                             class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <router-link :to="{ name: 'grade' }" class="slide-item"> پایه تحصیلی </router-link>
-                        <router-link :to="{ name: 'tree.index' }" class="slide-item"> تری سازمان </router-link>
                         <router-link :to="{ name: 'organization' }" class="slide-item"> سازمان </router-link>
                         <router-link :to="{ name: 'chart' }" class="slide-item"> چارت سازمانی </router-link>
                         <router-link :to="{ name: 'knowledgefield' }" class="slide-item"> فیلد دانش </router-link>

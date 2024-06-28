@@ -95,12 +95,12 @@ debugger;
 
   try {
     let fd = new FormData();
-    fd.append("id ", localStorageService.getHomePageSetting.id);
+    fd.append("id", localStorageService.getHomePageSetting.id);
     fd.append("imagePath",'');
     fd.append("file", logo.value);
     console.log('fd   ',fd);
 
-    const response = await HomePageSettingService.UpdateLogo(fd);
+    const response = await HomePageSettingService.updateLogo(fd);
     console.log('response:   ',response);
 
     if (response.data.result == 0) {

@@ -71,12 +71,7 @@ const routes = [{
                 path: 'homepagesetting',
                 name: 'homepagesetting',
                 component: () => { return import('./components/HomePageSetting/HomePageSetting.vue') }
-            },
-            {
-                path: 'tree',
-                name: 'tree.index',
-                component: () => { return import ('./components/pages/tree/Index.vue') }
-            },
+            }
         ],
         beforeEnter: (to, from, next) => {
             if (isAuth()) {
