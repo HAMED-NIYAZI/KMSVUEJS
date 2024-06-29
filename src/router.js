@@ -76,6 +76,11 @@ const routes = [{
                 path: 'knowledgeformpage',
                 name: 'knowledgeformpage',
                 component: () => { return import('./components/Form/Knowledge/KnowledgeFormPage.vue') }
+            },
+            {
+                path: 'knowledgeformcreate',
+                name: 'Knowledgeformcreate',
+                component: () => { return import('./components/Form/Knowledge/KnowledgeFormCreate.vue') }
             }
         ],
         beforeEnter: (to, from, next) => {

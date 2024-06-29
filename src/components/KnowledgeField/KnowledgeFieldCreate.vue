@@ -2,9 +2,9 @@
     
 </template> -->
 <template>
-    <div class="breadcrumb-header justify-content-between">
-      <div class="my-auto">
-        <div class="d-flex">
+    <div class="breadcrumb-header justify-content-between" >
+      <div class="my-auto" >
+        <div class="d-flex" > 
           <h4 class="content-title mb-0 my-auto">
             <router-link :to="{ name: 'knowledgefield' }" class="content-title mb-0 my-auto">فیلدهای دانش </router-link>
           </h4>
@@ -14,7 +14,9 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-12">
+ 
+
+    <div class="col-xl-12 col-12">
       <form @submit.prevent="createKnowledgefield">
         <div class="card">
           <div class="card-header pb-0">

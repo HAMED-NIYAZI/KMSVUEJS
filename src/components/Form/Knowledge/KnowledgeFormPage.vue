@@ -1,16 +1,52 @@
-<template>
-  <div class="col-xl-12">
+<template>    <div class="breadcrumb-header justify-content-between">
+  <div class="my-auto" >
+    <div class="d-flex">
+      <h4 class="content-title mb-0 my-auto">
+        <router-link :to="{ name: 'knowledgeformpage' }" class="content-title mb-0 my-auto">فرمها   </router-link>
+      </h4>
+      <!-- <span class="text-muted mt-1 tx-13 ms-2 mb-0">
+        <router-link :to="{ name: 'create_knowledgefield' }"> /&nbsp; اضافه کردن فیلد دانش </router-link>
+      </span> -->
+    </div>
+  </div>
+</div>
+
+  <div class="col-xl-12 col-12">
     <div class="card">
       <div class="card-header pb-0">
         <div class="d-flex justify-content-between">
           <h4 class="card-title mg-b-0">لیست فرمها</h4>
+          <div class="d-flex">
+            <!-- <button
+            type="button"
+            class="btn btn-success btn-icon mr-2"
+            
+          >
+            <i class="fa fa-plus"></i>
+          </button> -->
+          <router-link
+          :to="{
+            name: 'Knowledgeformcreate'          }"
+          class="btn btn-success btn-icon mr-2"
+          title="ایجاد فرم جدید"
+        >
+        <i class="fa fa-plus"></i>
+        </router-link>
+          
           <button
             type="button"
-            class="btn btn-success btn-icon"
+            class="btn btn-success btn-icon mr-2"          title=" رفرش گرید  "
+
             @click="RefreshGridForm"
           >
             <i class="mdi mdi-refresh"></i>
           </button>
+
+
+
+          </div>
+
+
         </div>
       </div>
       <div class="card-body">
@@ -44,12 +80,12 @@
                   <span class="badge bg-info" title="ترتیب نمایش" >{{ form.sortingNumber }}</span>
                 </td>
                 <td>
-                  <a href="#" @click.prevent="DeleteGrade(form.id)" title="حذف فرم"
+                  <a href="#" @click.prevent="DeleteForm(form.id)" title="حذف فرم"
                     ><i class="fa fa-trash text-danger mr-10"></i
                   ></a>
                   <!-- <router-link :to="{ name: 'grades.edit', params: { id: grade.id } }" class="ms-2"><i
                                             class="fa fa-pen text-warning"></i></router-link> -->
-                  <a href="#" @click="EditGrade(form.id)" class="ms-2" title="ویرایش فرم"
+                  <a href="#" @click="EditForm(form.id)" class="ms-2 mr-10" title="ویرایش فرم"
                     ><i class="fa fa-pen text-warning"></i
                   ></a>
 
@@ -104,7 +140,7 @@ async function index() {
         loading.value = false
     }
 }
-async function DeleteGrade(id) {
+async function DeleteForm(id) {
     Swal.fire({
         title: "آیا مایل به حذف کردن هستید؟",
         text: "آیتم حذف شده قابل بازیابی نمی باشد",
@@ -117,7 +153,7 @@ async function DeleteGrade(id) {
     }).then(async (result) => {
         if (result.isConfirmed) {
              try {
-                const response = await GradeService.delete(id);
+                const response = await FormService.delete(id);
                 if (response.data.result == 0) {
                     toast.success(response.data.message);
                     index()
@@ -140,7 +176,7 @@ async function DeleteGrade(id) {
 function RefreshGridForm() {
     index();
 }
-function EditGrade( id){
+function EditForm( id){
    //  emit('ReloadEditGrade'); // Use emit instead of this.$emit
 var emitid=id
    emit('ReloadEditGrade', emitid);
@@ -158,7 +194,7 @@ function getFormName(formId){
       return "فرم مستند"
       break;
   
-      case 1:
+      case 3:
       return "فرم استفاده از دانش"
       break;
   
@@ -175,4 +211,12 @@ index()
 
 
 <style scoped>
+.mr-2{
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.mr-10{
+  margin-right: 10px;
+  margin-left: 10px;
+}
 </style>
