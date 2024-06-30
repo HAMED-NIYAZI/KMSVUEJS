@@ -25,19 +25,24 @@
 
   <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
     <div class="card box-shadow-0">
-      <div class="card-header">
+      <div class="card-header d-flex justify-content-between">
+ 
+
         <h4 class="card-title mb-1">ایجاد فرم جدید</h4>
+        <router-link :to="{ name: 'knowledgeformpage' }" class=" btn btn-primary btn-icon">
+                            <i class="fa fa-arrow-left"></i>
+                        </router-link>
       </div>
       <div class="card-body pt-0">
-        <form>
+        <form @submit.prevent="createForm">
           <div class="row">
             <div class="col-lg-4 col-12"> 
             <div class="form-group">
               <label for="exampleInputEmail1">نام فرم </label>
               <input
-                type="email"
+                type="text"
                 class="form-control"
-                id="exampleInputEmail1"
+                id="exampleInputEmail1" v-model="formData.name" 
                 placeholder="نام فرم را وارد کنید"
               />
             </div>
@@ -45,8 +50,8 @@
 
 
             <div class="col-lg-4 col-12"> 
-											<p class="mg-b-10">   نوع فرم</p><select class="form-control select2-no-search">
-											<option label="نوع فرم را انتخاب کنید">
+											<p class="mg-b-10">   نوع فرم</p><select class="form-control select2-no-search" v-model="formData.formType" >
+											<option label="نوع فرم را انتخاب کنید" value="0" style="color:red;">
 											</option>
 											<option value="1">
 												دانش
@@ -64,7 +69,7 @@
                                         <div class="col-lg-4 col-12">
                 <div class="form-group">
                   <label>اولویت نمایش</label>
-                  <input class="form-control"  type="number"/>
+                  <input class="form-control"  type="number" title="ترتیب نمایش را وارد نمایید" v-model="formData.sortingNumber"  />
         
                   
   
@@ -75,7 +80,7 @@
 
             <div class="form-group">
               <label for="exampleInputPassword1">توضیحات</label>
-              <textarea
+              <textarea v-model="formData.description"
                 type="text"
                 class="form-control"
                 id="exampleInputPassword1"
@@ -86,11 +91,17 @@
             </div>
            
           </div>
+ 
+ 
           <div class="card-footer text-center">
-
-          <button type="submit" class="btn btn-primary mt-3 mb-0">ذخیره</button>
+            <Spinner_btn v-if="loading" />
+            <template v-else>
+              <button type="submit" class="btn btn-primary mt-3 mb-0">ذخیره</button>
+            </template>
           </div>
-        </form>
+
+
+         </form>
       </div>
     </div>
   </div>
@@ -100,6 +111,78 @@
 
 <!-------------------------- script ------------------------->
 <script setup>
+  import { reactive, ref, onMounted } from "vue";
+  import { useRouter } from "vue-router";
+  import FormService from "@/services/FormService";
+  import { useToast } from "vue-toastification";
+  import { useVuelidate } from "@vuelidate/core";
+  import { required, minLength, maxLength } from "@vuelidate/validators";
+   import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
+  
+  const router = useRouter();
+  const toastService = useToast();
+  let loading = ref(false);
+  let formData = reactive({
+    name: '',
+    description: '',
+    formType:0,
+    sortingNumber: 0,
+  });
+  
+  const rules = {
+    name: {
+      required,
+      minLength: minLength(1),
+      maxLength: maxLength(50),
+    },
+    formType:{
+      required
+    }
+  
+  };
+  
+  const v$ = useVuelidate(rules, formData);
+  
+  
+  async function createForm() {
+    console.log(formData);
+    const isFormCorrect = await v$.value.$validate();
+    if (!isFormCorrect) return;
+  
+    loading.value = true;
+    try {
+
+      if (formData.name == undefined) {
+        toastService.error(" نام فیلد دانش الزامی می باشد", {
+          timeout: 2000,
+        });
+        return;
+      }
+
+
+      const response = await FormService.create(formData);
+      if (response.data.result === 0) {
+        formData = {
+          persianTitle: '',
+          parentId: null,
+          sortingNumber: "",
+        };
+
+
+        toastService.success(response.data.message, { timeout: 2000 });
+        router.push({ name: 'knowledgeformpage' });
+      } else {
+        toastService.warning(response.data.message, { timeout: 2000 });
+      }
+    } catch (err) {
+      toastService.error(err.message, { timeout: 2000 });
+    } finally {
+      loading.value = false;
+    }
+  }
+  
+  onMounted(() => {
+  })
 </script>
 <!-------------------------- script ------------------------->
 

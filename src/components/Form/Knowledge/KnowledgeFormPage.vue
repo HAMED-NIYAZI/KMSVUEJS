@@ -2,7 +2,7 @@
   <div class="my-auto" >
     <div class="d-flex">
       <h4 class="content-title mb-0 my-auto">
-        <router-link :to="{ name: 'knowledgeformpage' }" class="content-title mb-0 my-auto">فرمها   </router-link>
+        <router-link :to="{ name: 'knowledgeformpage' }" class="content-title mb-0 my-auto" style="margin-right: 12px;">فرمها   </router-link>
       </h4>
       <!-- <span class="text-muted mt-1 tx-13 ms-2 mb-0">
         <router-link :to="{ name: 'create_knowledgefield' }"> /&nbsp; اضافه کردن فیلد دانش </router-link>

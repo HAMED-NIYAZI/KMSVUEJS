@@ -3,9 +3,9 @@ class FormService {
     async getAll() {
         return await api.get(`api/Form/GetAll`);
     }
-    // async create(data) {
-    //     return await api.post(`api/Form/Add`, data);
-    // }
+    async create(data) {
+        return await api.post(`api/Form/Add`, data);
+    }
     // async getById(id) {
     //     return await api.get(`api/Form/GetById/${id}`);
     // }
