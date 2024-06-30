@@ -53,9 +53,9 @@
         <div class="text-center" v-if="loading">
           <Spinner_Gride />
         </div>
-        <div class="table-responsive" v-else>
-          <table
-            class="table table-striped mg-b-0 text-md-nowrap table-hover"
+        <div class="table-responsive table-scrollable" v-else>
+            <table
+            class="table table-striped mg-b-0   table-hover "
             v-if="forms.length"
           >
             <thead>
@@ -72,7 +72,7 @@
               <tr v-for="(form, index) in forms" :key="form.id">
                 <th scope="row">{{ 1 + index }}</th>
                 <td>{{ form.name }}</td>
-                <td>{{ form.description }}</td>
+                <td>{{ form.description.substring(0, 50) }}</td>
                 <td>{{  getFormName(form.formType)
                 
                 }}</td>
@@ -219,4 +219,11 @@ index()
   margin-right: 10px;
   margin-left: 10px;
 }
+
+.table-scrollable {
+    max-height: 500px; /* Adjust based on your needs */
+    overflow-y: auto;
+    width: 100%; /* Adjust based on your needs */
+    overflow-x: auto;
+ }
 </style>
