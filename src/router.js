@@ -81,6 +81,11 @@ const routes = [{
         path: 'formcreate',
         name: 'formcreate',
         component: () => { return import('./components/Form/FormCreate.vue') }
+    },
+    {
+        path: 'form/:id/edit',
+        name: 'formedit',
+        component: () => { return import('./components/Form/FormEdit.vue') }
     }
     
     ],

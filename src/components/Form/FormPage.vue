@@ -73,11 +73,11 @@
                   <a href="#" @click.prevent="DeleteForm(form.id)" title="حذف فرم"
                     ><i class="fa fa-trash text-danger mr-10"></i
                   ></a>
-                  <!-- <router-link :to="{ name: 'grades.edit', params: { id: grade.id } }" class="ms-2"><i
-                                            class="fa fa-pen text-warning"></i></router-link> -->
-                  <a href="#" @click="EditForm(form.id)" class="ms-2 mr-10" title="ویرایش فرم"
+                 <router-link :to="{ name: 'formedit', params: { id: form.id } }" class="ms-2"><i
+                                            class="fa fa-pen text-warning"></i></router-link>  
+                  <!-- <a href="#" @click="EditForm(form.id)" class="ms-2 mr-10" title="ویرایش فرم"
                     ><i class="fa fa-pen text-warning"></i
-                  ></a>
+                  ></a> -->
 
 
                                <router-link :to="{ name: '', params: { id: form.id } }" class="btn btn-success btn-sm ms-2">
