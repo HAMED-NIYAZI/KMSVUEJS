@@ -1,12 +1,9 @@
-<!-- <template>
-    
-</template> -->
 <template>
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">
-                    <router-link :to="{ name: 'chart' }" class="content-title mb-0 my-auto">چارت
+                    <router-link :to="{ name: 'charts_index' }" class="content-title mb-0 my-auto">چارت
                         ها</router-link>
                 </h4>
                 <span class="text-muted mt-1 tx-13 ms-2 mb-0">
@@ -21,7 +18,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">اضافه کردن چارت</h4>
-                        <router-link :to="{ name: 'chart' }" class=" btn btn-primary btn-icon">
+                        <router-link :to="{ name: 'charts_index' }" class=" btn btn-primary btn-icon">
                             <i class="fa fa-arrow-left"></i>
                         </router-link>
                     </div>
@@ -41,7 +38,7 @@
                                 <input type="text" class="form-control" v-model="formData.sortingNumber">
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <label>نام سازمان</label>
                             <div class="row">
                                 <div class="col-10">
@@ -55,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 mb-3"
+                        <div class="col-lg-6 mb-3"
                             v-if="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')">
                             <label>سرشاخه</label>
                             <div class="row">
@@ -72,7 +69,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="card-footer text-center">
@@ -97,10 +93,7 @@ import { required, minLength, maxLength } from "@vuelidate/validators";
 import ChartTreeModalSingleSelect from '@/components/Chart/ChartTreeModalSingleSelect.vue'
 import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
 import OrganizationTreeModalSingleSelect from '@/components/Organization/OrganizationTreeModalSingleSelect.vue'
-let tree_name = ref('OrganizationViewList');
-let chart_tree_name = ref("OrganizationChartViewList");
 const router = useRouter();
-const route = useRoute();
 const toastService = useToast();
 let loading = ref(false);
 let formData = reactive({
@@ -152,7 +145,7 @@ async function createChart() {
             toastService.success(response.data.message, { timeout: 2000 });
             useLocalStorageService.setTreeSelectedItem('OrganizationViewList_ModalCreate', '')
             useLocalStorageService.setTreeSelectedItem('OrganizationChartViewList', '')
-            // router.push({ name: 'chart' });
+            router.push({ name: 'charts_index' });
         } else {
             toastService.warning(response.data.message, { timeout: 2000 });
         }

@@ -3,7 +3,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">
-                    <router-link :to="{ name: 'chart' }" class="content-title mb-0 my-auto">
+                    <router-link :to="{ name: 'charts_index' }" class="content-title mb-0 my-auto">
                         چارت سازمانی
                     </router-link>
                 </h4>
@@ -35,12 +35,12 @@
                             </a>
 
                             <router-link v-if="OrganizationChartViewList_Value && OrganizationChartViewList_Value.id"
-                                :to="{ name: 'edit_chart', params: { id: OrganizationChartViewList_Value.id } }"
+                                :to="{ name: 'edit_charts', params: { id: OrganizationChartViewList_Value.id } }"
                                 class="btn btn-warning btn-icon mr-2" title="ویرایش چارت">
                                 <i class="fa fa-pen"></i>
                             </router-link>
-                            <router-link v-if="OrganizationViewList_Value && OrganizationViewList_Value.id"
-                                :to="{ name: 'create_chart' }" class="btn btn-success btn-icon mr-2" title="ایجاد چارت">
+                            <router-link :to="{ name: 'create_charts' }" class="btn btn-success btn-icon mr-2"
+                                title="ایجاد چارت">
                                 <i class="fa fa-plus"></i>
                             </router-link>
 
@@ -51,8 +51,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-12">
-
+                        <div class="col-lg-12" v-if="trees && trees.length">
                             <TreeSingleSelect :tree_name="chart_tree_name" :trees="trees" />
                         </div>
                     </div>
@@ -71,7 +70,6 @@ import { useToast } from "vue-toastification";
 const toastService = useToast()
 const useLocalStorageService = LocalStorageService();
 let chart_tree_name = ref("OrganizationChartViewList");
-let componentKeyChartTree = ref(0);
 let trees = ref([]);
 let tree_name = ref("OrganizationViewList");
 
@@ -100,8 +98,6 @@ watch(OrganizationViewList_Value, (n, o) => {
 
 
 let componentKeyOrganizationTree = ref(0);
-
-let chart_tree_key = ref(0);
 
 let OrganizationChartViewList_Value = computed(() => {
     return useLocalStorageService.getTreeSelectedItem(chart_tree_name.value)
