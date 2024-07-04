@@ -1,9 +1,185 @@
 <template>
-    {{ route.params.id }}
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">
+                    <router-link :to="{ name: 'charts_index' }" class="content-title mb-0 my-auto">چارت
+                        ها</router-link>
+                </h4>
+                <span class="text-muted mt-1 tx-13 ms-2 mb-0">
+                    ویرایش چارت
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12">
+        <form @submit.prevent="updateChart">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="card-title mg-b-0">ویرایش چارت</h4>
+                        <router-link :to="{ name: 'charts_index' }" class=" btn btn-primary btn-icon">
+                            <i class="fa fa-arrow-left"></i>
+                        </router-link>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>نام چارت</label>
+                                <input class="form-control" v-model="formData.persianTitle"
+                                    placeholder="نام چارت را وارد کنید" type="text" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>اولویت نمایش</label>
+                                <input type="text" class="form-control" v-model="formData.sortingNumber">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>نام سازمان</label>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-control" disabled="true"
+                                        :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle : organization.persianTitle"
+                                        type="text" />
+                                </div>
+
+                                <div class="col-2">
+                                    <OrganizationTreeModalSingleSelect />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-6 mb-3"
+                            v-if="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')">
+                            <label>سرشاخه</label>
+                            <div class="row">
+                                <div class="col-10">
+                                    <input class="form-control" disabled="true"
+                                        :value="useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList').persianTitle : ''"
+                                        type="text" />
+                                </div>
+
+                                <div class="col-2">
+                                    <ChartTreeModalSingleSelect
+                                        :key="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id"
+                                        :id="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id" />
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <Spinner_btn v-if="loading" />
+                    <template v-else>
+                        <button type="submit" class="btn btn-warning">ذخیره</button>
+                    </template>
+                </div>
+            </div>
+        </form>
+    </div>
 </template>
-
 <script setup>
-import { useRoute } from 'vue-router';
+import { reactive, ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { LocalStorageService } from "@/services/LocalStorageService";
+const useLocalStorageService = LocalStorageService()
+import ChartService from "@/services/ChartService";
+import OrganizationService from "@/services/OrganizationService";
 
-const route = useRoute()
+import { useToast } from "vue-toastification";
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength, maxLength } from "@vuelidate/validators";
+import ChartTreeModalSingleSelect from '@/components/Chart/ChartTreeModalSingleSelect.vue'
+import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
+import OrganizationTreeModalSingleSelect from '@/components/Organization/OrganizationTreeModalSingleSelect.vue'
+
+const router = useRouter();
+const route = useRoute();
+const toastService = useToast();
+let loading = ref(false);
+
+let formData = reactive({
+    persianTitle: '',
+    parentId: null,
+    sortingNumber: "",
+    organizationId: 0,
+});
+
+let organization = reactive({})
+
+const rules = {
+    persianTitle: {
+        required,
+        minLength: minLength(1),
+        maxLength: maxLength(50),
+    },
+
+};
+
+const v$ = useVuelidate(rules, formData);
+
+const emit = defineEmits(["updateOrganizationTree"]); // Define emit
+
+async function updateChart() {
+    const isFormCorrect = await v$.value.$validate();
+    if (!isFormCorrect) return;
+
+    loading.value = true;
+    try {
+        if (formData.persianTitle == undefined) {
+            toastService.error("فیلد نام سازمان الزامی می باشد", {
+                timeout: 2000,
+            });
+            return;
+        }
+
+        formData.parentId = useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList')?.id;
+        formData.organizationId = useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')?.id;
+        if (!formData.parentId && !formData.organizationId) {
+            toastService.warning('انتخاب سازمان و سرشاخه الزامیست', { timeout: 2000 });
+            return;
+        }
+
+        const response = await ChartService.create(formData);
+        if (response.data.result === 0) {
+            formData = {
+                persianTitle: '',
+                parentId: null,
+                sortingNumber: "",
+            };
+            toastService.success(response.data.message, { timeout: 2000 });
+            useLocalStorageService.setTreeSelectedItem('OrganizationViewList_ModalCreate', '')
+            useLocalStorageService.setTreeSelectedItem('OrganizationChartViewList', '')
+            router.push({ name: 'charts_index' });
+        } else {
+            toastService.warning(response.data.message, { timeout: 2000 });
+        }
+    } catch (err) {
+        debugger;
+        toastService.error(err.message, { timeout: 2000 });
+    } finally {
+        debugger;
+
+        loading.value = false;
+    }
+}
+
+onMounted(async () => {
+    try {
+        const chartResponse = await ChartService.getById(route.params.id);
+        formData = chartResponse.data.data;
+
+        const organizationResponse = await OrganizationService.getById(formData.organizationId);
+        organization = organizationResponse.data.data;
+
+    } catch (e) {
+        console.log(e)
+    }
+
+})
 </script>
+
+<style scoped></style>

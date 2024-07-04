@@ -12,6 +12,9 @@ class ChartService {
     async delete(id) {
         return await api.delete(`api/Chart/DeleteById/${id}`);
     }
+    async getById(id) {
+        return await api.get(`api/Chart/GetById/${id}`);
+    }
 }
 
 export default new ChartService;
