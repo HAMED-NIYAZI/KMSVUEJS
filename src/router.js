@@ -73,14 +73,14 @@ const routes = [{
                 component: () => { return import('./components/HomePageSetting/HomePageSetting.vue') }
             },
             {
-                path: 'knowledgeformpage',
-                name: 'knowledgeformpage',
-                component: () => { return import('./components/Form/Knowledge/KnowledgeFormPage.vue') }
+                path: 'formpage',
+                name: 'formpage',
+                component: () => { return import('./components/Form/FormPage.vue') }
             },
             {
-                path: 'knowledgeformcreate',
-                name: 'Knowledgeformcreate',
-                component: () => { return import('./components/Form/Knowledge/KnowledgeFormCreate.vue') }
+                path: 'formcreate',
+                name: 'formcreate',
+                component: () => { return import('./components/Form/FormCreate.vue') }
             }
         ],
         beforeEnter: (to, from, next) => {

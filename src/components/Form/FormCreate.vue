@@ -10,13 +10,13 @@
     <div class="d-flex">
       <h4 class="content-title mb-0 my-auto">
         <router-link
-          :to="{ name: 'knowledgeformpage' }"
+          :to="{ name: 'formpage' }"
           class="content-title mb-0 my-auto"
           >فرمها
         </router-link>
       </h4>
       <span class="text-muted mt-1 tx-13 ms-2 mb-0">
-        <router-link :to="{ name: 'Knowledgeformcreate' }">
+        <router-link :to="{ name: 'formcreate' }">
           /&nbsp; اضافه کردن فرم جدید
         </router-link>
       </span>
@@ -29,7 +29,7 @@
  
 
         <h4 class="card-title mb-1">ایجاد فرم جدید</h4>
-        <router-link :to="{ name: 'knowledgeformpage' }" class=" btn btn-primary btn-icon">
+        <router-link :to="{ name: 'formpage' }" class=" btn btn-primary btn-icon">
                             <i class="fa fa-arrow-left"></i>
                         </router-link>
       </div>
@@ -170,7 +170,7 @@
 
 
         toastService.success(response.data.message, { timeout: 2000 });
-        router.push({ name: 'knowledgeformpage' });
+        router.push({ name: 'formpage' });
       } else {
         toastService.warning(response.data.message, { timeout: 2000 });
       }

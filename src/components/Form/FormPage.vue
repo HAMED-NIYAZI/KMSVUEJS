@@ -2,11 +2,8 @@
   <div class="my-auto" >
     <div class="d-flex">
       <h4 class="content-title mb-0 my-auto">
-        <router-link :to="{ name: 'knowledgeformpage' }" class="content-title mb-0 my-auto" style="margin-right: 12px;">فرمها   </router-link>
+        <router-link :to="{ name: 'formpage' }" class="content-title mb-0 my-auto" style="margin-right: 12px;">فرمها   </router-link>
       </h4>
-      <!-- <span class="text-muted mt-1 tx-13 ms-2 mb-0">
-        <router-link :to="{ name: 'create_knowledgefield' }"> /&nbsp; اضافه کردن فیلد دانش </router-link>
-      </span> -->
     </div>
   </div>
 </div>
@@ -17,16 +14,9 @@
         <div class="d-flex justify-content-between">
           <h4 class="card-title mg-b-0">لیست فرمها</h4>
           <div class="d-flex">
-            <!-- <button
-            type="button"
-            class="btn btn-success btn-icon mr-2"
-            
-          >
-            <i class="fa fa-plus"></i>
-          </button> -->
           <router-link
           :to="{
-            name: 'Knowledgeformcreate'          }"
+            name: 'formcreate'          }"
           class="btn btn-success btn-icon mr-2"
           title="ایجاد فرم جدید"
         >
