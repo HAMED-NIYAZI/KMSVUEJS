@@ -9,9 +9,9 @@ class FormService {
     // async getById(id) {
     //     return await api.get(`api/Form/GetById/${id}`);
     // }
-    // async update(data) {
-    //     return await api.put(`api/Form/update`, data);
-    // }
+    async update(data) {
+         return await api.put(`api/Form/update`, data);
+     }
     async delete(id) {
         return await api.delete(`api/Form/DeleteById/${id}`);
     }
