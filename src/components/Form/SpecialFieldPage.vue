@@ -8,9 +8,10 @@
       <div class="d-flex">
       <h4 class="content-title mb-0 my-auto">
         <router-link
-          :to="{ name: 'formpage' }"
+           :to="{ name: 'specialfieldpage', params: { id: route.params.id } }"
+
           class="content-title mb-0 my-auto"
-          >فرمها
+          >فیلد های خاص فرم
         </router-link> 
       </h4>
       
@@ -22,7 +23,7 @@
     <div class="card">
       <div class="card-header pb-0">
         <div class="d-flex justify-content-between">
-          <h4 class="card-title mg-b-0">لیست فیلد های خاص</h4>
+          <h4 class="card-title mg-b-0"> لیست فیلد های خاص فرم {{  }}</h4>
           <div class="d-flex">
             <router-link
               :to="{
@@ -42,6 +43,15 @@
             >
               <i class="mdi mdi-refresh"></i>
             </button>
+
+            <router-link
+            :to="{ name: 'formpage' }"
+
+          class="btn btn-primary btn-icon"
+        >
+          <i class="fa fa-arrow-left"></i>
+        </router-link>
+
           </div>
         </div>
       </div>
@@ -87,9 +97,9 @@
                     ><i class="fa fa-trash text-danger mr-10"></i
                   ></a>
                   <router-link
-                    :to="{ name: 'formedit', params: { id: field.id } }"
+                    :to="{ name: 'specialfieldedit', params: { id: field.id } }"
                     class="ms-2"
-                    ><i class="fa fa-pen text-warning"></i
+                 ><i class="fa fa-pen text-warning"></i
                   ></router-link>
                   <!-- <a href="#" @click="EditForm(form.id)" class="ms-2 mr-10" title="ویرایش فرم"
                       ><i class="fa fa-pen text-warning"></i

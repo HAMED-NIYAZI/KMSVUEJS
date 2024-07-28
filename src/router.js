@@ -96,8 +96,13 @@ const routes = [{
         path: 'specialfieldcreate/:id',
         name: 'specialfieldcreate',
         component: () => { return import('./components/Form/SpecialFieldCreate.vue') }
+    },
+    {
+        path: 'specialfield/:id/edit',
+        name: 'specialfieldedit',
+        component: () => { return import('./components/Form/SpecialFieldEdit.vue') }
     }
-    
+    //SpecialFieldEdit.vue
     ],
     beforeEnter: (to, from, next) => {
         if (isAuth()) {

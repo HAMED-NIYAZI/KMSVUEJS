@@ -28,7 +28,8 @@
       <div class="card-header d-flex justify-content-between">
         <h4 class="card-title mb-1">ایجاد فرم جدید</h4>
         <router-link
-          :to="{ name: 'specialfieldcreate' }"
+           :to="{ name: 'specialfieldpage', params: { id: formData.formId } }"
+
           class="btn btn-primary btn-icon"
         >
           <i class="fa fa-arrow-left"></i>
@@ -63,16 +64,16 @@
                 ></option>
  
 
-                <option value="ShortString">رشته کوتاه</option>
-                <option value="LongString">رشته طولانی</option>
-                <option value="DateString">تاریخ</option>
-                <option value="NumberString">عددی</option>
-                <option value="YesNoRadioButton">بله خیر با رادیو باتن</option>
-                <option value="MultipleChoiceRadioButton">مثل سوال چهار جوابی ---  رادیو باتن 4 گزینه ای که یکی باید انتخاب شود</option>
-                <option value="SingleCheckBox">چک باکس تکی</option>
-                <option value="MultipleCheckBox">چک باکس چند گزینه ای که هرکدام لازم بود را باید انتخاب کند</option>
-                <option value="DropDownStatic">دراپ داون با دیتای ثابت</option>
-                <option value="DropDownDynamic">دراپ داون با دیتای دینامیک</option>
+                <option value="1">رشته کوتاه</option>
+                <option value="2">رشته طولانی</option>
+                <option value="3">تاریخ</option>
+                <option value="4">عددی</option>
+                <option value="5">بله خیر با رادیو باتن</option>
+                <option value="6">مثل سوال چهار جوابی ---  رادیو باتن 4 گزینه ای که یکی باید انتخاب شود</option>
+                <option value="7">چک باکس تکی</option>
+                <option value="8">چک باکس چند گزینه ای که هرکدام لازم بود را باید انتخاب کند</option>
+                <option value="9">دراپ داون با دیتای ثابت</option>
+                <option value="10">دراپ داون با دیتای دینامیک</option>
  
  
  
@@ -101,6 +102,7 @@
                   type="number"
                   title=" حداقل کاراکتر را وارد نمایید"
                   v-model="formData.minLength"
+                  :disabled="disabledMinLength"
                 />
               </div>
             </div>
@@ -149,7 +151,7 @@
   
   <!-------------------------- script ------------------------->
   <script setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted ,computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import FormService from "@/services/FormService";
 import { useToast } from "vue-toastification";
@@ -213,7 +215,7 @@ async function addSpecialField() {
       // };
 
       toastService.success(response.data.message, { timeout: 2000 });
-    //  router.push({ name: "specialfieldpage", params: { id: form.id } });
+     router.push({ name: "specialfieldpage", params: { id: route.params.id } });
     } else {
       toastService.warning(response.data.message, { timeout: 2000 });
     }
@@ -222,7 +224,12 @@ async function addSpecialField() {
   } finally {
     loading.value = false;
   }
+
+
 }
+
+const disabledMinLength = computed(() => formData.dataTypeId !== '1' && formData.dataTypeId !== '2');
+
 </script>
   <!-------------------------- script ------------------------->
   

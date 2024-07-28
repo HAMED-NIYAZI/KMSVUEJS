@@ -18,7 +18,7 @@ class FormService {
 
 
 
-//AddSpecialField
+//SpecialField
     async getAllSpecialFildsOfForm(formId) {
         return await api.get(`api/Form/GetAllSpecialFildsOfForm/${formId}`);
     }
@@ -29,7 +29,12 @@ class FormService {
         console.log(data);
         return await api.post(`api/Form/AddSpecialField`, data);
     }
-
+    async getSpecialField(id) {
+        return await api.get(`api/Form/GetSpecialField/${id}`);
+    }
+    async updateSpecialField(data) {
+        return await api.put(`api/Form/UpdateSpecialField`, data);
+    }
 }
 
 export default new FormService
