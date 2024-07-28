@@ -6,15 +6,30 @@ class FormService {
     async create(data) {
         return await api.post(`api/Form/Add`, data);
     }
-    // async getById(id) {
-    //     return await api.get(`api/Form/GetById/${id}`);
-    // }
+    async get(id) {
+        return await api.get(`api/Form/Get/${id}`);
+    }
     async update(data) {
-         return await api.put(`api/Form/update`, data);
+         return await api.put(`api/Form/Update`, data);
      }
     async delete(id) {
         return await api.delete(`api/Form/DeleteById/${id}`);
     }
+
+
+
+//AddSpecialField
+    async getAllSpecialFildsOfForm(formId) {
+        return await api.get(`api/Form/GetAllSpecialFildsOfForm/${formId}`);
+    }
+    async deleteSpecialFild(id) {
+        return await api.delete(`api/Form/DeleteSpecialFild/${id}`);
+    }
+    async addSpecialField(data) {
+        console.log(data);
+        return await api.post(`api/Form/AddSpecialField`, data);
+    }
+
 }
 
 export default new FormService

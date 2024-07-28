@@ -86,6 +86,16 @@ const routes = [{
         path: 'form/:id/edit',
         name: 'formedit',
         component: () => { return import('./components/Form/FormEdit.vue') }
+    },
+    {
+        path: 'specialfieldpage/:id',
+        name: 'specialfieldpage',
+        component: () => { return import('./components/Form/SpecialFieldPage.vue') }
+    },
+    {
+        path: 'specialfieldcreate/:id',
+        name: 'specialfieldcreate',
+        component: () => { return import('./components/Form/SpecialFieldCreate.vue') }
     }
     
     ],
