@@ -9,6 +9,9 @@ class ChartService {
     async create(data) {
         return await api.post(`api/Chart/Add`, data);
     }
+    async update(data) {
+        return await api.put(`api/Chart/Update`, data);
+    }
     async delete(id) {
         return await api.delete(`api/Chart/DeleteById/${id}`);
     }

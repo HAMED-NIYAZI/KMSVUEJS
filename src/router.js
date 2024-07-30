@@ -102,7 +102,6 @@ const routes = [{
         name: 'specialfieldedit',
         component: () => { return import('./components/Form/SpecialFieldEdit.vue') }
     }
-    //SpecialFieldEdit.vue
     ],
     beforeEnter: (to, from, next) => {
         if (isAuth()) {

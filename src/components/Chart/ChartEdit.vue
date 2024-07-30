@@ -3,8 +3,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">
-                    <router-link :to="{ name: 'charts_index' }" class="content-title mb-0 my-auto">چارت
-                        ها</router-link>
+                    <router-link :to="{ name: 'charts_index' }" class="content-title mb-0 my-auto">چارتها</router-link>
                 </h4>
                 <span class="text-muted mt-1 tx-13 ms-2 mb-0">
                     ویرایش چارت
@@ -13,7 +12,8 @@
         </div>
     </div>
     <div class="col-xl-12">
-        <form @submit.prevent="updateChart">
+        <Spinner_btn v-if="loading" />
+        <form v-else @submit.prevent="updateChart">
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
@@ -38,37 +38,36 @@
                                 <input type="text" class="form-control" v-model="formData.sortingNumber">
                             </div>
                         </div>
+
                         <div class="col-lg-6">
                             <label>نام سازمان</label>
                             <div class="row">
                                 <div class="col-10">
-                                    <input class="form-control" disabled="true"
-                                        :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle : organization.persianTitle"
+                                    <input class="form-control" disabled="true" :value="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle == null
+                        ? formData.organizationPersianTitle
+                        : useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').persianTitle"
                                         type="text" />
-                                </div>
-
-                                <div class="col-2">
+                                </div> <!-- <div class="col-2">
                                     <OrganizationTreeModalSingleSelect />
                                 </div>
+                                -->
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6 mb-3"
-                            v-if="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')">
+                        <div class="col-lg-6 mb-3">
                             <label>سرشاخه</label>
                             <div class="row">
                                 <div class="col-10">
-                                    <input class="form-control" disabled="true"
-                                        :value="useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList') != null ? useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList').persianTitle : ''"
+                                    <input class="form-control" disabled="true" :value="useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList')?.persianTitle == null
+                        ? formData.parentPersianTitle
+                        : useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList').persianTitle"
                                         type="text" />
                                 </div>
-
                                 <div class="col-2">
-                                    <ChartTreeModalSingleSelect
-                                        :key="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id"
-                                        :id="useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate').id" />
+                                    <ChartTreeModalSingleSelect :key="formData.organizationId"
+                                        :id="formData.organizationId" />
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer text-center">
@@ -80,21 +79,19 @@
             </div>
         </form>
     </div>
+
 </template>
 <script setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { LocalStorageService } from "@/services/LocalStorageService";
 const useLocalStorageService = LocalStorageService()
 import ChartService from "@/services/ChartService";
-import OrganizationService from "@/services/OrganizationService";
-
 import { useToast } from "vue-toastification";
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, maxLength } from "@vuelidate/validators";
 import ChartTreeModalSingleSelect from '@/components/Chart/ChartTreeModalSingleSelect.vue'
 import Spinner_btn from "@/components/Spinners/Spinner_btn.vue";
-import OrganizationTreeModalSingleSelect from '@/components/Organization/OrganizationTreeModalSingleSelect.vue'
 
 const router = useRouter();
 const route = useRoute();
@@ -106,9 +103,8 @@ let formData = reactive({
     parentId: null,
     sortingNumber: "",
     organizationId: 0,
+    parentPersianTitle: ''
 });
-
-let organization = reactive({})
 
 const rules = {
     persianTitle: {
@@ -119,31 +115,32 @@ const rules = {
 
 };
 
+
 const v$ = useVuelidate(rules, formData);
 
 const emit = defineEmits(["updateOrganizationTree"]); // Define emit
 
 async function updateChart() {
-    const isFormCorrect = await v$.value.$validate();
-    if (!isFormCorrect) return;
+    // const isFormCorrect = await v$.value.$validate();
+    // if (!isFormCorrect) return;
 
     loading.value = true;
     try {
-        if (formData.persianTitle == undefined) {
-            toastService.error("فیلد نام سازمان الزامی می باشد", {
-                timeout: 2000,
-            });
-            return;
-        }
+        // if (formData.persianTitle == undefined) {
+        //     toastService.error("فیلد نام سازمان الزامی می باشد", {
+        //         timeout: 2000,
+        //     });
+        //     return;
+        // }
 
         formData.parentId = useLocalStorageService.getTreeSelectedItem('OrganizationChartViewList')?.id;
-        formData.organizationId = useLocalStorageService.getTreeSelectedItem('OrganizationViewList_ModalCreate')?.id;
-        if (!formData.parentId && !formData.organizationId) {
-            toastService.warning('انتخاب سازمان و سرشاخه الزامیست', { timeout: 2000 });
-            return;
-        }
-
-        const response = await ChartService.create(formData);
+        // if (!formData.parentId) {
+        //     toastService.warning('انتخاب سازمان سرشاخه الزامیست', { timeout: 2000 });
+        //     return;
+        // }
+        console.log(formData.value);
+        return;
+        const response = await ChartService.update(formData);
         if (response.data.result === 0) {
             formData = {
                 persianTitle: '',
@@ -168,15 +165,17 @@ async function updateChart() {
 }
 
 onMounted(async () => {
+    useLocalStorageService.setTreeSelectedItem('OrganizationViewList_ModalCreate', {});
+    useLocalStorageService.setTreeSelectedItem('OrganizationChartViewList', {});
     try {
+        loading.value = true;
         const chartResponse = await ChartService.getById(route.params.id);
         formData = chartResponse.data.data;
-
-        const organizationResponse = await OrganizationService.getById(formData.organizationId);
-        organization = organizationResponse.data.data;
-
+        console.log(formData);
     } catch (e) {
         console.log(e)
+    } finally {
+        loading.value = false
     }
 
 })
