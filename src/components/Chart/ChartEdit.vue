@@ -63,6 +63,7 @@
                                         type="text" />
                                 </div>
                                 <div class="col-2">
+                                    <button class="btn btn-danger btn-sm" @click.prevent="remvoeParent">حذف</button>
                                     <ChartTreeModalSingleSelect :key="formData.organizationId"
                                         :id="formData.organizationId" />
                                 </div>
@@ -115,7 +116,11 @@ const rules = {
 
 };
 
-
+function remvoeParent() {
+    useLocalStorageService.setTreeSelectedItem('OrganizationChartViewList', '')
+    formData.parentId = null;
+    formData.parentPersianTitle = null;
+}
 const v$ = useVuelidate(rules, formData);
 
 const emit = defineEmits(["updateOrganizationTree"]); // Define emit
@@ -123,7 +128,6 @@ const emit = defineEmits(["updateOrganizationTree"]); // Define emit
 async function updateChart() {
     // const isFormCorrect = await v$.value.$validate();
     // if (!isFormCorrect) return;
-
     loading.value = true;
     try {
         // if (formData.persianTitle == undefined) {
@@ -138,8 +142,7 @@ async function updateChart() {
         //     toastService.warning('انتخاب سازمان سرشاخه الزامیست', { timeout: 2000 });
         //     return;
         // }
-        console.log(formData.value);
-        return;
+
         const response = await ChartService.update(formData);
         if (response.data.result === 0) {
             formData = {
