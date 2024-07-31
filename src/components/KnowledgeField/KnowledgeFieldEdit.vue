@@ -5,7 +5,8 @@
             <div class="my-auto">
                 <div class="d-flex">
                     <h4 class="content-title mb-0 my-auto">
-                        <router-link :to="{ name: 'knowledgefield' }" class="content-title mb-0 my-auto">فیلدهای دانش</router-link>
+                        <router-link :to="{ name: 'knowledgefield' }" class="content-title mb-0 my-auto">فیلدهای
+                            دانش</router-link>
                     </h4>
                     <span class="text-muted mt-1 tx-13 ms-2 mb-0">ویرایش فیلد دانش</span>
                 </div>
@@ -47,8 +48,10 @@
                                             :value="useLocalStorageService.getTreeSelectedItem('KnowledgeFieldViewList_ModalCreate') != null ? useLocalStorageService.getTreeSelectedItem('KnowledgeFieldViewList_ModalCreate').persianTitle : ''"
                                             type="text" />
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-2 d-flex gap-3 align-items-center">
                                         <KnowledgeFieldTreeModalSingleSelect />
+                                        <i v-if="useLocalStorageService.getTreeSelectedItem('KnowledgeFieldViewList_ModalCreate')"
+                                            @click.prevent="removeParetn" class="fa fa-trash text-danger"></i>
                                     </div>
                                 </div>
                             </div>
@@ -88,6 +91,11 @@ let formData = reactive({
 });
 let grades = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
 let tree_name = ref('KnowledgeFieldViewList');
+
+function removeParetn() {
+    useLocalStorageService.setTreeSelectedItem('KnowledgeFieldViewList_ModalCreate', '')
+    formData.parentId = ''
+}
 
 async function updateKnowledgeField() {
     loadingUpdate.value = true;
